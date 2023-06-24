@@ -53,7 +53,7 @@ export default function RootLayout({
           </div>
           <div className="w-1/12 xl:grow"></div>
 
-          <div className="grow p-12 xl:w-1/2">{children}</div>
+          <div className="grow p-12 xl:w-1/2 max-w-4xl">{children}</div>
           <div className="w-1/12 xl:grow"></div>
         </div>
       </body>
