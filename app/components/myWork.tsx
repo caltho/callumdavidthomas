@@ -69,9 +69,9 @@ export default function MyWork() {
       >
         A retro and nostalgic Sliding Tile Puzzle game which brings back the
         excitement of your childhood. With five grid sizes to choose from, this
-        app offers a challenging yet entertaining experience. Whether you're a
-        puzzle enthusiast looking to sharpen your skills or a casual gamer
-        seeking a brain-teasing pastime, Grid Puzzle Solver has something for
+        app offers a challenging yet entertaining experience. Whether
+        you&apos;re a puzzle enthusiast looking to sharpen your skills or a
+        casual gamer seeking a brain-teasing pastime, this app has something for
         everyone. <br />
         <br />
         The Sliding Tile Puzzle uses the Unsplash developer API to fetch random
