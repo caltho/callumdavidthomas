@@ -51,13 +51,41 @@ export default function MyWork() {
         Connect Five offers a captivating and visually appealing gaming
         experience. <br />
         <br />
-        In its development, Next.js was chosen for its server-side rendering
-        capabilities, while Tailwind CSS facilitated the creation of a modern
-        and polished design. JavaScript and React hooks were used to implement
-        the game logic, allowing for dynamic interaction and real-time updates.
-        With its focus on simplicity and user experience, Connect Five showcases
-        technical proficiency and provides an engaging web app for players of
-        all ages.
+        In its development, Tailwind CSS facilitated the creation of a modern
+        design with offset div elements to create the grid. JavaScript and React
+        hooks were used to implement the game logic, allowing for dynamic
+        interaction and instant updates. With its focus on simplicity and user
+        experience, Connect Five showcases my javascript proficiency and
+        provides an engaging web app for players of all ages.
+      </WorkPanel>
+      <WorkPanel
+        image="Sliding-tiles.png"
+        title="Sliding Tiles Puzzle"
+        techStack={["API", "Javascript", "Next.js", "Typescript"]}
+      >
+        A retro and nostalgic Sliding Tile Puzzle game which brings back the
+        excitement of your childhood. With five grid sizes to choose from, this
+        app offers a challenging yet entertaining experience. Whether you're a
+        puzzle enthusiast looking to sharpen your skills or a casual gamer
+        seeking a brain-teasing pastime, Grid Puzzle Solver has something for
+        everyone. <br />
+        <br />
+        The Sliding Tile Puzzle uses the Unsplash developer API to fetch random
+        images for the puzzle. The image is then scaled based on its aspect
+        ratio which allows it to fit into the puzzle pieces no matter the image
+        or puzzle resolution.
+        <br />
+        <br />
+        Creating the puzzle board introduced some interesting javascript logic,
+        as only one half of randomly generated puzzles are solvable. The
+        solution for a randomised yet solvable puzzle comes from calculating the
+        parity of the generated array, and swapping any two random pieces as
+        required. More information regarding the solvability of sliding tile
+        puzzles is referenced{" "}
+        <a href="https://www.cs.princeton.edu/courses/archive/spring21/cos226/assignments/8puzzle/specification.php#:~:text=Thus%2C%20if%20a%20board%20has,inversions%2C%20then%20it%20is%20solvable.">
+          here
+        </a>
+        .
       </WorkPanel>
     </div>
   );
