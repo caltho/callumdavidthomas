@@ -12,6 +12,7 @@ export default function MyWork() {
         title="Traffic Tools"
         techStack={["Next.js", "Typescript", "HTML", "CSS"]}
         link="https://traffictools.com.au"
+        github="https://github.com/caltho/traffic-tools"
       >
         Traffic Tools is an open-source and free web app created for use by
         anyone within the town-planning industry. In developing the web app I
@@ -28,6 +29,7 @@ export default function MyWork() {
         title="CentreSafe"
         techStack={["PHP", "MySQL", "AWS-S3"]}
         link="http://centresafe.com/index"
+        github="https://github.com/caltho/centresafe"
       >
         CentreSafe is a risk management service created for use by companies and
         NGOs. The CentreSafe portal allows users to quickly understand where the
@@ -44,6 +46,7 @@ export default function MyWork() {
         title="Connect-five"
         techStack={["Next.js", "Typescript", "Vercel"]}
         link="https://connect-five-five.vercel.app/"
+        github="https://github.com/caltho/connect-five"
       >
         Connect Five is an exciting web game built with Next.js and Tailwind
         CSS. The goal is to strategically connect five game pieces in a row on a
@@ -66,6 +69,7 @@ export default function MyWork() {
         title="Sliding Tiles Puzzle"
         techStack={["API", "Javascript", "Next.js", "Typescript"]}
         link="https://sliding-puzzle-rho.vercel.app/"
+        github="https://github.com/caltho/sliding-puzzle"
       >
         A retro and nostalgic Sliding Tile Puzzle game which brings back the
         excitement of your childhood. With five grid sizes to choose from, this
@@ -90,6 +94,16 @@ export default function MyWork() {
           here
         </a>
         .
+      </WorkPanel>
+      <WorkPanel
+        image="Callum David Thomas.png"
+        title="Portfolio"
+        techStack={["Figma", "Javascript", "Next.js", "TailwindCSS"]}
+        link="https://www.figma.com/proto/nsNsYOoaPZpzXxinP1ccsc/Cal-Portfolio?page-id=0%3A1&type=design&node-id=1-2&viewport=561%2C293%2C0.39&scaling=scale-down&starting-point-node-id=1%3A2"
+        github="https://github.com/caltho/callumdavidthomas"
+      >
+        This is my portfolio! I built it from a figma design by Oliver Wedd
+        using tailwindcss and have hosted it on Vercel!
       </WorkPanel>
     </div>
   );

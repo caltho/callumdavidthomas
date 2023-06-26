@@ -16,8 +16,12 @@ export default function AboutMe() {
         <br />
         When I&apos;m not coding you will find me practicing jiu jitsu, playing
         volleyball, or cycling around the city. If you would like to get in
-        touch, let me know by filling out the Google form at the bottom of this
-        page!
+        touch send me an email at my contact below!
+      </div>
+      <div className="pt-6 font-mono text-lg text-blue-300">
+        <a href="https://github.com/caltho" target="_blank">
+          Checkout my github
+        </a>
       </div>
     </div>
   );

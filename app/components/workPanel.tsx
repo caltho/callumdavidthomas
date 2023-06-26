@@ -6,6 +6,7 @@ interface WorkPanelProps {
   title: string;
   techStack: string[];
   link: string;
+  github: string;
   children?: ReactNode;
 }
 
@@ -14,10 +15,11 @@ export default function WorkPanel({
   title,
   techStack,
   link,
+  github,
   children,
 }: WorkPanelProps) {
   return (
-    <div className="flex flex-row py-6">
+    <div className="flex flex-row py-10">
       <div className="invisible w-0 md:w-1/4 md:visible md:pr-6 lg:pr-12">
         <img src={image} alt="logo" className="w-full" />
       </div>
@@ -37,6 +39,11 @@ export default function WorkPanel({
             ))}
           </div>
           {children}
+          <div className="py-3 font-mono text-lg italic text-blue-300">
+            <a href={github} target="_blank">
+              View on github
+            </a>
+          </div>
         </div>
       </div>
     </div>
