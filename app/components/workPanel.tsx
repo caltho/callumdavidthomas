@@ -5,6 +5,7 @@ interface WorkPanelProps {
   image: string;
   title: string;
   techStack: string[];
+  link: string;
   children?: ReactNode;
 }
 
@@ -12,17 +13,20 @@ export default function WorkPanel({
   image,
   title,
   techStack,
+  link,
   children,
 }: WorkPanelProps) {
   return (
     <div className="flex flex-row py-6">
       <div className="invisible w-0 md:w-1/4 md:visible md:pr-6 lg:pr-12">
-        <img src={image} alt="logo" className="w-full w-[300px]" />
+        <img src={image} alt="logo" className="w-full" />
       </div>
       <div className="flex-initial w-full md:w-3/4">
         <div className="flex-column">
           <div className="mb-2 mt-0 text-3xl font-medium leading-tight text-primary">
-            {title}
+            <a href={link} target="_blank">
+              {title}
+            </a>
           </div>
           <div className="flex flex-row py-3">
             {techStack.map((tech, item) => (

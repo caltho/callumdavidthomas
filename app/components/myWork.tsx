@@ -11,6 +11,7 @@ export default function MyWork() {
         image="Traffic Tools Logo.png"
         title="Traffic Tools"
         techStack={["Next.js", "Typescript", "HTML", "CSS"]}
+        link="https://traffictools.com.au"
       >
         Traffic Tools is an open-source and free web app created for use by
         anyone within the town-planning industry. In developing the web app I
@@ -26,6 +27,7 @@ export default function MyWork() {
         image="CTS Favicon - Original.svg"
         title="CentreSafe"
         techStack={["PHP", "MySQL", "AWS-S3"]}
+        link="http://centresafe.com/index"
       >
         CentreSafe is a risk management service created for use by companies and
         NGOs. The CentreSafe portal allows users to quickly understand where the
@@ -41,6 +43,7 @@ export default function MyWork() {
         image="Connect-five-1.png"
         title="Connect-five"
         techStack={["Next.js", "Typescript", "Vercel"]}
+        link="https://connect-five-five.vercel.app/"
       >
         Connect Five is an exciting web game built with Next.js and Tailwind
         CSS. The goal is to strategically connect five game pieces in a row on a
@@ -62,6 +65,7 @@ export default function MyWork() {
         image="Sliding-tiles.png"
         title="Sliding Tiles Puzzle"
         techStack={["API", "Javascript", "Next.js", "Typescript"]}
+        link="https://sliding-puzzle-rho.vercel.app/"
       >
         A retro and nostalgic Sliding Tile Puzzle game which brings back the
         excitement of your childhood. With five grid sizes to choose from, this
