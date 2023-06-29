@@ -36,7 +36,7 @@ export function GlobalNav() {
 
                 <div className="space-y-1">
                   {section.items.map((item) => (
-                    <GlobalNavItem key={item.slug} item={item} close={close} />
+                    <GlobalNavItem key={item.link} item={item} close={close} />
                   ))}
                 </div>
               </div>
@@ -48,13 +48,12 @@ export function GlobalNav() {
   );
 }
 
-function GlobalNavItem({
-  item,
-  close,
-}: {
-  item: Item;
-  close: () => false | void;
-}) {
+type Item = {
+  name: string;
+  link: string;
+};
+
+function GlobalNavItem({ item }: { item: Item }) {
   const isActive = false;
   return (
     <a
