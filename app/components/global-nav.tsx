@@ -36,7 +36,7 @@ export function GlobalNav() {
 
                 <div className="space-y-1">
                   {section.items.map((item) => (
-                    <GlobalNavItem key={item.link} item={item} close={close} />
+                    <GlobalNavItem key={item.link} item={item} />
                   ))}
                 </div>
               </div>
