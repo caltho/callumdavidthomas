@@ -5,11 +5,11 @@ export default function ContactPanel() {
         <ArrowIcon />
       </div>
       <a
-        href="mailto:callumdavidthomas@gmail.com"
+        href="https://www.linkedin.com/in/callum-thomas/"
         className="flex border-2 rounded-full w-1/3 m-3 p-3 hover:bg-blue-500 cursor-pointer"
       >
         <p className="text-center whitespace-nowrap w-full font-bold">
-          Contact Me
+          LinkedIn
         </p>
       </a>
     </div>

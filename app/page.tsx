@@ -6,6 +6,7 @@ import ContactPanel from "./components/contactPanel";
 import MyWork from "./components/myWork";
 import TechStack from "./components/techStack";
 import ContactMe from "./components/contactMe";
+import Footer from "./components/footer";
 
 const navigation = [
   { name: "Projects", href: "/projects" },
@@ -16,7 +17,7 @@ export default function Home() {
   const varb = "TbBrandCss3";
   return (
     <div className="flex-column">
-      <div className="flex pb-6" id="welcome">
+      <div className="flex pb-6 pt-0" id="welcome">
         <Status />
       </div>
       <div className="flex py-6">
@@ -34,8 +35,11 @@ export default function Home() {
       <div className="flex py-6" id="tech-stack">
         <TechStack />
       </div>
-      <div className="flex py-6" id="contact">
+      <div className="flex py-12" id="contact">
         <ContactMe />
+      </div>
+      <div className="flex pt-24">
+        <Footer />
       </div>
     </div>
   );

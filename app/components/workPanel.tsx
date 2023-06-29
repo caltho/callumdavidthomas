@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React, { ReactNode } from "react";
+import { TbExternalLink } from "react-icons/tb";
 
 interface WorkPanelProps {
   image: string;
@@ -25,9 +26,9 @@ export default function WorkPanel({
       </div>
       <div className="flex-initial w-full md:w-3/4">
         <div className="flex-column">
-          <div className="mb-2 mt-0 text-3xl font-medium leading-tight text-primary">
-            <a href={link} target="_blank">
-              {title}
+          <div className="mb-2 mt-0 text-3xl font-medium leading-tight text-primary flex-row">
+            <a href={link} target="_blank" className="flex">
+              {title} <TbExternalLink size="20" className="flex ml-1" />
             </a>
           </div>
           <div className="flex flex-row py-3">
