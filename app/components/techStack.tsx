@@ -7,7 +7,12 @@ import {
   TbBrandPhp,
   TbBrandReact,
   TbHtml,
+  TbBrandBootstrap,
+  TbBrandTailwind,
+  TbBrandWordpress,
 } from "react-icons/tb";
+
+import { SiChakraui } from "react-icons/si";
 
 const icons = [
   { icon: TbBrandReact, name: "React" },
@@ -17,8 +22,11 @@ const icons = [
   { icon: TbHtml, name: "HTML" },
   { icon: TbBrandJavascript, name: "Javascript" },
   { icon: TbBrandMysql, name: "MySql" },
-
   { icon: TbBrandPhp, name: "PhP" },
+  { icon: TbBrandBootstrap, name: "Bootstrap" },
+  { icon: TbBrandTailwind, name: "TailwindCSS" },
+  { icon: SiChakraui, name: "Chakra-UI" },
+  { icon: TbBrandWordpress, name: "Wordpress" },
 ];
 export default function TechStack() {
   return (

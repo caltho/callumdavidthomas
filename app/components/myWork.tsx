@@ -1,3 +1,5 @@
+"use client";
+
 import WorkPanel from "./workPanel";
 
 export default function MyWork() {
@@ -10,7 +12,14 @@ export default function MyWork() {
       <WorkPanel
         image="Traffic Tools Logo.png"
         title="Traffic Tools"
-        techStack={["Next.js", "Typescript", "HTML", "CSS"]}
+        techStack={[
+          "Next.js",
+          "TypeScript",
+          "HTML",
+          "CSS",
+          "Chakra-UI",
+          "Vercel",
+        ]}
         link="https://traffictools.com.au"
         github="https://github.com/caltho/traffic-tools"
       >
@@ -20,14 +29,18 @@ export default function MyWork() {
         laypeople, while encouraging innovation and knowledge-sharing within the
         profession.
         <br />
-        <br />I built Traffic Tools using next.js with typescript,
+        <br />I built Traffic Tools using Next.js with TypeScript,
         Google-firebase for user authentication, Chakra-UI for the component
         library, and the chart.js plugin for creating charts.
+        <br />
+        <br />I enjoyed making each component as modular as possible, not only
+        to eliminate repitition of code but also to use the calculators in
+        future projects within the Traffic Engineering space.
       </WorkPanel>
       <WorkPanel
         image="CTS Favicon - Original.svg"
         title="CentreSafe"
-        techStack={["PHP", "MySQL", "AWS-S3"]}
+        techStack={["PHP", "MySQL", "AWS-S3", "Bootstrap", "UX/UI", "Branding"]}
         link="http://centresafe.com/index"
         github="https://github.com/caltho/centresafe"
       >
@@ -39,12 +52,14 @@ export default function MyWork() {
         identification to mitigation and elimination.
         <br />
         <br />I built CentreSafe using the LAMP software stack, which includes
-        PHP, MySQL and hosting via AWS.
+        PHP, MySQL and hosting via AWS. I challenged myself by building the app
+        without a component library, while using Bootstrap to fasttrack the CSS
+        and provide a consistent feel. My team had a
       </WorkPanel>
       <WorkPanel
         image="Connect-five-1.png"
         title="Connect-five"
-        techStack={["Next.js", "Typescript", "Vercel"]}
+        techStack={["Next.js", "TypeScript", "Vercel"]}
         link="https://connect-five-five.vercel.app/"
         github="https://github.com/caltho/connect-five"
       >
@@ -67,7 +82,7 @@ export default function MyWork() {
       <WorkPanel
         image="Sliding-tiles.png"
         title="Sliding Tiles Puzzle"
-        techStack={["API", "Javascript", "Next.js", "Typescript"]}
+        techStack={["API", "Javascript", "Next.js", "TypeScript"]}
         link="https://sliding-puzzle-rho.vercel.app/"
         github="https://github.com/caltho/sliding-puzzle"
       >
@@ -104,6 +119,78 @@ export default function MyWork() {
       >
         This is my portfolio! I built it from a figma design by Oliver Wedd
         using tailwindcss and have hosted it on Vercel!
+      </WorkPanel>
+      <WorkPanel
+        image="NZOPA logo.png"
+        title="NZOPA Revamp"
+        techStack={["Wordpress", "PHP", "MySQL", "Design"]}
+        link="https://nzopa.co.nz/"
+        github=""
+      >
+        The New Zealand Orthotics & Prosthetics Association (NZOPA) commissioned
+        me to revamp their website and member portal. NZOPA required that the
+        site&apos;s would end up entirely in their hands which was a key
+        consideration when choosing the CMS, which would ultimately need to be
+        customisabile yet simple and maintainable. I set up a new Wordpress site
+        and utilised plugins to:
+        <ul className="list-disc list-inside">
+          <li>Allow member sign-ups.</li>
+          <li>Show/hide content at different membership levels.</li>
+          <li>Accept online payments.</li>
+          <li>Allow members to upload case studies requiring a custom form.</li>
+          <li>Give admins access to creating new pages and blogposts.</li>
+        </ul>
+        I spent two sessions with NZOPA committee members to provide guidance
+        and training for administering the Wordpress site. Overall the project
+        was a success and we recieved positive feedback from members.
+      </WorkPanel>
+      <WorkPanel
+        image="Amber-circle-orange.png"
+        title="Amber Organisation WordPress Plugin"
+        techStack={["Wordpress", "PHP", "MySQL", "Plugin"]}
+        link="https://github.com/caltho/Quote-Sign-Plugin"
+        github="https://github.com/caltho/Quote-Sign-Plugin"
+      >
+        While working at Amber Organisation as a senior traffic engineeer, I
+        provided key input to the design and functionality of the company
+        website including custom HTML and CSS, implementing a child theme,
+        upgrading to the latest version of Wordpress and PHP, optimising images
+        for web.
+        <br />
+        <br />A difficulty I found our clients had was the ease of signing
+        quotes. In almost all cases our clients were unable to edit and sign
+        PDFs which resulted in them printing off paper copies, signing by hand,
+        scanning, and sending via email. I sought to overcome this challenge by
+        providing a simple portal where clients could view and sign quotes on
+        any electonic device and their details would be collected by us
+        electronically. <br />
+        <br />I achieved this through custom Wordpress templates, a new MySQL
+        table, and custom forms. The quote is uploaded by Amber and displayed
+        via an iFrame.
+      </WorkPanel>
+      <WorkPanel
+        image="modal-logo.png"
+        title="Modal Group Replatform"
+        techStack={[
+          "Next.js",
+          "Chakra-UI",
+          "Wordpress",
+          "PHP",
+          "MySQL",
+          "Replatform",
+        ]}
+        link="https://github.com/caltho/Quote-Sign-Plugin"
+        github="https://github.com/caltho/Quote-Sign-Plugin"
+      >
+        Modal Group had an existing Wordpress website and requested that it be
+        replatformed using React. I chose the Next.js framework because of its
+        speed and the ability to provide static HTML that is great for SEO.
+        <br />
+        <br />I was able to quickly create elements across the website using the
+        Chakra-UI component library, and customise the theme to suit the Modal
+        colours. The result is a website that is better than 1:1, providing
+        speed, responsiveness, and customisability while not losing out on SEO
+        from static HTML/PHP.
       </WorkPanel>
     </div>
   );

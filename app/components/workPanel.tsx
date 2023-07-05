@@ -31,9 +31,9 @@ export default function WorkPanel({
               {title} <TbExternalLink size="20" className="flex ml-1" />
             </a>
           </div>
-          <div className="flex flex-row py-3">
+          <div className="flex flex-row py-3 flex-wrap">
             {techStack.map((tech, item) => (
-              <div className="flex items-center" key={item}>
+              <div className="flex items-center " key={item}>
                 <div className="inline-block h-2 w-2 rounded-full bg-green-500 mr-2" />
                 <h3 className="mr-6">{tech}</h3>
               </div>
@@ -41,9 +41,11 @@ export default function WorkPanel({
           </div>
           {children}
           <div className="py-3 font-mono text-lg italic text-blue-300">
-            <a href={github} target="_blank">
-              View on github
-            </a>
+            {github !== "" && (
+              <a href={github} target="_blank">
+                View on github
+              </a>
+            )}
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ export default function AboutMe() {
   return (
     <div className="">
       <div className="">
-        I am a Software Engineer who is passionate about the dynamic and
+        I am a Software Developer who is passionate about the dynamic and
         fast-changing world of technology. I am dedicated to continual learning
         and practising agile methodologies and seek to be involved in useful and
         impactful projects.
@@ -20,7 +20,7 @@ export default function AboutMe() {
       </div>
       <div className="pt-6 font-mono text-lg text-blue-300">
         <a href="https://github.com/caltho" target="_blank">
-          Checkout my github
+          Check out my github
         </a>
       </div>
     </div>
