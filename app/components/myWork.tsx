@@ -71,10 +71,10 @@ export default function MyWork() {
       >
         I created brand guidelines and a web design template for CentreSafe. My
         primary goal was to establish a strong and consistent visual identity
-        that would effectively convey CentreSafe's mission, values, and
-        services. This document outlined the appropriate usage of CentreSafe's
-        logo, defined a color palette that evoked feelings of trust, and
-        security, and established a typography system that balanced
+        that would effectively convey CentreSafe&apos;s mission, values, and
+        services. This document outlined the appropriate usage of
+        CentreSafe&apos;s logo, defined a color palette that evoked feelings of
+        trust, and security, and established a typography system that balanced
         professionalism with approachability.
       </WorkPanel>
       <WorkPanel
