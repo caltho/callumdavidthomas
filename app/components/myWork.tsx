@@ -40,7 +40,7 @@ export default function MyWork() {
       <WorkPanel
         image="CTS Favicon - Original.svg"
         title="CentreSafe"
-        techStack={["PHP", "MySQL", "AWS-S3", "Bootstrap", "UX/UI", "Branding"]}
+        techStack={["PHP", "MySQL", "AWS-S3", "Bootstrap", "UX/UI"]}
         link="http://centresafe.com/index"
         github="https://github.com/caltho/centresafe"
       >
@@ -54,7 +54,28 @@ export default function MyWork() {
         <br />I built CentreSafe using the LAMP software stack, which includes
         PHP, MySQL and hosting via AWS. I challenged myself by building the app
         without a component library, while using Bootstrap to fasttrack the CSS
-        and provide a consistent feel. My team had a
+        and provide a consistent feel.
+      </WorkPanel>
+      <WorkPanel
+        image="CentreSafe Web Design.png"
+        title="CentreSafe Web Design"
+        techStack={[
+          "Figma",
+          "Photoshop",
+          "Font End Design",
+          "UX/UI",
+          "Branding",
+        ]}
+        link="https://drive.google.com/file/d/17FdxlspCdb8Zt73JDnf2E8jeFu0sSHqy/view?usp=drive_link"
+        github=""
+      >
+        I created brand guidelines and a web design template for CentreSafe. My
+        primary goal was to establish a strong and consistent visual identity
+        that would effectively convey CentreSafe's mission, values, and
+        services. This document outlined the appropriate usage of CentreSafe's
+        logo, defined a color palette that evoked feelings of trust, and
+        security, and established a typography system that balanced
+        professionalism with approachability.
       </WorkPanel>
       <WorkPanel
         image="Connect-five-1.png"
