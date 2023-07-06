@@ -200,8 +200,8 @@ export default function MyWork() {
           "MySQL",
           "Replatform",
         ]}
-        link="https://github.com/caltho/Quote-Sign-Plugin"
-        github="https://github.com/caltho/Quote-Sign-Plugin"
+        link="http://modalgroup.com.au/"
+        github="https://github.com/caltho/modalgroup"
       >
         Modal Group had an existing Wordpress website and requested that it be
         replatformed using React. I chose the Next.js framework because of its
