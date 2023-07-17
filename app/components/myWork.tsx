@@ -1,5 +1,6 @@
 "use client";
 
+import CodeBlock from "./codeBlock";
 import WorkPanel from "./workPanel";
 
 export default function MyWork() {
@@ -212,6 +213,62 @@ export default function MyWork() {
         colours. The result is a website that is better than 1:1, providing
         speed, responsiveness, and customisability while not losing out on SEO
         from static HTML/PHP.
+      </WorkPanel>
+      <WorkPanel
+        image="vbs.png"
+        title="Project Folder Shortcut"
+        techStack={["Visual Basic Script", "Windows OS", "Productivity"]}
+        link=""
+        github=""
+      >
+        File structures within large organisations can often be cumbersome and
+        difficult to navigate. This FolderFinder short-cutting tool that I have
+        created directly opens a folder based on a search string of the first 3
+        letters, as input by the user.
+        <br />
+        <br />
+        Code block (readme at end):
+        <CodeBlock name="folderFinder" />
+      </WorkPanel>
+      <WorkPanel
+        image="outlook.png"
+        title="Outlook Filing Macro"
+        techStack={[
+          "Visual Basic for Applications",
+          "Macros",
+          "Windows OS",
+          "Productivity",
+        ]}
+        link=""
+        github=""
+      >
+        Productivity is not always just about saving time and getting things
+        done faster - often it is about saving our own sanity when doing
+        repetitive tasks.
+        <br />
+        <br />
+        After nearly a decade of using Microsoft Outlook and being left without
+        a quick filing system, I decided to make my own! It can be tedious to
+        scroll through 10s or even 100s of email folders just to drop in a
+        single mail item, even if you have them sorted in alphabetical or
+        numerical order. <br />
+        <br />
+        To use these macros they will need to be added into Outlook as macros.
+        You can then add them to the quick access bar and run them with the
+        keyboard shortcut Alt+[item].
+        <br />
+        <br /> The first macro will jump directly to the folder based on your
+        search input. <br />
+        <br />
+        Code block:
+        <CodeBlock name="jumpToFolder" />
+        <br />
+        <br />
+        The second macro will file the selected mail item(s) directly into the
+        searched folder, without changing the screen focus. <br />
+        <br />
+        Code block:
+        <CodeBlock name="fileMail" />
       </WorkPanel>
     </div>
   );
