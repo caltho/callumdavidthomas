@@ -4,6 +4,8 @@ import { Reveal } from "@/components/reveal";
 import { ProjectRow } from "@/components/project-row";
 import { MarqueeTags } from "@/components/marquee-tags";
 import { LiveAppsGrid } from "@/components/live-apps";
+import { StickerShop } from "@/components/relics/sticker-shop";
+import { GreentextRelic } from "@/components/relics/greentext";
 import { site } from "@/lib/site";
 import { liveApps } from "@/data/live-apps";
 
@@ -24,25 +26,25 @@ export default async function Home() {
           <Reveal>
             <p className="eyebrow flex items-center gap-3">
               <span className="pulse-dot" aria-hidden />
-              Portfolio · 2026 / Index 001
+              Index 001 · 2026 · it me
             </p>
           </Reveal>
 
           <Reveal delay={0.05}>
-            <h1 className="font-display mt-8 text-[16vw] leading-[0.84] tracking-[-0.04em] text-bone-50 sm:text-[14vw] md:text-[12vw]">
-              Callum
-              <br />
-              <span className="text-bone-200">David</span>
-              <br />
-              <span className="inline-flex items-baseline">
-                Thomas<span className="text-ember">.</span>
-              </span>
+            <h1 className="font-display mt-8 text-[28vw] leading-[0.88] tracking-[-0.04em] text-bone-50 sm:text-[20vw] md:text-[14vw]">
+              it me<span className="text-ember">.</span>
             </h1>
+          </Reveal>
+
+          <Reveal delay={0.07}>
+            <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.25em] text-bone-400">
+              Callum David Thomas — software developer, Melbourne
+            </p>
           </Reveal>
 
           <div className="mt-16 grid grid-cols-12 gap-6">
             <Reveal delay={0.1} className="col-span-12 md:col-span-7">
-              <p className="max-w-2xl font-display text-2xl leading-[1.2] text-bone-200 md:text-3xl">
+              <p className="max-w-xl text-lg leading-[1.55] text-bone-200 md:text-xl">
                 I build clean, modular web apps —{" "}
                 <span className="text-bone-50">slowly and on purpose.</span>{" "}
                 Construction tools, traffic engineering software, late-night
@@ -151,6 +153,36 @@ export default async function Home() {
           >
             See the full archive →
           </Link>
+        </div>
+      </section>
+
+      {/* B-SIDES — internet relics ------------------------------------ */}
+      <section className="py-24 md:py-32">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+          <Reveal>
+            <div className="flex items-end justify-between">
+              <p className="eyebrow">§ B-sides</p>
+              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-bone-600">
+                small internet artifacts
+              </span>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <h2 className="font-display mt-6 max-w-4xl text-5xl leading-[0.95] tracking-[-0.04em] text-bone-50 md:text-7xl">
+              Stuff that{" "}
+              <span className="text-bone-400">doesn&apos;t belong anywhere else.</span>
+            </h2>
+          </Reveal>
+
+          <div className="mt-14 grid grid-cols-12 gap-5 md:gap-6">
+            <Reveal className="col-span-12" delay={0.1}>
+              <StickerShop />
+            </Reveal>
+            <Reveal className="col-span-12 md:col-span-7" delay={0.15}>
+              <GreentextRelic />
+            </Reveal>
+          </div>
         </div>
       </section>
 
