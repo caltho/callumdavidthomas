@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# callumdavidthomas.com
 
-## Getting Started
+Personal portfolio. Rebuild — fully AI built, editorial brutalism × basement-club design, content driven from Supabase with a custom admin panel.
 
-First, run the development server:
+## Stack
+
+| Concern        | Tool                                        |
+|----------------|---------------------------------------------|
+| Framework      | Next.js 16 (App Router, RSC, Turbopack)     |
+| Language       | TypeScript                                  |
+| Styling        | Tailwind CSS v4 (CSS-first design tokens)   |
+| Motion         | Motion (formerly framer-motion)             |
+| Type display   | Fraunces (variable: opsz, SOFT, WONK)       |
+| Database       | Supabase Postgres (colocated in `almanac`)  |
+| Auth           | Supabase Auth (magic link)                  |
+| Storage        | Supabase Storage (`portfolio-media` bucket) |
+
+Schema lives in `supabase/migrations/`. All portfolio objects are prefixed `portfolio_*` so the project cohabits cleanly with other apps in the same Supabase project.
+
+## Getting started
 
 ```bash
+npm install
+cp .env.local.example .env.local   # fill in your own keys
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 — public site. Admin at http://localhost:3000/admin.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content workflow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run seed                  # upsert /data/*.ts into Supabase
+npm run seed:reset            # truncate + reseed
+npm run bootstrap:admin -- you@example.com   # grant admin
+```
 
-## Learn More
+Once seeded you can manage everything from the admin panel:
+- `/admin/projects` — selected work CRUD
+- `/admin/stuff` — non-software entries (hikes etc.)
+- `/admin/about` — singleton bio
+- Image uploads go directly to the `portfolio-media` Storage bucket.
 
-To learn more about Next.js, take a look at the following resources:
+The local `/data/*.ts` files act as a fallback when Supabase is unreachable, so the site still renders during dev.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design language
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tokens in [`app/globals.css`](app/globals.css):
 
-## Deploy on Vercel
+- `--ink-900..400` deep, warm blacks
+- `--bone-50..600` bulb whites
+- `--ember` oxide red, `--ultra` violet — the club lights
+- `.font-display` Fraunces, tight letter-spacing, soft + wonk axes
+- `.clublights` slow CSS radial-gradient drift behind every page
+- `.sweep` hover-reveal sweep across rows
+- `.pulse-dot` breathing accent dot
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+No scroll hijacking — ever. Native scroll only. `prefers-reduced-motion` disables everything.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Architecture notes
+
+- **`lib/content.ts`** — single content access layer. Reads from Supabase, falls back to `/data/*.ts`. Swap data sources here, not in pages.
+- **`lib/supabase/{server,client,admin,middleware}.ts`** — distinct Supabase clients for each runtime context. The `admin.ts` service-role client is `"server-only"` to prevent shipping it to the browser.
+- **`proxy.ts`** — refreshes auth cookies on every request so RSCs see the right user.
+- **`app/admin/*`** — admin pages guard themselves with `requireAdmin()` from `lib/auth.ts`.
+
+## Deploying
+
+```bash
+# Vercel: connect this repo, set the same env vars from .env.local
+# DNS points to the Vercel project — see ~/projects/callumdavidthomas memory.
+```
+
+---
+
+Built in the dark.

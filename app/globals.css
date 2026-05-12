@@ -1,26 +1,224 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   Design tokens — "basement club" palette.
+   Inky bases, warm bulb whites, oxide red + ultraviolet club lights.
+------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink-900: #07060a;
+  --ink-800: #0b0a10;
+  --ink-700: #110f17;
+  --ink-600: #16131f;
+  --ink-500: #1d1a28;
+  --ink-400: #2a2538;
+  --line: #221d2e;
+
+  --bone-50: #f6f1e7;
+  --bone-200: #d8cfbe;
+  --bone-400: #a89e8d;
+  --bone-600: #6a6358;
+
+  --ember: #ff3d2e;
+  --ember-deep: #c3261c;
+  --ultra: #7a2dff;
+  --ultra-deep: #3d0d8a;
+  --halo: #ffe7c2;
+
+  --background: var(--ink-900);
+  --foreground: var(--bone-50);
+  --muted: var(--bone-400);
+  --border: var(--line);
+  --accent: var(--ember);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+
+  --color-ink-900: var(--ink-900);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+  --color-ink-600: var(--ink-600);
+  --color-ink-500: var(--ink-500);
+  --color-ink-400: var(--ink-400);
+
+  --color-bone-50: var(--bone-50);
+  --color-bone-200: var(--bone-200);
+  --color-bone-400: var(--bone-400);
+  --color-bone-600: var(--bone-600);
+
+  --color-ember: var(--ember);
+  --color-ember-deep: var(--ember-deep);
+  --color-ultra: var(--ultra);
+  --color-ultra-deep: var(--ultra-deep);
+  --color-halo: var(--halo);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Force dark — there is no light mode in the basement. */
+html {
+  color-scheme: dark;
+  background: var(--background);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--ember);
+  color: var(--ink-900);
+}
+
+/* ------------------------------------------------------------------
+   Typography primitives
+------------------------------------------------------------------ */
+.font-display {
+  font-family: var(--font-display), "Times New Roman", serif;
+  font-feature-settings: "ss01", "ss02", "dlig", "liga";
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  letter-spacing: -0.04em;
+  line-height: 0.86;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-400);
+}
+
+/* ------------------------------------------------------------------
+   Film grain — barely-there overlay. The basement is dusty.
+------------------------------------------------------------------ */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ------------------------------------------------------------------
+   Club lights — slow drifting radial gradients in the background.
+   No scroll hijack; pure CSS animation. Sits behind everything.
+------------------------------------------------------------------ */
+.clublights {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.clublights span {
+  position: absolute;
+  display: block;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.35;
+  will-change: transform, opacity;
+}
+.clublights .l1 {
+  width: 60vmax; height: 60vmax;
+  left: -20vmax; top: -20vmax;
+  background: radial-gradient(circle, var(--ember) 0%, transparent 60%);
+  animation: drift1 22s ease-in-out infinite alternate;
+}
+.clublights .l2 {
+  width: 50vmax; height: 50vmax;
+  right: -15vmax; bottom: -15vmax;
+  background: radial-gradient(circle, var(--ultra) 0%, transparent 60%);
+  animation: drift2 28s ease-in-out infinite alternate;
+}
+.clublights .l3 {
+  width: 30vmax; height: 30vmax;
+  left: 30vw; top: 60vh;
+  background: radial-gradient(circle, var(--halo) 0%, transparent 70%);
+  opacity: 0.12;
+  animation: drift3 36s ease-in-out infinite alternate;
+}
+
+@keyframes drift1 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.30; }
+  100% { transform: translate3d(8vw, 6vh, 0) scale(1.15); opacity: 0.45; }
+}
+@keyframes drift2 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0.25; }
+  100% { transform: translate3d(-10vw, -8vh, 0) scale(1.1); opacity: 0.4; }
+}
+@keyframes drift3 {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0.08; }
+  100% { transform: translate3d(-6vw, -10vh, 0); opacity: 0.18; }
+}
+
+/* ------------------------------------------------------------------
+   Pulsing accent dot — a single bulb breathing.
+------------------------------------------------------------------ */
+.pulse-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--ember);
+  box-shadow: 0 0 12px var(--ember);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.25); }
+}
+
+/* ------------------------------------------------------------------
+   Hover sweep — a faint light passes across a row on hover.
+------------------------------------------------------------------ */
+.sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in srgb, var(--ember) 14%, transparent) 50%,
+    transparent 70%
+  );
+  transform: translateX(-110%);
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  z-index: -1;
+  pointer-events: none;
+}
+.sweep:hover::before {
+  transform: translateX(110%);
+}
+
+/* Hairline rule used everywhere */
+.hr-line {
+  height: 1px;
+  background: var(--line);
+  width: 100%;
+}
+
+/* Reduce motion: kill the drifting lights and pulse */
+@media (prefers-reduced-motion: reduce) {
+  .clublights span,
+  .pulse-dot,
+  .sweep::before { animation: none !important; transition: none !important; }
 }

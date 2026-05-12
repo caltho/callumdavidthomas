@@ -1,65 +1,142 @@
-import Image from "next/image";
+import Link from "next/link";
+import { getProjects } from "@/lib/content";
+import { Reveal } from "@/components/reveal";
+import { ProjectRow } from "@/components/project-row";
+import { MarqueeTags } from "@/components/marquee-tags";
+import { site } from "@/lib/site";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getProjects();
+  const featured = projects.slice(0, 6);
+
+  // De-duped tech tags for the marquee
+  const allTags = Array.from(
+    new Set(projects.flatMap((p) => p.techStack ?? p.tags ?? []))
+  );
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* HERO ----------------------------------------------------------- */}
+      <section className="relative pt-24 pb-32 md:pt-36 md:pb-48">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+          <Reveal>
+            <p className="eyebrow flex items-center gap-3">
+              <span className="pulse-dot" aria-hidden />
+              Portfolio · 2026 / Index 001
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <h1 className="font-display mt-8 text-[16vw] leading-[0.84] tracking-[-0.04em] text-bone-50 sm:text-[14vw] md:text-[12vw]">
+              Callum
+              <br />
+              <span className="text-bone-200">David</span>
+              <br />
+              <span className="inline-flex items-baseline">
+                Thomas<span className="text-ember">.</span>
+              </span>
+            </h1>
+          </Reveal>
+
+          <div className="mt-16 grid grid-cols-12 gap-6">
+            <Reveal delay={0.1} className="col-span-12 md:col-span-7">
+              <p className="max-w-2xl font-display text-2xl leading-[1.2] text-bone-200 md:text-3xl">
+                I build clean, modular web apps —{" "}
+                <span className="text-bone-50">slowly and on purpose.</span>{" "}
+                Construction tools, traffic engineering software, late-night
+                experiments. Currently freelancing out of {site.location}.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.15} className="col-span-12 md:col-span-3 md:col-start-10">
+              <div className="space-y-4 font-mono text-xs uppercase tracking-[0.2em] text-bone-400">
+                <div className="flex justify-between border-b border-border/60 pb-2">
+                  <span>Status</span>
+                  <span className="text-bone-50">Open</span>
+                </div>
+                <div className="flex justify-between border-b border-border/60 pb-2">
+                  <span>Loc.</span>
+                  <span className="text-bone-50">{site.location}</span>
+                </div>
+                <div className="flex justify-between border-b border-border/60 pb-2">
+                  <span>Time</span>
+                  <span className="text-bone-50">UTC+10</span>
+                </div>
+                <Link
+                  href="/work"
+                  className="mt-6 inline-flex items-center gap-2 text-bone-50 transition-colors hover:text-ember"
+                >
+                  See selected work →
+                </Link>
+              </div>
+            </Reveal>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* TECH MARQUEE -------------------------------------------------- */}
+      <MarqueeTags items={allTags.slice(0, 24)} />
+
+      {/* SELECTED WORK ------------------------------------------------- */}
+      <section className="py-24 md:py-32">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+          <Reveal>
+            <div className="flex items-end justify-between">
+              <p className="eyebrow">§ Selected work</p>
+              <Link
+                href="/work"
+                className="font-mono text-xs uppercase tracking-[0.2em] text-bone-400 transition-colors hover:text-bone-50"
+              >
+                Full index →
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <h2 className="font-display mt-6 text-5xl leading-none tracking-[-0.04em] text-bone-50 md:text-7xl">
+              Things I have made,
+              <br />
+              <span className="text-bone-400">on purpose.</span>
+            </h2>
+          </Reveal>
         </div>
-      </main>
-    </div>
+
+        <div className="mt-16">
+          {featured.map((p, i) => (
+            <ProjectRow key={p.slug} project={p} index={i} />
+          ))}
+          <div className="border-t border-border/60" />
+        </div>
+
+        <div className="mx-auto mt-16 max-w-[1600px] px-6 md:px-10">
+          <Link
+            href="/work"
+            className="font-display text-3xl text-bone-200 underline decoration-ember/60 decoration-2 underline-offset-8 transition-colors hover:text-bone-50 md:text-5xl"
+          >
+            See the full archive →
+          </Link>
+        </div>
+      </section>
+
+      {/* QUIET CTA ---------------------------------------------------- */}
+      <section className="relative py-32 md:py-48">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+          <Reveal>
+            <p className="eyebrow">§ Get in touch</p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="font-display mt-6 max-w-5xl text-5xl leading-[0.95] tracking-[-0.04em] text-bone-50 md:text-8xl">
+              The basement door is{" "}
+              <a
+                href={`mailto:${site.email}`}
+                className="relative inline-block text-ember underline decoration-ember/40 decoration-[0.08em] underline-offset-[0.12em] transition-colors hover:text-bone-50"
+              >
+                always open.
+              </a>
+            </h2>
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }

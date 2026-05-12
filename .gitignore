@@ -22,7 +22,12 @@
 
 # misc
 .DS_Store
+Thumbs.db
 *.pem
+
+# supabase local
+/supabase/.temp
+/supabase/.branches
 
 # debug
 npm-debug.log*
