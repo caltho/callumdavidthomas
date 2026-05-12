@@ -3,7 +3,9 @@ import { getProjects } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
 import { ProjectRow } from "@/components/project-row";
 import { MarqueeTags } from "@/components/marquee-tags";
+import { LiveAppsGrid } from "@/components/live-apps";
 import { site } from "@/lib/site";
+import { liveApps } from "@/data/live-apps";
 
 export default async function Home() {
   const projects = await getProjects();
@@ -76,6 +78,40 @@ export default async function Home() {
 
       {/* TECH MARQUEE -------------------------------------------------- */}
       <MarqueeTags items={allTags.slice(0, 24)} />
+
+      {/* LIVE APPS ----------------------------------------------------- */}
+      <section className="py-24 md:py-32">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+          <Reveal>
+            <div className="flex items-end justify-between">
+              <p className="eyebrow">§ In the wild</p>
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-bone-400">
+                {liveApps.length} live
+              </span>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <h2 className="font-display mt-6 max-w-4xl text-5xl leading-[0.95] tracking-[-0.04em] text-bone-50 md:text-7xl">
+              Apps that are{" "}
+              <span className="text-ember">actually running.</span>
+            </h2>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-xl text-bone-400">
+              Click through, kick the tyres. Live URLs only — no screenshots,
+              no demos behind glass.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            <div className="mt-14">
+              <LiveAppsGrid apps={liveApps} />
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       {/* SELECTED WORK ------------------------------------------------- */}
       <section className="py-24 md:py-32">

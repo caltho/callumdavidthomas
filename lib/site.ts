@@ -2,7 +2,7 @@ export const site = {
   name: "Callum David Thomas",
   shortName: "CDT",
   role: "Software developer",
-  location: "Brisbane",
+  location: "Melbourne",
   email: "callum.thomas@rjeglobal.com",
   socials: [
     { label: "GitHub", href: "https://github.com/caltho" },
