@@ -59,7 +59,7 @@ export default async function StuffDetail({
         </Reveal>
 
         <Reveal delay={0.15}>
-          <p className="font-display mt-10 max-w-3xl text-2xl leading-[1.2] text-bone-200 md:text-3xl">
+          <p className="mt-10 max-w-2xl text-lg leading-[1.55] text-bone-200 md:text-xl">
             {item.summary}
           </p>
         </Reveal>

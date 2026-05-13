@@ -25,7 +25,7 @@ export default async function StuffPage() {
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="font-display mt-8 max-w-3xl text-2xl leading-[1.2] text-bone-200 md:text-3xl">
+            <p className="mt-8 max-w-2xl text-lg leading-[1.55] text-bone-200 md:text-xl">
               Things I do when I&apos;m not at a keyboard.
             </p>
           </Reveal>

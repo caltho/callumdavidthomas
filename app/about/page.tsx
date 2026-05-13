@@ -28,7 +28,7 @@ export default async function AboutPage() {
         <div className="mt-16 grid grid-cols-12 gap-8">
           <Reveal className="col-span-12 md:col-span-7" delay={0.1}>
             <div
-              className="font-display space-y-6 text-2xl leading-[1.25] text-bone-200 md:text-3xl [&_p]:max-w-2xl"
+              className="space-y-6 text-lg leading-[1.55] text-bone-200 md:text-xl [&_p]:max-w-2xl"
               dangerouslySetInnerHTML={{ __html: about.description }}
             />
           </Reveal>

@@ -190,18 +190,23 @@ export default async function Home() {
       <section className="relative py-32 md:py-48">
         <div className="mx-auto max-w-[1600px] px-6 md:px-10">
           <Reveal>
-            <p className="eyebrow">§ Get in touch</p>
+            <p className="eyebrow">§ The list</p>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="font-display mt-6 max-w-5xl text-5xl leading-[0.95] tracking-[-0.04em] text-bone-50 md:text-8xl">
-              The basement door is{" "}
+              You&apos;re on it.{" "}
               <a
                 href={`mailto:${site.email}`}
                 className="relative inline-block text-ember underline decoration-ember/40 decoration-[0.08em] underline-offset-[0.12em] transition-colors hover:text-bone-50"
               >
-                always open.
+                Email →
               </a>
             </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-8 max-w-md text-sm text-bone-400">
+              No bouncer. No list. No idea why I framed it that way.
+            </p>
           </Reveal>
         </div>
       </section>

@@ -8,8 +8,7 @@ export function SiteFooter() {
         <div className="col-span-12 md:col-span-6">
           <p className="eyebrow">Currently</p>
           <p className="mt-3 max-w-md text-lg text-bone-200">
-            Open to collaborations and freelance projects. The basement is open
-            late.
+            Open to good emails. Face control applies.
           </p>
         </div>
 
