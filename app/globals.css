@@ -197,7 +197,10 @@ body {
 }
 
 /* ------------------------------------------------------------------
-   Hover sweep — a faint light passes across a row on hover.
+   Hover sweep — a soft light passes across a row on hover.
+   One-shot animation (no return sweep on mouse-out). Per-position
+   duration variance gives each row a slightly different feel —
+   like lights shining through a crowd, not a single strobe.
 ------------------------------------------------------------------ */
 .sweep {
   position: relative;
@@ -210,17 +213,30 @@ body {
   inset: 0;
   background: linear-gradient(
     100deg,
-    transparent 30%,
-    color-mix(in srgb, var(--ember) 14%, transparent) 50%,
-    transparent 70%
+    transparent 25%,
+    color-mix(in srgb, var(--ember) 16%, transparent) 50%,
+    transparent 75%
   );
   transform: translateX(-110%);
-  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
   z-index: -1;
   pointer-events: none;
 }
 .sweep:hover::before {
-  transform: translateX(110%);
+  animation: sweep-pass 2s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
+}
+
+/* Per-position duration variance — base on sibling index. Anything
+   between 1.4s and 2.6s. Feels unrehearsed without being random per
+   click (which would jank). */
+.sweep:nth-child(5n+1):hover::before { animation-duration: 1.6s; }
+.sweep:nth-child(5n+2):hover::before { animation-duration: 2.3s; }
+.sweep:nth-child(5n+3):hover::before { animation-duration: 1.9s; }
+.sweep:nth-child(5n+4):hover::before { animation-duration: 2.6s; }
+.sweep:nth-child(5n+5):hover::before { animation-duration: 1.4s; }
+
+@keyframes sweep-pass {
+  from { transform: translateX(-110%); }
+  to   { transform: translateX(110%); }
 }
 
 /* Hairline rule used everywhere */

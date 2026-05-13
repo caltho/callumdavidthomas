@@ -18,7 +18,7 @@ export const projects: Project[] = [
       "rje/QMS (7).png",
     ],
     techStack: ["Angular", "Node.js", "MySQL", "TypeScript", "Material-UI"],
-    link: "portfolio/qms",
+    link: "",
     github: "",
     longDescription: `
         A key project during my role at RJE Global was a web-based Quality &
@@ -50,7 +50,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "HTML", "CSS", "Chakra-UI", "Vercel"],
     techStack: ["Next.js", "TypeScript", "HTML", "CSS", "Chakra-UI", "Vercel"],
     number: 0,
-    link: "https://traffictools.com.au",
+    link: "https://www.traffictools.com.au",
     github: "https://github.com/caltho/traffic-tools",
     longDescription: `
       Traffic Tools is an open-source and free web app created for use by
@@ -119,7 +119,7 @@ while using Bootstrap to fasttrack the CSS and provide a consistent feel.`,
     thumbnail: "connect-five-1.png",
     image: ["connect-five-1.png", "connect-five-2.png", "connect-five-3.png"],
     techStack: ["Next.js", "TypeScript", "Vercel"],
-    link: "https://connect-five-five.vercel.app/",
+    link: "https://connect-five-five.vercel.app",
     github: "https://github.com/caltho/connect-five",
     longDescription: `Connect Five is an exciting web game built with Next.js and Tailwind CSS. The goal is to strategically connect five game pieces in a row on a 19x19 grid. Players take turns clicking on the grid to place their black or white circles. The game tracks the board state, checks for win conditions, and provides an intuitive user interface.
 
@@ -138,7 +138,7 @@ In its development, Tailwind CSS facilitated the creation of a modern design wit
       "sliding-tiles/sliding-tiles-3.png",
     ],
     techStack: ["API", "Next.js", "TypeScript"],
-    link: "https://sliding-puzzle-rho.vercel.app/",
+    link: "https://sliding-puzzle-rho.vercel.app",
     github: "https://github.com/caltho/sliding-puzzle",
     longDescription: `A retro and nostalgic Sliding Tile Puzzle game which brings back the excitement of your childhood. With five grid sizes to choose from, this app offers a challenging yet entertaining experience. The Sliding Tile Puzzle uses the Unsplash developer API to fetch random images for the puzzle. The image is then scaled based on its aspect ratio which allows it to fit into the puzzle pieces no matter the image or puzzle resolution.
     <br />
@@ -155,7 +155,7 @@ Creating the puzzle board introduced some interesting game logic, as only one ha
     image: ["Callum David Thomas.png"],
 
     techStack: ["Figma", "Javascript", "Next.js", "TailwindCSS"],
-    link: "https://www.figma.com/proto/nsNsYOoaPZpzXxinP1ccsc/Cal-Portfolio",
+    link: "https://callumdavidthomas.com",
     github: "https://github.com/caltho/callumdavidthomas",
     longDescription: `This is my portfolio! I built it from a Figma design by Oliver Wedd using TailwindCSS and have hosted it on Vercel.
     <br />
@@ -192,7 +192,7 @@ I spent two sessions with NZOPA committee members to provide guidance and traini
     thumbnail: "Amber-circle-orange.png",
     image: [],
     techStack: ["Wordpress", "PHP", "MySQL", "Plugin"],
-    link: "https://github.com/caltho/Quote-Sign-Plugin",
+    link: "",
     github: "https://github.com/caltho/Quote-Sign-Plugin",
     longDescription: `While working at Amber Organisation as a senior traffic engineer, I provided key input to the design and functionality of the company website including custom HTML and CSS, implementing a child theme, upgrading to the latest version of Wordpress and PHP, optimising images for web.
 
@@ -214,7 +214,7 @@ A difficulty I found our clients had was the ease of signing quotes. I provided 
       "MySQL",
       "Replatform",
     ],
-    link: "http://modalgroup.com.au/",
+    link: "https://modalgroup.com.au/",
     github: "https://github.com/caltho/modalgroup",
     longDescription: `Modal Group had an existing Wordpress website and requested that it be replatformed using React. I chose Next.js for speed and static HTML for SEO. I quickly created elements using Chakra-UI and customised the theme to match Modal colours, providing speed, responsiveness, and customisability.`,
   },
