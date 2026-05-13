@@ -61,14 +61,13 @@ export const projects: Project[] = [
       <br />
       <br />
       I built Traffic Tools using Next.js with TypeScript, Google Firebase for
-      user authentication, Chakra-UI for the component library, and the
-      Chart.js plugin for creating charts.
+      user authentication, Chakra UI for the component library, and Chart.js
+      for charts.
       <br />
       <br />
-      I enjoyed making each component as modular as possible, not only to
-      eliminate repetition of code but also to use the calculators in future
-      projects within the Traffic Engineering space.
-    
+      I made each component as modular as possible — not only to eliminate
+      repetition of code, but also to reuse the calculators in future projects
+      within the traffic-engineering space.
   `,
   },
   {
@@ -82,15 +81,9 @@ export const projects: Project[] = [
     techStack: ["PHP", "MySQL", "AWS-S3", "Bootstrap", "UX/UI"],
     link: "",
     github: "https://github.com/caltho/centresafe",
-    longDescription: `CentreSafe is a risk management service created
-    for use by companies and NGOs. The CentreSafe portal allows users
-    to quickly understand where the critical risks lie within their organisation, 
-    and to forecast upcoming risks. Risk management data within Centresafe is 
-    immutable allowing organisations to clearly see the risk treatment lifecycle 
-    from identification to mitigation and elimination.
-I built CentreSafe using the LAMP software stack, which includes PHP, MySQL and 
-hosting via AWS. I challenged myself by building the app without a component library, 
-while using Bootstrap to fasttrack the CSS and provide a consistent feel.`,
+    longDescription: `CentreSafe is a risk management service for companies and NGOs. The portal allows users to quickly understand where the critical risks lie within their organisation and to forecast upcoming risks. Risk management data within CentreSafe is immutable, allowing organisations to clearly see the risk treatment lifecycle from identification through mitigation to elimination.
+<br /><br />
+I built CentreSafe on the LAMP stack — PHP and MySQL, hosted on AWS. I challenged myself by building the app without a component library, using Bootstrap to fast-track the CSS and provide a consistent feel.`,
   },
   {
     slug: "centresafe-web-design",
@@ -108,22 +101,22 @@ while using Bootstrap to fasttrack the CSS and provide a consistent feel.`,
     techStack: ["Figma", "Photoshop", "Front End Design", "UX/UI", "Branding"],
     link: "https://drive.google.com/file/d/17FdxlspCdb8Zt73JDnf2E8jeFu0sSHqy/view?usp=drive_link",
     github: "",
-    longDescription: `I created brand guidelines and a web design template for CentreSafe. My primary goal was to establish a strong and consistent visual identity that would effectively convey CentreSafe's mission, values, and services. This document outlined the appropriate usage of CentreSafe's logo, defined a color palette that evoked feelings of trust, and security, and established a typography system that balanced professionalism with approachability.`,
+    longDescription: `I created brand guidelines and a web design template for CentreSafe. My primary goal was to establish a strong and consistent visual identity that would effectively convey CentreSafe's mission, values, and services. The document outlines the appropriate usage of CentreSafe's logo, defines a colour palette that evokes trust and security, and establishes a typography system that balances professionalism with approachability.`,
   },
   {
     slug: "connect-five",
-    title: "Connect-five",
+    title: "Connect Five",
     summary: "A web game built with Next.js and Tailwind CSS.",
-    tags: ["Next.js", "TypeScript", "Vercel"],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
     number: 5,
     thumbnail: "connect-five-1.png",
     image: ["connect-five-1.png", "connect-five-2.png", "connect-five-3.png"],
-    techStack: ["Next.js", "TypeScript", "Vercel"],
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
     link: "https://connect-five-five.vercel.app",
     github: "https://github.com/caltho/connect-five",
-    longDescription: `Connect Five is an exciting web game built with Next.js and Tailwind CSS. The goal is to strategically connect five game pieces in a row on a 19x19 grid. Players take turns clicking on the grid to place their black or white circles. The game tracks the board state, checks for win conditions, and provides an intuitive user interface.
-
-In its development, Tailwind CSS facilitated the creation of a modern design with offset div elements to create the grid. JavaScript and React hooks were used to implement the game logic, allowing for dynamic interaction and instant updates. With its focus on simplicity and user experience, Connect Five showcases my Typescript proficiency and provides an engaging web app for players of all ages.`,
+    longDescription: `Connect Five is a web game built with Next.js and Tailwind CSS. The goal is to strategically connect five game pieces in a row on a 19×19 grid. Players take turns clicking the grid to place their black or white circles; the game tracks the board state, checks for win conditions, and provides an intuitive interface.
+<br /><br />
+Tailwind CSS handled the visual side — offset div elements to render the grid, modern type, generous spacing. JavaScript and React hooks implemented the game logic, allowing for dynamic interaction and instant updates. With its focus on simplicity and clean UX, Connect Five is a small showcase of my TypeScript work and an engaging web app for players of all ages.`,
   },
   {
     slug: "sliding-tiles-puzzle",
@@ -140,83 +133,98 @@ In its development, Tailwind CSS facilitated the creation of a modern design wit
     techStack: ["API", "Next.js", "TypeScript"],
     link: "https://sliding-puzzle-rho.vercel.app",
     github: "https://github.com/caltho/sliding-puzzle",
-    longDescription: `A retro and nostalgic Sliding Tile Puzzle game which brings back the excitement of your childhood. With five grid sizes to choose from, this app offers a challenging yet entertaining experience. The Sliding Tile Puzzle uses the Unsplash developer API to fetch random images for the puzzle. The image is then scaled based on its aspect ratio which allows it to fit into the puzzle pieces no matter the image or puzzle resolution.
+    longDescription: `A retro and nostalgic sliding-tile puzzle that brings back the excitement of your childhood. With five grid sizes to choose from, the app offers a challenging yet entertaining experience. It uses the Unsplash developer API to fetch random images for the puzzle, then scales each image based on its aspect ratio so it fits the puzzle pieces regardless of source resolution.
     <br />
     <br />
-Creating the puzzle board introduced some interesting game logic, as only one half of randomly generated puzzles are solvable. The solution for a randomised yet solvable puzzle comes from calculating the parity of the generated array, and swapping any two random pieces as required. More information regarding the solvability of sliding tile puzzles is referenced <a href="https://www.cs.princeton.edu/courses/archive/spring21/cos226/assignments/8puzzle/specification.php">here</a>.`,
+Building the puzzle board introduced some interesting game logic — only half of all randomly generated puzzles are actually solvable. The trick to a randomised-yet-solvable puzzle is calculating the parity of the generated array and swapping any two pieces if it comes out unsolvable. More on the solvability of sliding-tile puzzles is referenced <a href="https://www.cs.princeton.edu/courses/archive/spring21/cos226/assignments/8puzzle/specification.php">here</a>.`,
   },
   {
     slug: "portfolio",
-    title: "Portfolio",
-    summary: "My personal portfolio built with Figma, Next.js, and Tailwind.",
-    tags: ["Figma", "Javascript", "Next.js", "TailwindCSS"],
+    title: "Portfolio (this site)",
+    summary:
+      "This site. Fully AI-built editorial-brutalist portfolio with a custom admin, live data, and a /b-sides shelf for internet relics.",
+    tags: [
+      "Next.js 16",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Motion",
+      "Supabase",
+      "Vercel",
+    ],
     number: 5,
     thumbnail: "Callum David Thomas.png",
     image: ["Callum David Thomas.png"],
-
-    techStack: ["Figma", "Javascript", "Next.js", "TailwindCSS"],
+    techStack: [
+      "Next.js 16",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Motion",
+      "Supabase",
+      "Vercel",
+    ],
     link: "https://callumdavidthomas.com",
     github: "https://github.com/caltho/callumdavidthomas",
-    longDescription: `This is my portfolio! I built it from a Figma design by Oliver Wedd using TailwindCSS and have hosted it on Vercel.
-    <br />
-    <br />
-    I wanted to create a clean, simple, and easy-to-navigate portfolio that showcases my projects and experience. I focused on responsive design to ensure it looks great on all devices. Feel free to explore and check out my work!`,
+    longDescription: `This is the site you're looking at. Editorial brutalism meets basement-club: massive Fraunces display type, drifting CSS club lights, oxide-red accents, film-grain overlay. No scroll hijacking — native scroll only.
+    <br /><br />
+    Stack: Next.js 16 on the App Router with React 19 Server Components, Tailwind v4 (CSS-first design tokens), Motion for the reveal animations, and a small set of hand-rolled UI primitives I fully own. Content lives in Supabase Postgres, colocated in another of my projects with all tables prefixed and gated by Row-Level Security. There's a /admin panel behind Supabase Auth so I can add projects, stuff, and update the about page without touching code — image uploads go straight to a public Storage bucket.
+    <br /><br />
+    It was built end-to-end in collaboration with Claude — paired with the AI on architecture, scaffolding, design tokens, schema, and copy. A working example of what "AI-built" can actually look like when you treat the model as a senior collaborator instead of a fancy autocomplete.`,
   },
   {
     slug: "nzopa-revamp",
     title: "NZOPA Revamp",
     summary: "Revamp of NZOPA website and member portal.",
-    tags: ["Wordpress", "PHP", "MySQL", "Design"],
+    tags: ["WordPress", "PHP", "MySQL", "Design"],
     number: 6,
     thumbnail: "NZOPA logo.png",
     image: [],
-    techStack: ["Wordpress", "PHP", "MySQL", "Design"],
+    techStack: ["WordPress", "PHP", "MySQL", "Design"],
     link: "https://nzopa.co.nz/",
     github: "",
-    longDescription: `The New Zealand Orthotics & Prosthetics Association (NZOPA) commissioned me to revamp their website and member portal. I set up a new Wordpress site and utilised plugins to:
+    longDescription: `The New Zealand Orthotics & Prosthetics Association (NZOPA) commissioned me to revamp their website and member portal. I set up a new WordPress site and configured plugins to:
 <ul>
 <li>Allow member sign-ups.</li>
 <li>Show/hide content at different membership levels.</li>
 <li>Accept online payments.</li>
-<li>Allow members to upload case studies requiring a custom form.</li>
-<li>Give admins access to creating new pages and blogposts.</li>
+<li>Let members upload case studies via a custom form.</li>
+<li>Give admins access to creating new pages and blog posts.</li>
 </ul>
-I spent two sessions with NZOPA committee members to provide guidance and training for administering the Wordpress site. Overall the project was a success and we received positive feedback from members.`,
+I spent two sessions with the NZOPA committee providing guidance and training on administering the site. The project was a success and we received positive feedback from members.`,
   },
   {
     slug: "amber-wordpress-plugin",
     title: "Amber Organisation WordPress Plugin",
     summary: "Custom plugin to streamline quote signing process.",
-    tags: ["Wordpress", "PHP", "MySQL", "Plugin"],
+    tags: ["WordPress", "PHP", "MySQL", "Plugin"],
     number: 7,
     thumbnail: "Amber-circle-orange.png",
     image: [],
-    techStack: ["Wordpress", "PHP", "MySQL", "Plugin"],
+    techStack: ["WordPress", "PHP", "MySQL", "Plugin"],
     link: "",
     github: "https://github.com/caltho/Quote-Sign-Plugin",
-    longDescription: `While working at Amber Organisation as a senior traffic engineer, I provided key input to the design and functionality of the company website including custom HTML and CSS, implementing a child theme, upgrading to the latest version of Wordpress and PHP, optimising images for web.
-
-A difficulty I found our clients had was the ease of signing quotes. I provided a simple portal where clients could view and sign quotes on any electronic device. This was achieved through custom Wordpress templates, a new MySQL table, and custom forms.`,
+    longDescription: `While working at Amber Organisation as a senior traffic engineer, I provided key input on the design and functionality of the company website — custom HTML and CSS, a child theme, upgrades to the latest version of WordPress and PHP, and image optimisation for the web.
+<br /><br />
+A pain point our clients consistently raised was the cumbersome process of signing quotes. I built a simple portal where clients could view and sign quotes on any electronic device, implemented via custom WordPress templates, a new MySQL table, and custom forms.`,
   },
   {
     slug: "modal-group-replatform",
     title: "Modal Group Replatform",
-    summary: "Replatformed Modal Group site from Wordpress to React.",
-    tags: ["Next.js", "Chakra-UI", "Wordpress", "PHP", "MySQL", "Replatform"],
+    summary: "Replatformed Modal Group site from WordPress to React.",
+    tags: ["Next.js", "Chakra-UI", "WordPress", "PHP", "MySQL", "Replatform"],
     number: 8,
     thumbnail: "modal-logo.png",
     image: [],
     techStack: [
       "Next.js",
       "Chakra-UI",
-      "Wordpress",
+      "WordPress",
       "PHP",
       "MySQL",
       "Replatform",
     ],
     link: "https://modalgroup.com.au/",
     github: "https://github.com/caltho/modalgroup",
-    longDescription: `Modal Group had an existing Wordpress website and requested that it be replatformed using React. I chose Next.js for speed and static HTML for SEO. I quickly created elements using Chakra-UI and customised the theme to match Modal colours, providing speed, responsiveness, and customisability.`,
+    longDescription: `Modal Group had an existing WordPress site and asked me to replatform it on React. I chose Next.js for speed and static HTML for SEO. I built out the UI with Chakra UI, customising the theme to match Modal's brand colours — the result is faster, more responsive, and easier to extend.`,
   },
   {
     slug: "project-folder-shortcut",
@@ -229,7 +237,7 @@ A difficulty I found our clients had was the ease of signing quotes. I provided 
     techStack: ["Visual Basic Script", "Windows OS", "Productivity"],
     link: "",
     github: "",
-    longDescription: `File structures within large organisations can often be cumbersome. This FolderFinder shortcut opens a folder based on a search string of the first 3 letters input by the user.`,
+    longDescription: `File structures within large organisations can often be cumbersome. This FolderFinder shortcut opens a folder based on a 3-letter search string entered by the user.`,
     codeblock: {
       lang: "clike",
       desc: [`VB Code`],
@@ -316,7 +324,7 @@ A difficulty I found our clients had was the ease of signing quotes. I provided 
     ],
     link: "",
     github: "",
-    longDescription: `Productivity is about saving time and mental overhead. These Outlook macros allow quick filing of emails via keyboard shortcuts, without losing screen focus. Includes macros: jumpToFolder, fileMail.`,
+    longDescription: `Productivity is about saving time and reducing mental overhead. These Outlook macros allow quick filing of emails via keyboard shortcuts without losing screen focus. Includes macros: jumpToFolder, fileMail.`,
     codeblock: {
       lang: "clike",
       desc: [

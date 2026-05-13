@@ -6,6 +6,7 @@ import { MarqueeTags } from "@/components/marquee-tags";
 import { LiveAppsGrid } from "@/components/live-apps";
 import { StickerShop } from "@/components/relics/sticker-shop";
 import { GreentextRelic } from "@/components/relics/greentext";
+import { SleepMeter } from "@/components/relics/sleep-meter";
 import { site } from "@/lib/site";
 import { liveApps } from "@/data/live-apps";
 
@@ -179,8 +180,11 @@ export default async function Home() {
             <Reveal className="col-span-12" delay={0.1}>
               <StickerShop />
             </Reveal>
-            <Reveal className="col-span-12 md:col-span-7" delay={0.15}>
+            <Reveal className="col-span-12 md:col-span-5" delay={0.15}>
               <GreentextRelic />
+            </Reveal>
+            <Reveal className="col-span-12 md:col-span-7" delay={0.18}>
+              <SleepMeter />
             </Reveal>
           </div>
         </div>
