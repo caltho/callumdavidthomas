@@ -13,12 +13,12 @@ export const stuff: Stuff[] = [
       "High Altitude",
     ],
     number: 1,
-    thumbnail: "yukhin-peak/summit.jpg",
+    thumbnail: "/images/yukhin-peak/summit.jpg",
     image: [
-      "yukhin-peak/summit.jpg",
-      "yukhin-peak/camp-1.jpg",
-      "yukhin-peak/day-2.jpg",
-      "yukhin-peak/mountain-yak.jpg",
+      "/images/yukhin-peak/summit.jpg",
+      "/images/yukhin-peak/camp-1.jpg",
+      "/images/yukhin-peak/day-2.jpg",
+      "/images/yukhin-peak/mountain-yak.jpg",
     ],
     links: [],
     longDescription: `

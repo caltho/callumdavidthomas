@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProject, getProjects } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
+import { ImageGallery } from "@/components/image-gallery";
 import { pad } from "@/lib/utils";
 
 export async function generateStaticParams() {
@@ -124,6 +125,15 @@ export default async function ProjectPage({
               dangerouslySetInnerHTML={{ __html: project.longDescription }}
             />
           </Reveal>
+
+          {project.image && project.image.length > 0 && (
+            <Reveal delay={0.18}>
+              <div className="mx-auto mt-16 max-w-5xl">
+                <p className="eyebrow mb-6">§ Screens</p>
+                <ImageGallery images={project.image} alt={project.title} />
+              </div>
+            </Reveal>
+          )}
 
           {project.codeblock && (
             <Reveal delay={0.2}>

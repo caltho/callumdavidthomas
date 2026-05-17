@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getStuff, getStuffItem } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
+import { ImageGallery } from "@/components/image-gallery";
 import { pad } from "@/lib/utils";
 
 export async function generateStaticParams() {
@@ -70,6 +71,15 @@ export default async function StuffDetail({
             dangerouslySetInnerHTML={{ __html: item.longDescription }}
           />
         </Reveal>
+
+        {item.image && item.image.length > 0 && (
+          <Reveal delay={0.25}>
+            <div className="mx-auto mt-16 max-w-5xl">
+              <p className="eyebrow mb-6">§ Photos</p>
+              <ImageGallery images={item.image} alt={item.title} />
+            </div>
+          </Reveal>
+        )}
       </div>
     </article>
   );
