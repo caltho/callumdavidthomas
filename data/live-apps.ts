@@ -38,7 +38,7 @@ export const liveApps: LiveApp[] = [
   {
     slug: "boatlog",
     name: "Boatlog",
-    url: "https://boatlog.vercel.app",
+    url: "https://boatlog.callumdavidthomas.com",
     blurb: "Trip logbook for the boat — distance, weather, fuel, crew.",
     kind: "Personal tool",
     year: "2026",
@@ -47,7 +47,7 @@ export const liveApps: LiveApp[] = [
   {
     slug: "sliding-tiles",
     name: "Sliding Tiles",
-    url: "https://sliding-puzzle-rho.vercel.app",
+    url: "https://sliding-puzzle.callumdavidthomas.com",
     blurb: "Retro sliding-tile puzzle with five grid sizes and Unsplash imagery.",
     kind: "Web game",
     year: "2024",
@@ -56,7 +56,7 @@ export const liveApps: LiveApp[] = [
   {
     slug: "connect-five",
     name: "Connect Five",
-    url: "https://connect-five-five.vercel.app",
+    url: "https://connect-five.callumdavidthomas.com",
     blurb: "Strategic five-in-a-row on a 19×19 grid. Black vs. white, turn-based.",
     kind: "Web game",
     year: "2024",

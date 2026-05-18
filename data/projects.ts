@@ -27,7 +27,7 @@ Built end-to-end with SvelteKit, TypeScript, and Supabase Postgres. Heavy Row-Le
     thumbnail: "",
     image: [],
     techStack: ["Next.js", "TypeScript", "Supabase", "Vercel"],
-    link: "https://boatlog.vercel.app",
+    link: "https://boatlog.callumdavidthomas.com",
     github: "",
     longDescription: `Boatlog is a small private app I built for tracking days on the water — distance covered, weather and conditions, fuel used, crew on board. The kind of thing that used to live in a damp notebook on the chart table, now in a phone-friendly web app I can update one-handed.
 <br /><br />
@@ -43,7 +43,7 @@ Next.js with TypeScript on Vercel, backed by Supabase. Deliberately minimal — 
     thumbnail: "",
     image: [],
     techStack: ["JavaScript", "HTML", "CSS"],
-    link: "https://lan-hero.vercel.app",
+    link: "https://lan-hero.callumdavidthomas.com",
     github: "https://github.com/caltho/LAN-hero",
     longDescription: `LAN Hero is a tongue-in-cheek personal-development tracker that wraps your real life in RPG mechanics. Level up by completing quests (read a book, train a martial art, ship a side project), unlock skills, earn XP, hoard inventory items. Half productivity app, half character sheet.
 <br /><br />
@@ -59,7 +59,7 @@ Vanilla JavaScript, HTML, and CSS — no framework, no build step. The simplest 
     thumbnail: "",
     image: [],
     techStack: ["Next.js", "TypeScript", "React", "Vercel"],
-    link: "https://firewall-gray.vercel.app",
+    link: "https://firewall.callumdavidthomas.com",
     github: "https://github.com/caltho/firewall",
     longDescription: `A small construction-industry utility for calculating the fire-resistance rating ("the fireyness") of a building firewall. Born out of doing the same back-of-envelope calc with a coffee-stained spreadsheet one too many times — now a clean web tool that anyone on site can pull up on their phone.
 <br /><br />
@@ -190,7 +190,7 @@ I built CentreSafe on the LAMP stack — PHP and MySQL, hosted on AWS. I challen
     thumbnail: "/images/connect-five-1.png",
     image: ["/images/connect-five-1.png", "/images/connect-five-2.png", "/images/connect-five-3.png"],
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    link: "https://connect-five-five.vercel.app",
+    link: "https://connect-five.callumdavidthomas.com",
     github: "https://github.com/caltho/connect-five",
     longDescription: `Connect Five is a web game built with Next.js and Tailwind CSS. The goal is to strategically connect five game pieces in a row on a 19×19 grid. Players take turns clicking the grid to place their black or white circles; the game tracks the board state, checks for win conditions, and provides an intuitive interface.
 <br /><br />
@@ -209,7 +209,7 @@ Tailwind CSS handled the visual side — offset div elements to render the grid,
       "/images/sliding-tiles/sliding-tiles-3.png",
     ],
     techStack: ["API", "Next.js", "TypeScript"],
-    link: "https://sliding-puzzle-rho.vercel.app",
+    link: "https://sliding-puzzle.callumdavidthomas.com",
     github: "https://github.com/caltho/sliding-puzzle",
     longDescription: `A retro and nostalgic sliding-tile puzzle that brings back the excitement of your childhood. With five grid sizes to choose from, the app offers a challenging yet entertaining experience. It uses the Unsplash developer API to fetch random images for the puzzle, then scales each image based on its aspect ratio so it fits the puzzle pieces regardless of source resolution.
     <br />
