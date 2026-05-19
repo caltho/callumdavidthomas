@@ -127,8 +127,8 @@ TypeScript + React on Next.js, deployed on Vercel. Single page, no login, paste 
     title: "Traffic Tools",
     tags: ["Next.js", "TypeScript", "HTML", "CSS", "Chakra-UI", "Vercel"],
     techStack: ["Next.js", "TypeScript", "HTML", "CSS", "Chakra-UI", "Vercel"],
-    number: 0,
-    link: "https://www.traffictools.com.au",
+    number: 5,
+    link: "https://traffictools.com.au",
     github: "https://github.com/caltho/traffic-tools",
     longDescription: `
       Traffic Tools is an open-source and free web app created for use by
