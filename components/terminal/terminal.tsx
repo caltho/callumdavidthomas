@@ -417,7 +417,7 @@ export function Terminal({
       </div>
 
       {/* screen content */}
-      <div className="relative z-10 mx-auto min-h-screen max-w-[1240px] px-[max(1.5rem,calc(3vw+0.5rem))] pb-28 pt-[max(2.5rem,calc(3vw+1.5rem))]">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1240px] flex-col px-[max(1.5rem,calc(3vw+0.5rem))] pb-24 pt-[max(2rem,calc(2vw+1rem))]">
         {/* status strip */}
         <div className="flex items-center justify-between gap-4 border-b border-border/60 pb-4">
           <p className="font-cyber text-[clamp(10px,1.2vw,14px)] tracking-[0.04em] text-bone-400">
@@ -432,32 +432,36 @@ export function Terminal({
           </div>
         </div>
 
-        {/* hero + console */}
-        <div className="mt-10 grid grid-cols-1 items-center gap-10 lg:mt-12 lg:grid-cols-[1.05fr_0.95fr]">
-          {/* hero */}
-          <div>
-            <span className="ghost text-[clamp(56px,12vw,168px)] text-bone-50">
-              <span className="echo e3" aria-hidden>what&rsquo;s cyber?</span>
-              <span className="echo e2" aria-hidden>what&rsquo;s cyber?</span>
-              <span className="echo e1" aria-hidden>what&rsquo;s cyber?</span>
-              <span className="relative">what&rsquo;s cyber<span className="red">?</span></span>
-            </span>
-            <p className="mt-7 max-w-[36ch] text-[clamp(16px,1.6vw,20px)] leading-[1.55] text-bone-400">
-              I build clean, modular web apps —{" "}
-              <em className="text-bone-50">slowly, and on purpose.</em>{" "}
-              Construction tools, traffic-engineering software, late-night experiments.
-            </p>
-            <div className="mt-7 flex items-center gap-4">
-              <span className="target inline-block size-[54px]" aria-hidden />
-              <span className="target rev inline-block size-[30px] opacity-60" aria-hidden />
-              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-bone-600">
-                Edition 001 · MMXXVI
-              </span>
-            </div>
-          </div>
+        {/* centered middle: full-width hero, then intro + console row */}
+        <div className="flex flex-1 flex-col justify-center gap-12 py-10">
+          {/* hero — full width, one line */}
+          <span className="ghost text-[clamp(40px,10vw,156px)] text-bone-50">
+            <span className="echo e3" aria-hidden>what&rsquo;s cyber?</span>
+            <span className="echo e2" aria-hidden>what&rsquo;s cyber?</span>
+            <span className="echo e1" aria-hidden>what&rsquo;s cyber?</span>
+            <span className="relative">what&rsquo;s cyber<span className="red">?</span></span>
+          </span>
 
-          {/* console */}
-          <div className="console">
+          {/* intro + console */}
+          <div className="grid grid-cols-1 gap-x-12 gap-y-10 lg:grid-cols-[1fr_minmax(0,460px)] lg:items-center">
+            {/* intro */}
+            <div className="min-w-0">
+              <p className="max-w-[42ch] text-[clamp(16px,1.6vw,21px)] leading-[1.55] text-bone-400">
+                I build clean, modular web apps —{" "}
+                <em className="text-bone-50">slowly, and on purpose.</em>{" "}
+                Construction tools, traffic-engineering software, late-night experiments.
+              </p>
+              <div className="mt-9 flex items-center gap-4">
+                <span className="target inline-block size-[54px]" aria-hidden />
+                <span className="target rev inline-block size-[30px] opacity-60" aria-hidden />
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-bone-600">
+                  Edition 001 · MMXXVI
+                </span>
+              </div>
+            </div>
+
+            {/* console */}
+            <div className="console min-w-0">
             <span className="console-rivet tl" aria-hidden />
             <span className="console-rivet tr" aria-hidden />
             <span className="console-rivet bl" aria-hidden />
@@ -498,6 +502,7 @@ export function Terminal({
               <button className="cmd" onClick={() => runCommand("about")}>▸ About<span className="k">whoami</span></button>
               <button className="cmd" onClick={() => runCommand("clear")}>▸ Clear<span className="k">wipe</span></button>
             </div>
+          </div>
           </div>
         </div>
 
