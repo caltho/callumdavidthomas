@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CDT//OS — Y2K × Basement · Legend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Michroma&family=Pixelify+Sans:wght@400;500;600&family=VT323&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink-900:#040308;--ink-800:#08070d;--ink-700:#0d0b13;--ink-600:#12101a;--ink-500:#181523;--ink-400:#241f30;--line:#1c1828;
+  --bone-50:#f6f1e7;--bone-200:#d8cfbe;--bone-400:#a89e8d;--bone-600:#6a6358;
+  --ember:#ff3d2e;--ember-deep:#c3261c;--ultra:#7a2dff;--ultra-deep:#3d0d8a;--halo:#ffe7c2;--phosphor:#8dff63;
+  --acid:#b6ff3a;--acid-deep:#7fbf1f;--metal-base:#16131d;
+  --font-display:'Fraunces','Times New Roman',serif;--font-sans:'Geist','Segoe UI',system-ui,sans-serif;
+  --font-cyber:'Michroma','Arial Narrow',sans-serif;--font-helv:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;--font-pixel:'Pixelify Sans','MS Sans Serif',Tahoma,sans-serif;--font-led:'VT323',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--ink-900);color:var(--bone-50);-webkit-font-smoothing:antialiased;padding:48px 24px 80px}
+.scan{position:fixed;inset:0;z-index:55;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.12) 0 1px,transparent 1px 3px);mix-blend-mode:multiply;opacity:.5}
+.clublights{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.clublights span{position:absolute;border-radius:9999px;filter:blur(130px);opacity:.16}
+.l1{width:60vmax;height:60vmax;left:-20vmax;top:-25vmax;background:radial-gradient(circle,var(--ember),transparent 60%)}
+.l2{width:50vmax;height:50vmax;right:-18vmax;bottom:-18vmax;background:radial-gradient(circle,var(--ultra),transparent 60%)}
+.wrap{position:relative;z-index:10;max-width:1080px;margin:0 auto}
+.led{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--phosphor);box-shadow:0 0 8px var(--phosphor);animation:blink 2.6s steps(1) infinite}
+@keyframes blink{0%,92%{opacity:1}93%,100%{opacity:.4}}
+.holo{height:2px;border:0;background:linear-gradient(90deg,var(--ember),var(--ultra),var(--phosphor),var(--halo),var(--ember));background-size:220% 100%;opacity:.5;animation:holo 9s linear infinite;margin:30px 0}
+@keyframes holo{to{background-position:220% 0}}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-400);display:flex;gap:10px;align-items:center}
+h1{font-family:var(--font-display);font-size:clamp(56px,11vw,140px);line-height:.84;letter-spacing:-.04em;margin:18px 0 8px}
+h1 b{color:var(--ember)}
+.tag{font-family:var(--font-pixel);font-size:16px;color:var(--bone-400);letter-spacing:.04em}
+.lead{max-width:60ch;color:var(--bone-200);font-size:17px;line-height:1.6;margin-top:22px}
+h2{font-family:var(--font-pixel);font-size:20px;color:var(--halo);letter-spacing:.02em;margin:14px 0}
+/* launcher cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+.card{display:block;text-decoration:none;color:inherit;background:#0d0b13;
+  border-top:1px solid rgba(255,255,255,.08);border-left:1px solid rgba(255,255,255,.05);border-right:1px solid rgba(0,0,0,.8);border-bottom:1px solid rgba(0,0,0,.85);box-shadow:2px 2px 0 rgba(0,0,0,.4);transition:box-shadow .25s}
+.card:hover{box-shadow:2px 2px 0 rgba(0,0,0,.4),0 24px 60px -20px rgba(122,45,255,.4)}
+.card .tb{display:flex;align-items:center;gap:9px;padding:6px 8px 6px 11px;position:relative;background:linear-gradient(90deg,var(--ember-deep),var(--ultra-deep));font-family:var(--font-pixel);font-size:12px;color:var(--halo)}
+.card .tb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 55%)}
+.card .tb .dot{width:6px;height:6px;border-radius:50%;background:var(--halo);box-shadow:0 0 6px var(--halo)}
+.card .tb .ctl{margin-left:auto;display:flex;gap:3px}
+.card .tb .ctl i{width:16px;height:14px;display:grid;place-items:center;font-style:normal;font-size:11px;color:var(--bone-200);background:linear-gradient(180deg,#3a3646,#211e2b);border-top:1px solid rgba(255,255,255,.2);border-left:1px solid rgba(255,255,255,.1);border-right:1px solid #000;border-bottom:1px solid #000}
+.card .bd{padding:24px}
+.card h3{font-family:var(--font-display);font-size:38px;line-height:.95;color:var(--bone-50);margin-bottom:10px}
+.card p{color:var(--bone-400);font-size:14px;line-height:1.5}
+.card .open{display:inline-block;margin-top:16px;font-family:var(--font-pixel);font-size:13px;color:var(--ember)}
+.pill{display:inline-block;font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);color:var(--bone-400);margin-top:8px}
+
+/* spec grid */
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:10px}
+.swatches{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.sw{width:78px}.sw .chip{height:48px;border:1px solid rgba(255,255,255,.08)}.sw .nm{font-family:var(--font-mono);font-size:9px;letter-spacing:.06em;color:var(--bone-400);margin-top:5px;text-transform:uppercase}
+.type li{list-style:none;margin:14px 0;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.type .role{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600)}
+.dial{font-family:var(--font-mono);font-size:13px;line-height:1.8;color:var(--bone-200);margin-top:10px}
+.dial b{color:var(--phosphor)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{font-family:var(--font-pixel);color:var(--halo);white-space:nowrap;width:34%}
+td:last-child{color:var(--bone-400)}
+.counter{font-family:var(--font-led);font-size:22px;color:var(--phosphor);letter-spacing:3px;background:#020104;padding:2px 9px;text-shadow:0 0 6px rgba(141,255,99,.5)}
+
+/* v2 component legend */
+.v2grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:6px}
+.v2cell{background:var(--ink-700);border:1px solid var(--line);padding:18px}
+.legend-target{width:54px;height:54px;border-radius:50%;
+  background:radial-gradient(circle,transparent 0 18%,var(--acid) 18% 26%,transparent 26% 44%,var(--acid) 44% 50%,transparent 50% 70%,var(--acid) 70% 74%,transparent 74%);
+  animation:spin 26s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.legend-loz{display:inline-flex;align-items:center;gap:9px;background:var(--ink-900);border-radius:999px;padding:6px 16px 6px 7px;
+  font-family:var(--font-helv);font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--bone-50);border:1px solid rgba(255,255,255,.08);line-height:1;white-space:nowrap}
+.legend-bullet{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-helv);font-weight:700;font-size:13px}
+.legend-metal{position:relative;background:
+  linear-gradient(180deg,rgba(255,255,255,.05),transparent 30%),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,rgba(0,0,0,.05) 1px 2px,transparent 2px 3px),
+  linear-gradient(180deg,#1d1a26,var(--metal-base) 50%,#100d16);
+  border-top:1px solid rgba(255,255,255,.12);border-left:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(0,0,0,.7);border-bottom:1px solid rgba(0,0,0,.8)}
+.legend-duo{position:relative;height:64px;overflow:hidden;background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 30px),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 2px,transparent 2px 30px),
+  radial-gradient(circle at 30% 40%,#2a2636,#0a0810 70%);
+  filter:grayscale(1) contrast(1.15) brightness(.85);display:grid;place-items:end start;padding:8px}
+.legend-duo::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(182,255,58,.32),rgba(4,3,8,.55));mix-blend-mode:screen}
+.legend-duo span{position:relative;z-index:2}
+@media(max-width:760px){.cards,.spec{grid-template-columns:1fr}.v2grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion: reduce){.led,.holo,.legend-target{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="clublights"><span class="l1"></span><span class="l2"></span></div><div class="scan"></div>
+<div class="wrap">
+  <div class="eyebrow"><span class="led"></span> CDT//OS · DESIGN PROPOSAL · v2.6 · REVIEW BUILD</div>
+  <h1>Y2K <b>×</b> Basement</h1>
+  <div class="tag">"oxidised chrome, after midnight" — the Wipeout UI, left running in a dark room for 25 years.</div>
+  <p class="lead">The crossover isn't cosplay. In 1995 The Designers Republic built the Wipeout interface <i>and</i> the visual identity of Warp Records — peak Y2K cyber graphics and underground techno were one scene. This rebuilds that overlap, rendered in your existing basement palette. Two mockups below: the maximal idea, and the restrained production version. Pick where on the dial you want to sit.</p>
+
+  <hr class="holo" />
+
+  <div class="cards">
+    <a class="card" href="desktop.html">
+      <div class="tb"><span class="dot"></span>desktop.html<span class="ctl"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="bd"><h3>CDT//OS Desktop</h3>
+        <p>Maximal intensity. A bootable basement operating system: draggable windows, taskbar + phosphor clock, Start menu, a non-blocking "transmission" popup, boot splash. The full vocabulary in one screen.</p>
+        <span class="pill">best on desktop / large screen</span><br/>
+        <span class="open">▶ Launch desktop.html →</span></div>
+    </a>
+    <a class="card" href="editorial.html">
+      <div class="tb"><span class="dot"></span>editorial.html<span class="ctl"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="bd"><h3>Editorial Mode</h3>
+        <p>Subtle intensity — the real homepage. 80% basement / 20% Y2K furniture: system bar, window-framed cards, gel buttons, ticker, phosphor hit-counter. Headlines stay pure Fraunces. This is what ships.</p>
+        <span class="pill">responsive · production-leaning</span><br/>
+        <span class="open">▶ Launch editorial.html →</span></div>
+    </a>
+    <a class="card" href="softclub.html">
+      <div class="tb"><span class="dot"></span>softclub.html<span class="ctl"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="bd"><h3>Gen X Soft Club — v2</h3>
+        <p>A new cold-front. The basement, re-skinned through the "Gen X Soft Club" corner of Y2K: clinical Tresor-techno negative space + one <b style="color:var(--acid)">acid yellow-green</b> spot, brushed-gunmetal panels, NYC-subway transit lozenges (live apps become station stops), late-90s cyber-mag ghost-outline display, concentric target motifs, duotone imagery and a faint Matrix code-rain. Ember stays the warm lead; acid is the cold machine. Full responsive home page.</p>
+        <span class="pill">responsive · the cold-front evolution</span><br/>
+        <span class="open">▶ Launch softclub.html →</span></div>
+    </a>
+    <a class="card" href="transit.html">
+      <div class="tb"><span class="dot"></span>transit.html<span class="ctl"><i>_</i><i>□</i><i>×</i></span></div>
+      <div class="bd"><h3>Basement Transit — v3</h3>
+        <p>The direction you chose: <b>max intensity, restrained green</b>. One committed metaphor — the portfolio as an underground metro line ("underground techno × underground transit"). Brushed-gunmetal everywhere, NYC-subway lozenges + route bullets, and a live dot-matrix <b style="color:var(--ember)">departure board</b> + strip-map as the centrepiece. <b style="color:var(--ember)">Ember</b> is the line colour doing the structural work; <b style="color:var(--phosphor)">phosphor green</b> is LED-only (clock, service lamp, "now approaching" blink, counter). No big green, no code-rain.</p>
+        <span class="pill">responsive · the chosen direction (metal + signage)</span><br/>
+        <span class="open">▶ Launch transit.html →</span></div>
+    </a>
+  </div>
+
+  <hr class="holo" />
+
+  <h2>§ The system, in brief</h2>
+  <div class="spec">
+    <div>
+      <div class="eyebrow">Palette — basement, unchanged + one cold accent</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#040308"></div><div class="nm">ink-900</div></div>
+        <div class="sw"><div class="chip" style="background:#0d0b13"></div><div class="nm">ink-700</div></div>
+        <div class="sw"><div class="chip" style="background:#241f30"></div><div class="nm">ink-400</div></div>
+        <div class="sw"><div class="chip" style="background:#f6f1e7"></div><div class="nm">bone-50</div></div>
+        <div class="sw"><div class="chip" style="background:#a89e8d"></div><div class="nm">bone-400</div></div>
+        <div class="sw"><div class="chip" style="background:#ff3d2e"></div><div class="nm">ember</div></div>
+        <div class="sw"><div class="chip" style="background:#7a2dff"></div><div class="nm">ultra</div></div>
+        <div class="sw"><div class="chip" style="background:#ffe7c2"></div><div class="nm">halo</div></div>
+        <div class="sw"><div class="chip" style="background:#8dff63"></div><div class="nm">phosphor★</div></div>
+        <div class="sw"><div class="chip" style="background:#b6ff3a"></div><div class="nm">acid★★</div></div>
+        <div class="sw"><div class="chip" style="background:#16131d"></div><div class="nm">metal-base★★</div></div>
+      </div>
+      <p style="color:var(--bone-600);font-size:12px;margin-top:12px;line-height:1.6">★ v1 cold accent — phosphor green at LED scale only (status dots, clocks, counters). ★★ v2 (Soft Club) tokens — <b style="color:var(--acid)">acid</b> is the loud Tresor/Matrix yellow-green spot used at display scale (target rings, route bullets, signage accents, duotone shadows, code-rain); metal-base tints the brushed-gunmetal panels toward the inks. The whole tension: warm <b style="color:var(--ember)">ember</b> (basement/human) lead vs cold <b style="color:var(--acid)">acid</b> (techno/machine) second. Title bars = ember→ultra. "Chrome" is oxidised gunmetal, never Win98 grey; never bright cyan.</p>
+    </div>
+    <div>
+      <div class="eyebrow">Type — roles by altitude</div>
+      <ul class="type">
+        <li><div class="role">Display / headlines — UNCHANGED</div><div style="font-family:var(--font-display);font-size:34px;letter-spacing:-.03em">it me. on purpose.</div></li>
+        <li><div class="role">Cyber labels / ghost hero — Michroma ★★</div><div style="font-family:var(--font-cyber);font-size:22px;letter-spacing:.1em;color:var(--acid)">WHAT'S CYBER!?</div></li>
+        <li><div class="role">Transit signage — Helvetica/Arial caps ★★</div><div style="font-family:var(--font-helv);font-weight:700;font-size:17px;letter-spacing:.04em;text-transform:uppercase">Almanac · Traffic Tools · Boatlog</div></li>
+        <li><div class="role">System chrome — Pixelify Sans</div><div style="font-family:var(--font-pixel);font-size:20px">now_playing.exe · ▶ START</div></li>
+        <li><div class="role">LED readouts — VT323</div><span class="counter">02:47</span> <span class="counter">00013371</span></li>
+        <li><div class="role">Labels / eyebrows — mono (unchanged)</div><div style="font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-400)">§ Selected work · index 001</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="holo" />
+
+  <h2>§ Every Y2K element maps to something already here</h2>
+  <table>
+    <tr><td>Club lights</td><td>→ CRT phosphor glow / monitor bleed behind the windows</td></tr>
+    <tr><td>"The basement"</td><td>→ an after-hours OS running with the lights off</td></tr>
+    <tr><td>"No bouncer / no list"</td><td>→ "guest session · no login · no cookies, we ate them"</td></tr>
+    <tr><td>B-side relics (greentext, sticker, sleep)</td><td>→ desktop applets / framed windows (what they wanted to be)</td></tr>
+    <tr><td>Tech-tag marquee</td><td>→ now_playing.exe ticker</td></tr>
+    <tr><td>Live sleep meter</td><td>→ sys_monitor performance graph (Task-Manager energy)</td></tr>
+    <tr><td>FolderFinder.vbs / Outlook macros (real projects!)</td><td>→ the OS framing is literally already in your archive</td></tr>
+    <tr><td>"It me." hero</td><td>→ boots like a program; "user: it me"</td></tr>
+  </table>
+
+  <hr class="holo" />
+
+  <h2>§ New in v2 — the Gen X Soft Club components</h2>
+  <p style="color:var(--bone-400);font-size:13px;line-height:1.6;max-width:64ch;margin-bottom:18px">The cold-front skin. Tresor-techno minimalism + one acid spot, NYC-subway signage, late-90s cyber-mag display. Live in <a href="softclub.html" style="color:var(--acid)">softclub.html</a>.</p>
+  <div class="v2grid">
+
+    <div class="v2cell">
+      <div class="role" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600);margin-bottom:12px">Acid spot colour — the cold second accent</div>
+      <div style="font-family:var(--font-cyber);font-size:clamp(28px,5vw,46px);letter-spacing:.06em;color:var(--acid)">CYBER</div>
+      <p style="color:var(--bone-400);font-size:12px;margin-top:8px;line-height:1.5">Tresor/Matrix yellow-green. Display scale only, on dark. Never body copy, never on metal.</p>
+    </div>
+
+    <div class="v2cell">
+      <div class="role" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600);margin-bottom:12px">Concentric target motif (Tresor)</div>
+      <div class="legend-target"></div>
+      <p style="color:var(--bone-400);font-size:12px;margin-top:8px;line-height:1.5">Section marker · hero accent · "online" indicator. Spins slowly (calm-gated).</p>
+    </div>
+
+    <div class="v2cell">
+      <div class="role" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600);margin-bottom:12px">Transit lozenges + route bullets</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span class="legend-loz"><span class="legend-bullet" style="background:var(--acid);color:var(--ink-900)">A</span>Almanac</span>
+        <span class="legend-loz"><span class="legend-bullet" style="background:var(--ember);color:var(--ink-900)">T</span>Traffic</span>
+        <span class="legend-loz" style="padding:6px 14px">About</span>
+      </div>
+      <p style="color:var(--bone-400);font-size:12px;margin-top:10px;line-height:1.5">Black pill + tight Helvetica caps. Nav, section markers, live-app "stations".</p>
+    </div>
+
+    <div class="v2cell legend-metal">
+      <div class="role" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600);margin-bottom:12px">Brushed-aluminium panel</div>
+      <div style="font-family:var(--font-pixel);font-size:18px;color:var(--bone-200)">matte gunmetal</div>
+      <p style="color:var(--bone-400);font-size:12px;margin-top:8px;line-height:1.5">Faint horizontal striations + top sheen + bevel. Tinted to the inks — not bright silver, never Win98 grey. System bar &amp; metal cards.</p>
+    </div>
+
+    <div class="v2cell">
+      <div class="role" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600);margin-bottom:12px">Duotone imagery (acid × ink)</div>
+      <div class="legend-duo"><span style="font-family:var(--font-mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--acid)">FIG.01 · DUOTONE</span></div>
+      <p style="color:var(--bone-400);font-size:12px;margin-top:8px;line-height:1.5">Grayscale + contrast, then acid-green screen over ink. Project / photo thumbnails.</p>
+    </div>
+
+    <div class="v2cell">
+      <div class="role" style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600);margin-bottom:12px">Ghost-outline hero + katakana + code-rain</div>
+      <div style="position:relative;font-family:var(--font-display);font-size:38px;letter-spacing:-.03em;line-height:1;height:46px">
+        <span style="position:absolute;left:.06em;top:-.06em;color:transparent;-webkit-text-stroke:1px rgba(182,255,58,.55)">it me.</span>
+        <span style="position:relative">it me<span style="color:var(--ember)">.</span></span>
+      </div>
+      <p style="color:var(--bone-400);font-size:12px;margin-top:10px;line-height:1.5">Solid word + offset outline echo. Plus decorative katakana micro-captions (<span style="font-family:var(--font-mono);color:var(--bone-600)">サイバー</span>) and a faint Matrix code-rain behind the hero only — all calm-gated.</p>
+    </div>
+
+  </div>
+
+  <div class="dial">
+    <p style="margin-top:24px"><b>The restraint budget</b> (what keeps it "complex yet subtle"):</p>
+    max <b>1</b> holographic element per viewport · pixel font only in chrome, never body · <b>1</b> cold accent (phosphor) at LED scale only · CRT scanline subtle &amp; toggle-able ("CALM" in the taskbar) · popups are dismissible non-blocking toasts, never blocking, never scroll-hijacking · all motion gated by prefers-reduced-motion.
+  </div>
+</div>
+</body>
+</html>

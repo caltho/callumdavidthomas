@@ -1,6 +1,12 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { site } from "@/lib/site";
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  // The terminal homepage has its own colophon — skip the global footer there.
+  if (pathname === "/") return null;
   const year = new Date().getFullYear();
   return (
     <footer className="mt-32 border-t border-border/60">

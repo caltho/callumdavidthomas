@@ -1,7 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { site } from "@/lib/site";
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  // The terminal homepage owns the whole viewport — no global chrome there.
+  if (pathname === "/") return null;
   return (
     <header className="sticky top-0 z-30 backdrop-blur-md bg-background/60 border-b border-border/60">
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4 md:px-10">

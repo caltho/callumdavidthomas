@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Callum David Thomas — Edition 001</title>
+<style>
+/* ==================================================================
+   EDITION 001 — the serious one.
+   Monochrome editorial poster · one oxide-red spot ink.
+   System type (Times / Helvetica / Courier) — gen-1 web, weaponised.
+   Print language: crop marks, registration, halftone, overprint, folios.
+   Berlin minimal-techno restraint. No rainbow. No parody.
+   ================================================================== */
+:root{
+  --ink:#08080a;            /* near-black ground */
+  --ink-2:#0e0e11;          /* lifted panel */
+  --bone:#ece6d8;           /* warm paper ink */
+  --bone-dim:#b7b1a4;
+  --grey:#8b867a;           /* warm mid grey */
+  --grey-2:#56524a;
+  --hair:rgba(236,230,216,.16);
+  --hair-soft:rgba(236,230,216,.08);
+  --red:#ff3d2e;            /* the only colour — spot ink */
+  --red-deep:#c3261c;
+  --serif:"Times New Roman",Times,"Liberation Serif",Georgia,serif;
+  --sans:"Helvetica Neue",Helvetica,Arial,"Segoe UI",sans-serif;
+  --mono:"Courier New",Courier,ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);color:var(--bone);font-family:var(--serif);
+  font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;position:relative;
+}
+::selection{background:var(--red);color:var(--ink)}
+a{color:inherit}
+
+/* ---- print/material overlays (no colour) ---- */
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.halftone{position:fixed;inset:0;z-index:89;pointer-events:none;opacity:.04;
+  background-image:radial-gradient(var(--bone) .5px,transparent .6px);background-size:4px 4px}
+.vignette{position:fixed;inset:0;z-index:88;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 30%,transparent 45%,rgba(0,0,0,.6) 100%)}
+
+/* ---- crop marks (corners of the sheet) ---- */
+.crops i{position:fixed;width:26px;height:26px;z-index:80;pointer-events:none;opacity:.5}
+.crops .tl{top:14px;left:14px;border-top:1px solid var(--bone);border-left:1px solid var(--bone)}
+.crops .tr{top:14px;right:14px;border-top:1px solid var(--bone);border-right:1px solid var(--bone)}
+.crops .bl{bottom:14px;left:14px;border-bottom:1px solid var(--bone);border-left:1px solid var(--bone)}
+.crops .br{bottom:14px;right:14px;border-bottom:1px solid var(--bone);border-right:1px solid var(--bone)}
+
+.sheet{position:relative;z-index:10;max-width:1360px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+.rule{height:1px;background:var(--hair);width:100%}
+.rule.heavy{height:2px;background:var(--bone);opacity:.85}
+.mono{font-family:var(--mono)}
+.sans{font-family:var(--sans)}
+em{font-style:italic;color:var(--bone)}
+
+/* ============ MASTHEAD ============ */
+.topmeta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);padding:18px 0 12px}
+.topmeta .r{color:var(--bone-dim)}
+.mast{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0}
+.brand{display:flex;align-items:center;gap:14px;font-family:var(--sans);font-weight:700;
+  font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--bone)}
+.brand .spot{width:11px;height:11px;background:var(--red);display:inline-block}
+nav{display:flex;gap:22px;font-family:var(--sans);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+nav a{color:var(--bone-dim);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;text-decoration-color:var(--hair)}
+nav a:hover{color:var(--red);text-decoration-color:var(--red)}
+
+/* ============ HERO / POSTER ============ */
+.hero{position:relative;padding:clamp(40px,7vw,90px) 0 clamp(60px,9vw,120px)}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:end}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);margin-bottom:18px}
+.mega{font-family:var(--serif);font-weight:400;font-size:clamp(110px,27vw,460px);line-height:.78;letter-spacing:-.04em;color:var(--bone)}
+.mega .red{color:var(--red)}
+.lede{font-family:var(--serif);font-size:clamp(19px,2vw,26px);line-height:1.5;max-width:30ch;margin-top:34px;color:var(--bone-dim)}
+.lede em{color:var(--bone)}
+.more{display:inline-block;margin-top:26px;font-family:var(--sans);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  text-decoration:underline;text-underline-offset:5px;text-decoration-color:var(--red);color:var(--bone)}
+.more:hover{color:var(--red)}
+
+.hero-credits{display:flex;flex-direction:column;gap:26px;padding-bottom:10px}
+.reg{width:62px;height:62px;position:relative}
+.reg::before,.reg::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid var(--red)}
+.reg::after{inset:14px}
+.reg span{position:absolute;background:var(--red)}
+.reg .h{top:50%;left:-8px;right:-8px;height:1px;transform:translateY(-.5px)}
+.reg .v{left:50%;top:-8px;bottom:-8px;width:1px;transform:translateX(-.5px)}
+dl.specs{font-family:var(--sans);font-size:12px}
+dl.specs > div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--hair);
+  letter-spacing:.12em;text-transform:uppercase}
+dl.specs dt{color:var(--grey)}
+dl.specs dd{color:var(--bone);text-align:right;font-family:var(--mono);letter-spacing:.04em}
+dl.specs dd.on{color:var(--red)}
+figure.fig{border-top:1px solid var(--hair);padding-top:12px}
+.fig .plate{aspect-ratio:4/5;background:
+  radial-gradient(var(--bone) .8px,transparent 1px) 0 0/5px 5px,
+  linear-gradient(135deg,#23211c,#0c0b0a 70%);
+  background-blend-mode:soft-light;filter:contrast(1.1);position:relative}
+.fig .plate::after{content:"C.D.T.";position:absolute;left:10px;bottom:8px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--bone-dim)}
+.fig figcaption{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);margin-top:8px;display:flex;justify-content:space-between}
+
+/* big red overprint ring behind the type */
+.bigring{position:absolute;z-index:1;right:8%;top:8%;width:min(58vh,560px);height:min(58vh,560px);
+  border:2px solid var(--red);border-radius:50%;opacity:.85;pointer-events:none;mix-blend-mode:screen}
+.bigring::before{content:"";position:absolute;inset:32%;border-radius:50%;border:1px solid var(--red);opacity:.6}
+
+/* ============ SECTIONS ============ */
+.section{padding:clamp(56px,8vw,100px) 0}
+.sechead{display:flex;align-items:baseline;gap:18px;margin-bottom:30px}
+.sechead .folio{font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:var(--red)}
+.sechead h2{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:var(--bone)}
+.sechead .count{margin-left:auto;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+
+/* WORK INDEX (the gen-1 table, done hard) */
+.index{width:100%;border-collapse:collapse}
+.index thead th{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);
+  text-align:left;padding:0 0 12px;border-bottom:2px solid var(--bone)}
+.index thead th.r,.index td.r{text-align:right}
+.index tbody tr{border-bottom:1px solid var(--hair);cursor:pointer}
+.index tbody tr:hover{background:rgba(236,230,216,.03)}
+.index td{padding:20px 0;vertical-align:baseline}
+.index .num{font-family:var(--mono);font-size:13px;color:var(--grey);width:64px}
+.index .title{font-family:var(--serif);font-size:clamp(26px,3.4vw,46px);line-height:1;letter-spacing:-.02em;color:var(--bone)}
+.index tr:hover .title{color:var(--bone)}
+.index tr:hover .title .pt{color:var(--red)}
+.index .year{font-family:var(--mono);font-size:13px;color:var(--bone-dim);width:90px}
+.index .type{font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);width:200px}
+.index .go{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);width:90px;text-align:right}
+.index tr:hover .go{color:var(--red)}
+
+/* IN THE WILD — monochrome plates */
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair)}
+.card{background:var(--ink);padding:22px;display:flex;flex-direction:column;gap:16px;text-decoration:none;min-height:300px;justify-content:space-between}
+.card.wide{grid-column:span 4}
+.card:not(.wide){grid-column:span 2}
+.card:hover{background:var(--ink-2)}
+.card .top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+.card .top .live{color:var(--red)}
+.card .plate{flex:1;min-height:90px;background:
+  radial-gradient(var(--bone) .7px,transparent .9px) 0 0/5px 5px,
+  linear-gradient(160deg,#201e1a,#0b0a09 75%);
+  background-blend-mode:soft-light;filter:contrast(1.08) grayscale(1);opacity:.9}
+.card h3{font-family:var(--serif);font-size:clamp(28px,3vw,44px);line-height:.96;letter-spacing:-.02em;color:var(--bone)}
+.card .url{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--bone-dim);display:flex;justify-content:space-between;border-top:1px solid var(--hair);padding-top:12px}
+.card:hover .url .go{color:var(--red)}
+
+/* STATEMENT / pull quote */
+.statement{padding:clamp(70px,12vw,160px) 0;text-align:center}
+.statement blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(44px,9vw,150px);line-height:.95;letter-spacing:-.03em;color:var(--bone)}
+.statement blockquote .red{color:var(--red);font-style:normal}
+.statement .attr{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey);margin-top:34px}
+
+/* ============ COLOPHON / FOOTER ============ */
+footer{padding:50px 0 70px}
+.colophon{display:grid;grid-template-columns:1.4fr 1fr 1.2fr;gap:40px;align-items:start;padding-top:30px}
+.colophon p{font-family:var(--mono);font-size:11px;line-height:1.9;letter-spacing:.06em;text-transform:uppercase;color:var(--grey)}
+.colophon p b{color:var(--bone-dim);font-weight:400}
+.spotchip{display:flex;align-items:center;gap:12px}
+.spotchip .sq{width:34px;height:34px;background:var(--red)}
+.spotchip div{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);line-height:1.6}
+.foot-r{text-align:right}
+.foot-r .socials{display:flex;gap:18px;justify-content:flex-end;font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.foot-r .socials a{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--hair);color:var(--bone-dim)}
+.foot-r .socials a:hover{color:var(--red);text-decoration-color:var(--red)}
+.foot-r .visitors{margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.foot-r .visitors b{color:var(--red);font-weight:400}
+.foot-r .copy{margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-2)}
+
+/* mockup badge */
+.badge{position:fixed;left:50%;bottom:0;transform:translateX(-50%);z-index:95;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);
+  background:var(--ink-2);border:1px solid var(--hair);border-bottom:0;padding:6px 16px}
+.badge a{color:var(--bone-dim);text-decoration:underline;text-underline-offset:3px}
+.badge a:hover{color:var(--red)}
+
+/* reveal (subtle, serious) */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero-credits{flex-direction:row;flex-wrap:wrap}
+  dl.specs{flex:1;min-width:220px}
+  figure.fig{flex:1;min-width:180px;max-width:240px}
+  .bigring{right:-10%;top:2%;opacity:.5}
+  .cards{grid-template-columns:1fr}
+  .card.wide,.card:not(.wide){grid-column:span 1}
+  .index .type{display:none}
+  .colophon{grid-template-columns:1fr;gap:26px}
+  .foot-r,.foot-r .socials,.foot-r .visitors{text-align:left;justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+  <div class="grain"></div><div class="halftone"></div><div class="vignette"></div>
+  <div class="crops"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
+
+  <div class="sheet">
+    <!-- MASTHEAD -->
+    <header>
+      <div class="topmeta">
+        <span>Edition 001 · MMXXVI · Melbourne</span>
+        <span class="r">UTC+10 · <span id="clock">––:––</span> · Renders everywhere, optimised for nothing</span>
+      </div>
+      <div class="rule"></div>
+      <div class="mast">
+        <div class="brand"><span class="spot"></span> Callum David Thomas</div>
+        <nav><a href="#work">Work</a><a href="#wild">In the wild</a><a href="#">Stuff</a><a href="#">About</a></nav>
+      </div>
+      <div class="rule heavy"></div>
+    </header>
+
+    <!-- HERO POSTER -->
+    <section class="hero">
+      <div class="bigring" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-main">
+          <p class="kicker">№001 — Software developer — Melbourne</p>
+          <h1 class="mega">it me<span class="red">.</span></h1>
+          <p class="lede">I build clean, modular web apps — <em>slowly, and on purpose.</em> Construction tools, traffic-engineering software, late-night experiments.</p>
+          <a class="more" href="#work">Selected work ↓</a>
+        </div>
+        <aside class="hero-credits">
+          <div class="reg" aria-hidden="true"><span class="h"></span><span class="v"></span></div>
+          <dl class="specs">
+            <div><dt>Status</dt><dd class="on">Open</dd></div>
+            <div><dt>Location</dt><dd>Melbourne, AU</dd></div>
+            <div><dt>Local time</dt><dd id="clock2">––:––</dd></div>
+            <div><dt>Discipline</dt><dd>Web / tools</dd></div>
+          </dl>
+          <figure class="fig">
+            <div class="plate"></div>
+            <figcaption><span>Fig. 01</span><span>Halftone, 1c</span></figcaption>
+          </figure>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK INDEX -->
+    <section class="section" id="work">
+      <div class="sechead"><span class="folio">§01</span><h2>Selected work</h2><span class="count">Index — 14 entries</span></div>
+      <table class="index">
+        <thead><tr><th>№</th><th>Project</th><th>Year</th><th>Type</th><th class="r">—</th></tr></thead>
+        <tbody>
+          <tr><td class="num">01</td><td class="title">Almanac<span class="pt">.</span></td><td class="year">2026</td><td class="type">Personal · PWA</td><td class="go">↗ Live</td></tr>
+          <tr><td class="num">02</td><td class="title">Traffic Tools<span class="pt">.</span></td><td class="year">2023–</td><td class="type">Public app</td><td class="go">↗ Live</td></tr>
+          <tr><td class="num">03</td><td class="title">Quality Mgmt System<span class="pt">.</span></td><td class="year">2022</td><td class="type">Construction</td><td class="go">Read →</td></tr>
+          <tr><td class="num">04</td><td class="title">Firewall Calc<span class="pt">.</span></td><td class="year">2024</td><td class="type">Construction</td><td class="go">Read →</td></tr>
+          <tr><td class="num">05</td><td class="title">Connect Five<span class="pt">.</span></td><td class="year">2024</td><td class="type">Web game</td><td class="go">↗ Live</td></tr>
+          <tr><td class="num">06</td><td class="title">FolderFinder.vbs<span class="pt">.</span></td><td class="year">2019</td><td class="type">Windows · VBScript</td><td class="go">Read →</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="rule"></div>
+
+    <!-- IN THE WILD -->
+    <section class="section" id="wild">
+      <div class="sechead"><span class="folio">§02</span><h2>In the wild</h2><span class="count">5 live</span></div>
+      <div class="cards">
+        <a class="card wide" href="#">
+          <div class="top"><span>01 · Personal tool · 2026</span><span class="live">● Live</span></div>
+          <div class="plate"></div>
+          <h3>Almanac</h3>
+          <div class="url"><span>almanac.callumdavidthomas.com</span><span class="go">Visit ↗</span></div>
+        </a>
+        <a class="card" href="#">
+          <div class="top"><span>02 · Web game</span><span class="live">● Live</span></div>
+          <div class="plate"></div>
+          <h3>Connect Five</h3>
+          <div class="url"><span>connect-five…</span><span class="go">Visit ↗</span></div>
+        </a>
+        <a class="card" href="#">
+          <div class="top"><span>03 · Personal tool</span><span class="live">● Live</span></div>
+          <div class="plate"></div>
+          <h3>Boatlog</h3>
+          <div class="url"><span>boatlog…</span><span class="go">Visit ↗</span></div>
+        </a>
+        <a class="card" href="#">
+          <div class="top"><span>04 · Web game</span><span class="live">● Live</span></div>
+          <div class="plate"></div>
+          <h3>Sliding Tiles</h3>
+          <div class="url"><span>sliding-puzzle…</span><span class="go">Visit ↗</span></div>
+        </a>
+        <a class="card" href="#">
+          <div class="top"><span>05 · Public app · 2023–</span><span class="live">● Live</span></div>
+          <div class="plate"></div>
+          <h3>Traffic Tools</h3>
+          <div class="url"><span>traffictools…</span><span class="go">Visit ↗</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- STATEMENT -->
+    <section class="statement">
+      <blockquote>“Slowly,<br/>and on purpose<span class="red">.</span>”</blockquote>
+      <p class="attr">— Working method, n.</p>
+    </section>
+
+    <div class="rule heavy"></div>
+
+    <!-- COLOPHON -->
+    <footer>
+      <div class="colophon">
+        <p>Set in <b>Times New Roman</b>, <b>Helvetica</b> &amp; <b>Courier New</b>.<br/>Built by hand in Melbourne.<br/>No newsletter. No popups. Email if you want.</p>
+        <div class="spotchip"><span class="sq"></span><div>Spot ink<br/>Oxide red<br/>Ed. 001</div></div>
+        <div class="foot-r">
+          <div class="socials"><a href="#">GitHub</a><a href="#">LinkedIn</a><a href="#">Email</a></div>
+          <div class="visitors">Visitors — <b id="hits">00013371</b></div>
+          <div class="copy">© MMXXVI C.D.T. · Last revised 16.VI.MMXXVI</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="badge">Mockup · Edition 001 (serious) — <a href="index.html">all directions</a> · <a href="softclub.html">v2</a> · <a href="transit.html">v3</a></div>
+
+<script>
+(function(){
+  function two(n){return String(n).padStart(2,'0');}
+  function tick(){var d=new Date(),t=two(d.getHours())+':'+two(d.getMinutes());
+    var a=document.getElementById('clock'),b=document.getElementById('clock2');if(a)a.textContent=t;if(b)b.textContent=t;}
+  tick();setInterval(tick,20000);
+  // deadpan visitor counter
+  var n=13371,el=document.getElementById('hits');if(el)setInterval(function(){n++;el.textContent=String(n).padStart(8,'0');},11000);
+  // subtle reveal
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.section,.statement,.hero-main,.colophon').forEach(function(s){s.classList.add('rv');});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+    document.querySelectorAll('.rv').forEach(function(s){io.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Fraunces } from "next/font/google";
+import { Geist, Geist_Mono, Fraunces, Michroma, VT323 } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ClubLights } from "@/components/club-lights";
+import { CounterAIHost } from "@/components/chat/counter-ai-host";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,6 +23,21 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   display: "swap",
   axes: ["SOFT", "WONK", "opsz"],
+});
+
+// Y2K layer: Michroma = extended "cyber" labels; VT323 = LED/terminal readouts.
+const michroma = Michroma({
+  variable: "--font-cyber",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const vt323 = VT323({
+  variable: "--font-led",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -46,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${michroma.variable} ${vt323.variable} h-full antialiased`}
     >
       <body className="grain relative min-h-full overflow-x-hidden bg-background text-foreground">
         <ClubLights />
@@ -55,6 +71,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <SiteFooter />
         </div>
+        <CounterAIHost />
       </body>
     </html>
   );

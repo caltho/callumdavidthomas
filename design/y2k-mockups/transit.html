@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>callumdavidthomas — MOCKUP (Basement Transit / v3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Michroma&family=Pixelify+Sans:wght@400;500;600&family=VT323&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   BASEMENT TRANSIT · v3 — "the underground line"
+   The portfolio re-cast as a clinical brushed-gunmetal transit
+   interface. Double meaning: underground techno + underground
+   metro. One committed metaphor, MAXIMUM intensity.
+
+   PALETTE = basement, unchanged. EMBER (#ff3d2e) is the LINE
+   COLOUR doing the structural work green did in v2. Ultraviolet
+   is a secondary line. Acid/phosphor green is LED-ONLY — status
+   dots, the clock, the hit-counter, the service lamp, a single
+   "NOW APPROACHING" blink on the departure board. Never a fill,
+   never big type, never a wash. Self-contained single file.
+   ============================================================ */
+:root{
+  /* --- basement palette (unchanged from production) --- */
+  --ink-900:#040308; --ink-800:#08070d; --ink-700:#0d0b13;
+  --ink-600:#12101a; --ink-500:#181523; --ink-400:#241f30; --line:#1c1828;
+  --bone-50:#f6f1e7; --bone-200:#d8cfbe; --bone-400:#a89e8d; --bone-600:#6a6358;
+  --ember:#ff3d2e; --ember-deep:#c3261c; --ember-dim:#7a1c14; /* unlit dot-matrix dots */
+  --ultra:#7a2dff; --ultra-deep:#3d0d8a; --halo:#ffe7c2;
+  /* --- LED-only green (status scale, never structural) --- */
+  --phosphor:#8dff63; --acid:#b6ff3a; --acid-deep:#7fbf1f;
+  --metal-base:#16131d;            /* brushed gunmetal base (tinted to inks) */
+  --board:#0a0604;                 /* the near-black departure-board glass */
+  --font-display:'Fraunces','Times New Roman',serif;
+  --font-cyber:'Michroma','Arial Narrow',sans-serif;
+  --font-sans:'Geist','Segoe UI',system-ui,sans-serif;
+  --font-helv:'Helvetica Neue',Helvetica,Arial,sans-serif; /* subway signage */
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --font-pixel:'Pixelify Sans','MS Sans Serif',Tahoma,sans-serif;
+  --font-led:'VT323',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--ink-900);color:var(--bone-50);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ============================================================
+   AMBIENCE — reused from the family. Warm drifting lights
+   (ember/ultra only — NO green channel here), CRT, grain, vignette
+   ============================================================ */
+.clublights{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.clublights span{position:absolute;display:block;border-radius:9999px;filter:blur(120px);opacity:.18;will-change:transform}
+.clublights .l1{width:60vmax;height:60vmax;left:-22vmax;top:-22vmax;background:radial-gradient(circle,var(--ember) 0%,transparent 60%);animation:d1 34s ease-in-out infinite alternate}
+.clublights .l2{width:50vmax;height:50vmax;right:-16vmax;bottom:-16vmax;background:radial-gradient(circle,var(--ultra) 0%,transparent 60%);animation:d2 42s ease-in-out infinite alternate}
+.clublights .l3{width:40vmax;height:40vmax;left:46vw;top:50vh;background:radial-gradient(circle,var(--ember) 0%,transparent 65%);opacity:.06;animation:d3 50s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate3d(8vw,6vh,0) scale(1.12)}}
+@keyframes d2{to{transform:translate3d(-10vw,-8vh,0) scale(1.08)}}
+@keyframes d3{0%{transform:translate3d(0,0,0);opacity:.05}100%{transform:translate3d(-7vw,-9vh,0);opacity:.1}}
+.scan{position:fixed;inset:0;z-index:55;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.10) 0 1px,transparent 1px 4px);mix-blend-mode:multiply;opacity:.5}
+.grain{position:fixed;inset:0;z-index:56;pointer-events:none;opacity:.08;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.vignette{position:fixed;inset:0;z-index:54;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%)}
+.content{position:relative;z-index:10}
+
+/* CALM mode kills the loud stuff */
+body.calm .scan,body.calm .grain{display:none}
+body.calm .clublights span{animation:none}
+
+/* ============================================================
+   LED — the ONLY green. Status dots, clock, counter, lamp.
+   ============================================================ */
+.led{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--phosphor);
+  box-shadow:0 0 8px var(--phosphor);animation:blink 2.6s steps(1) infinite}
+@keyframes blink{0%,92%{opacity:1}93%,100%{opacity:.4}}
+body.calm .led{animation:none}
+.clock{font-family:var(--font-led);font-size:18px;color:var(--phosphor);letter-spacing:1px;text-shadow:0 0 6px rgba(141,255,99,.5);
+  background:#020104;padding:1px 8px;box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.05)}
+.counter{font-family:var(--font-led);font-size:20px;color:var(--phosphor);letter-spacing:3px;background:#020104;padding:2px 9px;
+  text-shadow:0 0 6px rgba(141,255,99,.5);box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.06)}
+/* SERVICE STATUS lamp — small green LED slug */
+.lamp{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--phosphor)}
+.lamp .bulb{width:9px;height:9px;border-radius:50%;background:var(--phosphor);box-shadow:0 0 9px var(--phosphor),inset 0 0 2px rgba(255,255,255,.6)}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-400);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+/* ============================================================
+   BRUSHED ALUMINIUM — the dominant surface. Matte gunmetal,
+   layered striations + top sheen + 1px bevel + corner rivets.
+   ============================================================ */
+.metal{position:relative;background:
+  linear-gradient(180deg,rgba(255,255,255,.05),transparent 30%),
+  repeating-linear-gradient(0deg,rgba(255,255,255,.020) 0 1px,rgba(0,0,0,.06) 1px 2px,transparent 2px 3px),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 2px,transparent 2px 5px),
+  linear-gradient(180deg,#1d1a26,var(--metal-base) 50%,#100d16);
+  border-top:1px solid rgba(255,255,255,.12);border-left:1px solid rgba(255,255,255,.06);
+  border-right:1px solid rgba(0,0,0,.7);border-bottom:1px solid rgba(0,0,0,.8)}
+.metal::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.10),transparent 18%)}
+/* rivets — pin dots in the corners of a panel */
+.riveted{position:relative}
+.riveted::before,.riveted::after{content:"";position:absolute;width:6px;height:6px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#3a3646,#0a0810 80%);
+  box-shadow:0 1px 0 rgba(255,255,255,.12),inset 0 0 2px rgba(0,0,0,.8);z-index:3}
+.riveted::before{top:9px;left:9px}
+.riveted::after{top:9px;right:9px}
+.riveted .rivet-b{position:absolute;bottom:9px;width:6px;height:6px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#3a3646,#0a0810 80%);
+  box-shadow:0 1px 0 rgba(255,255,255,.12),inset 0 0 2px rgba(0,0,0,.8);z-index:3}
+.riveted .rivet-b.l{left:9px}.riveted .rivet-b.r{right:9px}
+
+/* ============================================================
+   TRANSIT LOZENGE — black pill, tight Helvetica caps, ember
+   route bullet. The signage system: nav, headers, labels.
+   ============================================================ */
+.lozenge{display:inline-flex;align-items:center;gap:9px;background:var(--ink-900);
+  border-radius:999px;padding:6px 16px 6px 7px;
+  font-family:var(--font-helv);font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--bone-50);text-decoration:none;border:1px solid rgba(255,255,255,.08);line-height:1;white-space:nowrap}
+.lozenge:hover{color:#fff;border-color:rgba(255,61,46,.45)}
+.lozenge.flat{padding:6px 16px}
+.bullet{flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--font-helv);font-weight:700;font-size:14px;line-height:1}
+.bullet.ember{background:var(--ember);color:var(--ink-900)}
+.bullet.ultra{background:var(--ultra);color:#fff}
+.bullet.bone{background:var(--bone-50);color:var(--ink-900)}
+.bullet.amber{background:var(--halo);color:var(--ink-900)}
+
+/* big station-sign lozenge for section heads */
+.signhead{display:inline-flex;align-items:center;gap:14px;background:var(--ink-900);border-radius:999px;
+  padding:9px 22px 9px 10px;border:1px solid rgba(255,255,255,.08)}
+.signhead .bullet{width:34px;height:34px;font-size:17px}
+.signhead .txt{font-family:var(--font-helv);font-weight:700;font-size:clamp(15px,2vw,20px);letter-spacing:.03em;
+  text-transform:uppercase;color:var(--bone-50)}
+
+/* ============================================================
+   SYSTEM BAR (brushed metal, subway signage) — the concourse
+   ============================================================ */
+header{position:sticky;top:0;z-index:30}
+header .bar{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:9px 24px;max-width:1180px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .roundel{width:24px;height:24px;border-radius:50%;background:var(--ember);display:grid;place-items:center;
+  font-family:var(--font-helv);font-weight:700;font-size:11px;color:var(--ink-900);box-shadow:0 0 0 3px var(--ink-900),0 0 0 4px rgba(255,255,255,.08)}
+.brand .cdt{font-family:var(--font-cyber);font-size:14px;letter-spacing:.12em;color:var(--bone-50)}
+.brand .sep{color:var(--bone-600);font-family:var(--font-mono)}
+.brand .role{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-400)}
+.navloz{display:flex;align-items:center;gap:8px}
+.sysctl{display:flex;align-items:center;gap:10px}
+.calmbtn{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-400);
+  cursor:pointer;background:none;border:1px solid var(--line);padding:5px 10px;border-radius:999px}
+.calmbtn:hover{color:var(--phosphor);border-color:rgba(141,255,99,.4)}
+.calmbtn.on{color:var(--phosphor);border-color:var(--phosphor)}
+
+/* ============================================================
+   HERO — brushed-metal station sign around the Fraunces hero
+   ============================================================ */
+.hero{position:relative;padding:64px 0 84px}
+.hero .cyberlabel{font-family:var(--font-mono);font-size:clamp(11px,1.4vw,14px);letter-spacing:.2em;
+  color:var(--bone-400);text-transform:uppercase;margin-bottom:26px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hero .cyberlabel .div{color:var(--bone-600)}
+.hero .cyberlabel b{color:var(--ember);font-weight:inherit}
+/* the station sign: a riveted brushed-metal plate holding the headline */
+.stationsign{position:relative;padding:46px 44px 40px;margin-top:4px}
+.stationsign .plateloz{margin-bottom:22px}
+.hero h1{font-family:var(--font-display);font-size:clamp(88px,20vw,280px);line-height:.8;letter-spacing:-.045em;color:var(--bone-50)}
+.hero h1 b{color:var(--ember);font-weight:inherit}
+.hero .gap{font-family:var(--font-helv);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ember);font-size:clamp(13px,1.8vw,18px);margin-top:26px;display:inline-flex;align-items:center;gap:12px}
+.hero .gap::before{content:"";width:34px;height:34px;border-radius:50%;flex:0 0 auto;
+  background:repeating-conic-gradient(var(--ember) 0 10deg,transparent 10deg 20deg);
+  -webkit-mask:radial-gradient(circle,transparent 0 36%,#000 38%);mask:radial-gradient(circle,transparent 0 36%,#000 38%)}
+.hero .sub{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;margin-top:48px;align-items:end}
+.hero .sub p{max-width:46ch;font-size:18px;line-height:1.55;color:var(--bone-200)}
+.hero .sub p b{color:var(--bone-50);font-weight:inherit}
+.hero .sub .right{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+/* dry-copy strip */
+.drycopy{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-400);
+  margin-top:44px;display:flex;flex-wrap:wrap;gap:8px 0}
+.drycopy span{padding:0 14px;border-right:1px solid var(--line)}
+.drycopy span:first-child{padding-left:0}
+.drycopy span.hot{color:var(--ember)}
+
+/* ============================================================
+   DOT-MATRIX DEPARTURE BOARD — THE hero centerpiece.
+   Ember/amber dots on near-black, like a platform "next train"
+   board. LED dot-matrix masking + scan ridges. Minimal green
+   lives in the STATUS lamps + one blinking "NOW APPROACHING".
+   ============================================================ */
+.depboard{position:relative;margin-top:42px;border-radius:6px;overflow:hidden;
+  background:linear-gradient(180deg,#0d0805,var(--board) 60%,#070402);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),inset 0 2px 24px rgba(0,0,0,.9),0 24px 60px -28px rgba(0,0,0,.9);
+  border-top:1px solid rgba(255,255,255,.06)}
+/* the LED dot grid that sits over the glass */
+.depboard .matrix{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(0,0,0,.55) 0 32%,transparent 36%);
+  background-size:4px 4px;mix-blend-mode:multiply;opacity:.7}
+.depboard .glassline{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 8%,transparent 92%,rgba(0,0,0,.4))}
+.depboard .inner{position:relative;z-index:2;padding:18px 22px 22px}
+/* board header strip */
+.depboard .bhead{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding-bottom:12px;border-bottom:1px dashed rgba(255,61,46,.25);margin-bottom:4px}
+.depboard .bhead .title{font-family:var(--font-led);font-size:26px;letter-spacing:2px;color:var(--ember);
+  text-shadow:0 0 10px rgba(255,61,46,.45);display:flex;align-items:center;gap:12px}
+.depboard .bhead .platclock{font-family:var(--font-led);font-size:26px;letter-spacing:2px;color:var(--halo);
+  text-shadow:0 0 8px rgba(255,231,194,.4)}
+/* column ruler */
+.depboard .cols{display:grid;grid-template-columns:64px 1fr 168px 64px;gap:14px;
+  font-family:var(--font-mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,61,46,.55);
+  padding:10px 0 8px}
+.depboard .cols span:last-child,.depboard .row .plat{text-align:right}
+/* a departure row, rendered in LED */
+.depboard .row{display:grid;grid-template-columns:64px 1fr 168px 64px;gap:14px;align-items:center;
+  padding:9px 0;border-top:1px solid rgba(255,61,46,.10);text-decoration:none;color:inherit}
+.depboard .row:hover{background:linear-gradient(90deg,rgba(255,61,46,.07),transparent 80%)}
+.depboard .row .ln{display:grid;place-items:center}
+.depboard .row .ln .bullet{width:30px;height:30px;font-size:14px;font-family:var(--font-helv)}
+.depboard .row .dest{font-family:var(--font-led);font-size:clamp(24px,3.4vw,38px);line-height:1;
+  color:var(--halo);text-shadow:0 0 7px rgba(255,231,194,.35);letter-spacing:1px}
+.depboard .row:hover .dest{color:#fff}
+.depboard .row .status{font-family:var(--font-led);font-size:19px;letter-spacing:1px;display:flex;align-items:center;gap:8px;color:var(--ember);text-shadow:0 0 7px rgba(255,61,46,.4)}
+.depboard .row .status.ontime{color:var(--ember)}
+.depboard .row .status.boarding{color:var(--halo);text-shadow:0 0 8px rgba(255,231,194,.5)}
+/* the single green-LED "approaching" — blinks */
+.depboard .row .status.approaching{color:var(--phosphor);text-shadow:0 0 9px rgba(141,255,99,.6);animation:approach 1.4s steps(1) infinite}
+.depboard .row .status .dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.depboard .row .status.ontime .dot{background:var(--ember);box-shadow:0 0 8px var(--ember)}
+.depboard .row .status.boarding .dot{background:var(--halo);box-shadow:0 0 8px var(--halo)}
+.depboard .row .status.approaching .dot{background:var(--phosphor);box-shadow:0 0 9px var(--phosphor)}
+@keyframes approach{0%,55%{opacity:1}56%,100%{opacity:.18}}
+body.calm .depboard .row .status.approaching{animation:none}
+.depboard .row .plat{font-family:var(--font-led);font-size:30px;color:var(--ember);text-shadow:0 0 8px rgba(255,61,46,.4);text-align:right;letter-spacing:1px}
+/* footer ticker line on the board */
+.depboard .bticker{margin-top:10px;padding-top:11px;border-top:1px dashed rgba(255,61,46,.25);
+  font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,231,194,.55);
+  white-space:nowrap;overflow:hidden}
+.depboard .bticker .run{display:inline-block;padding-left:100%;animation:ticker 26s linear infinite}
+body.calm .depboard .bticker .run{animation:none;padding-left:0}
+@keyframes ticker{to{transform:translateX(-100%)}}
+.depboard .bticker b{color:var(--phosphor)}
+
+/* ============================================================
+   STRIP MAP — the site as a metro line. Ember rail, station
+   dots, "YOU ARE HERE" marker. Horizontal; scrolls on mobile.
+   ============================================================ */
+.stripmap{position:relative;margin-top:30px;padding:34px 0 10px;overflow-x:auto}
+.stripmap .rail{position:relative;display:flex;align-items:flex-start;justify-content:space-between;
+  min-width:560px;gap:0}
+.stripmap .rail::before{content:"";position:absolute;left:5%;right:5%;top:13px;height:4px;border-radius:4px;
+  background:linear-gradient(90deg,var(--ember-deep),var(--ember) 50%,var(--ember-deep));z-index:0}
+.stripmap .stop{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;text-decoration:none}
+.stripmap .stop .node{width:18px;height:18px;border-radius:50%;background:var(--ink-900);border:3px solid var(--ember);
+  box-shadow:0 0 0 4px var(--ink-900)}
+.stripmap .stop.here .node{background:var(--ember);box-shadow:0 0 14px rgba(255,61,46,.8),0 0 0 4px var(--ink-900)}
+.stripmap .stop .lbl{font-family:var(--font-helv);font-weight:700;font-size:13px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--bone-400)}
+.stripmap .stop:hover .lbl{color:var(--bone-50)}
+.stripmap .stop.here .lbl{color:var(--ember)}
+.stripmap .stop .you{font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--phosphor);
+  display:flex;align-items:center;gap:6px;margin-top:2px}
+.stripmap .stop .you .led{width:6px;height:6px}
+
+/* ============================================================
+   STATIONS (live apps as stops on the line) — vertical rail
+   ============================================================ */
+.section{padding:84px 0;position:relative}
+.shead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:18px;flex-wrap:wrap}
+.shead .meta{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-400);text-align:right}
+.shead .meta b{color:var(--phosphor);font-weight:500}
+
+.line{margin-top:30px;display:flex;flex-direction:column}
+.station{position:relative;display:grid;grid-template-columns:minmax(220px,1fr) 2fr auto;gap:24px;align-items:center;
+  text-decoration:none;color:inherit;padding:20px 22px;
+  border-left:3px solid var(--ember-deep)} /* the ember rail */
+.station + .station{border-top:1px solid var(--line)}
+.station::before{content:"";position:absolute;left:-8px;top:50%;transform:translateY(-50%);
+  width:13px;height:13px;border-radius:50%;background:var(--ink-900);border:3px solid var(--ember)} /* stop marker */
+.station:hover{background:linear-gradient(90deg,rgba(255,61,46,.06),transparent 70%)}
+.station:hover::before{background:var(--ember);box-shadow:0 0 12px rgba(255,61,46,.7)}
+.station .stop{display:flex;align-items:center;gap:14px}
+.station .stop .name{font-family:var(--font-display);font-size:clamp(26px,3.2vw,42px);line-height:.95;letter-spacing:-.02em;color:var(--bone-50)}
+.station:hover .stop .name{color:#fff}
+.station .desc{font-size:14px;color:var(--bone-400);line-height:1.5;max-width:50ch}
+.station .end{display:flex;flex-direction:column;align-items:flex-end;gap:7px;white-space:nowrap}
+.station .end .live{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--phosphor);display:flex;align-items:center;gap:7px}
+.station .end .url{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bone-600)}
+.station:hover .end .url{color:var(--ember)}
+
+/* ============================================================
+   INTERCHANGE FEATURE BAND — a metal info panel + live readout
+   ============================================================ */
+.band{display:grid;grid-template-columns:1.05fr 1fr;gap:22px;margin-top:8px;align-items:stretch}
+.featcard{padding:34px 30px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.featcard .cyberlabel{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--ember);text-transform:uppercase}
+.featcard h3{font-family:var(--font-display);font-size:clamp(30px,4vw,52px);line-height:.95;letter-spacing:-.03em;color:var(--bone-50)}
+.featcard p{font-size:14px;color:var(--bone-400);line-height:1.55;max-width:44ch}
+.featcard .row{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:14px;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-400);border-top:1px solid var(--line);padding-top:16px}
+.featcard .row b{color:var(--phosphor);font-weight:500}
+/* the live "platform readout" panel */
+.readout{padding:30px;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.readout .lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-400)}
+.readout .big{font-family:var(--font-led);font-size:clamp(54px,9vw,92px);line-height:.85;color:var(--phosphor);
+  text-shadow:0 0 14px rgba(141,255,99,.4);letter-spacing:2px}
+.readout .big small{font-size:.4em;color:var(--bone-400);text-shadow:none;letter-spacing:.1em}
+.readout .barwrap{height:14px;background:#020104;border-radius:2px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.readout .barwrap .bar{height:100%;width:84%;background:repeating-linear-gradient(90deg,var(--phosphor) 0 6px,transparent 6px 9px);box-shadow:0 0 10px rgba(141,255,99,.4)}
+.readout .foot{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-600)}
+
+/* ============================================================
+   SELECTED WORK — a secondary departures list (metal panel)
+   ============================================================ */
+.board2{margin-top:24px;border-top:1px solid var(--line)}
+.wrow{display:grid;grid-template-columns:64px 1fr 320px 96px;gap:24px;align-items:center;padding:22px 0;
+  border-bottom:1px solid var(--line);text-decoration:none;position:relative;overflow:hidden}
+.wrow .bullet{width:30px;height:30px;font-size:13px}
+.wrow .t{font-family:var(--font-display);font-size:clamp(26px,3.4vw,46px);line-height:1;color:var(--bone-50);transition:transform .25s}
+.wrow .s{font-size:14px;color:var(--bone-400)}
+.wrow .go{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-400);text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.wrow .go .pf{font-family:var(--font-led);font-size:18px;color:var(--ember);text-shadow:0 0 6px rgba(255,61,46,.4)}
+.wrow::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 25%,rgba(255,61,46,.10) 50%,transparent 75%);transform:translateX(-110%);z-index:-1}
+.wrow:hover::before{animation:sweep 1.8s cubic-bezier(.45,.05,.55,.95) forwards}
+.wrow:hover .t{transform:translateX(6px)}
+.wrow:hover .go{color:var(--ember)}
+@keyframes sweep{to{transform:translateX(110%)}}
+body.calm .wrow:hover::before{animation:none}
+
+/* buttons (family) — ember primary */
+.btn{font-family:var(--font-pixel);font-size:13px;letter-spacing:.02em;padding:9px 18px;cursor:pointer;color:var(--bone-200);text-decoration:none;display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(180deg,#2a2734,#16131f);border-top:1px solid rgba(255,255,255,.16);border-left:1px solid rgba(255,255,255,.1);border-right:1px solid #000;border-bottom:1px solid #000}
+.btn:hover{color:var(--bone-50)}
+.btn:active{transform:translate(1px,1px)}
+.btn-ember{color:var(--bone-50);font-weight:600;background:linear-gradient(180deg,#ff6452,var(--ember));
+  border-top:1px solid rgba(255,255,255,.4);border-left:1px solid rgba(255,255,255,.22);border-right:1px solid var(--ember-deep);border-bottom:1px solid #7a1c14}
+.btn-ember:hover{color:#fff}
+
+/* ============================================================
+   CTA — terminus
+   ============================================================ */
+.cta{position:relative}
+.cta h2{font-family:var(--font-display);font-size:clamp(44px,9vw,120px);line-height:.95;letter-spacing:-.04em;color:var(--bone-50);max-width:14ch}
+.cta a.mail{color:var(--ember);text-decoration:underline;text-decoration-color:rgba(255,61,46,.4);text-underline-offset:.1em}
+.cta a.mail:hover{color:var(--bone-50)}
+
+/* ============================================================
+   FOOTER — the concourse plate
+   ============================================================ */
+footer{margin-top:40px;padding:36px 0 80px}
+footer .metal{padding:26px 26px}
+.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-400)}
+.foot .uc{color:var(--bone-600);font-size:9px;max-width:38ch}
+.foot .links{display:flex;gap:18px;align-items:center}
+.foot .links a{text-decoration:none}
+.foot .links a:hover{color:var(--ember)}
+
+/* corner mockup badge (family pattern) */
+.badge{position:fixed;bottom:12px;right:14px;z-index:73;font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--bone-600);text-align:right;line-height:1.7;
+  background:rgba(4,3,8,.7);padding:8px 12px;border:1px solid var(--line);border-radius:8px;backdrop-filter:blur(6px)}
+.badge .hd{color:var(--ember)}
+.badge a{color:var(--bone-400);text-decoration:none}
+.badge a:hover{color:var(--phosphor)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:900px){
+  .hero .sub{grid-template-columns:1fr;gap:26px}
+  .stationsign{padding:32px 24px 28px}
+  .band{grid-template-columns:1fr}
+  .station{grid-template-columns:1fr;gap:12px;padding:18px 18px 18px 22px}
+  .station .end{align-items:flex-start}
+  .depboard .cols,.depboard .row{grid-template-columns:48px 1fr 132px}
+  .depboard .cols span.platcol,.depboard .row .plat{display:none}
+  .wrow{grid-template-columns:44px 1fr 96px}
+  .wrow .s{display:none}
+}
+@media (max-width:680px){
+  header .bar{flex-wrap:wrap;gap:10px}
+  .brand .role{display:none}
+  .navloz{order:3;width:100%;overflow-x:auto;padding-bottom:2px}
+  .navloz::-webkit-scrollbar{height:0}
+  .depboard .bhead{gap:8px}
+  .depboard .row .dest{font-size:22px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .clublights span,.led,.depboard .row .status.approaching,.depboard .bticker .run,
+  .wrow:hover::before,.wrow:hover .t{animation:none!important;transform:none!important}
+  .depboard .bticker .run{padding-left:0}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+  <!-- ambience (warm — ember/ultra only) -->
+  <div class="clublights"><span class="l1"></span><span class="l2"></span><span class="l3"></span></div>
+  <div class="vignette"></div><div class="scan"></div><div class="grain"></div>
+
+  <div class="content">
+    <!-- ================= SYSTEM BAR (brushed metal concourse) ================= -->
+    <header class="metal">
+      <div class="bar">
+        <div class="brand">
+          <span class="roundel" aria-hidden="true">CDT</span>
+          <span class="cdt">LINE 1</span><span class="sep">//</span>
+          <span class="role">Software developer · Melbourne</span>
+        </div>
+        <nav class="navloz" aria-label="Primary">
+          <a class="lozenge" href="#stations"><span class="bullet ember">W</span>Work</a>
+          <a class="lozenge" href="#work"><span class="bullet ultra">S</span>Stuff</a>
+          <a class="lozenge flat" href="#contact">About</a>
+        </nav>
+        <div class="sysctl">
+          <span class="lamp" title="Service status"><span class="bulb"></span>Good service</span>
+          <span class="clock" id="clock">00:00</span>
+          <button class="calmbtn" id="calmtoggle" type="button" aria-pressed="false" title="Toggle scanlines / grain / motion">CALM</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="wrap hero">
+      <div class="cyberlabel">
+        <span class="led" aria-hidden="true"></span>
+        BASEMENT TRANSIT <span class="div">//</span> THE UNDERGROUND LINE <span class="div">//</span>
+        <b>NORTHBOUND</b> · NOW SERVING
+      </div>
+
+      <!-- brushed-metal station sign holding the headline -->
+      <div class="stationsign metal riveted">
+        <span class="rivet-b l" aria-hidden="true"></span><span class="rivet-b r" aria-hidden="true"></span>
+        <div class="plateloz">
+          <span class="signhead"><span class="bullet ember">1</span><span class="txt">Basement Transit · Line 1 · Software Developer</span></span>
+        </div>
+        <h1>it me<b>.</b></h1>
+        <div class="gap">Mind the gap between intent and shipping.</div>
+      </div>
+
+      <div class="sub">
+        <p>I build clean, modular web apps — <b>slowly and on purpose.</b> Construction tools, traffic engineering software, late-night experiments. Five stops are running live right now; you can ride the whole line.</p>
+        <div class="right">
+          <a class="btn btn-ember" href="#stations">▶ Board the line →</a>
+          <a class="btn" href="#contact">✉ Open a transmission</a>
+        </div>
+      </div>
+
+      <!-- ====== DOT-MATRIX DEPARTURE BOARD — centrepiece ====== -->
+      <div class="depboard" aria-label="Live departures board: the five live apps as departing services">
+        <div class="matrix" aria-hidden="true"></div>
+        <div class="glassline" aria-hidden="true"></div>
+        <div class="inner">
+          <div class="bhead">
+            <div class="title">▦ NEXT DEPARTURES</div>
+            <div class="platclock" id="boardclock" aria-label="Platform clock">00:00:00</div>
+          </div>
+          <div class="cols" aria-hidden="true">
+            <span>Line</span><span>Destination</span><span>Status</span><span class="platcol">Plat</span>
+          </div>
+
+          <a class="row" href="https://almanac.callumdavidthomas.com">
+            <span class="ln"><span class="bullet ember">A</span></span>
+            <span class="dest">ALMANAC</span>
+            <span class="status approaching"><span class="dot"></span>● NOW APPROACHING</span>
+            <span class="plat">1</span>
+          </a>
+          <a class="row" href="https://traffictools.callumdavidthomas.com">
+            <span class="ln"><span class="bullet amber">T</span></span>
+            <span class="dest">TRAFFIC TOOLS</span>
+            <span class="status boarding"><span class="dot"></span>● NOW BOARDING</span>
+            <span class="plat">2</span>
+          </a>
+          <a class="row" href="#">
+            <span class="ln"><span class="bullet ultra">C</span></span>
+            <span class="dest">CONNECT FIVE</span>
+            <span class="status ontime"><span class="dot"></span>ON TIME</span>
+            <span class="plat">3</span>
+          </a>
+          <a class="row" href="#">
+            <span class="ln"><span class="bullet bone">B</span></span>
+            <span class="dest">BOATLOG</span>
+            <span class="status ontime"><span class="dot"></span>ON TIME</span>
+            <span class="plat">4</span>
+          </a>
+          <a class="row" href="#">
+            <span class="ln"><span class="bullet ember">5</span></span>
+            <span class="dest">SLIDING TILES</span>
+            <span class="status ontime"><span class="dot"></span>ON TIME · LAST SERVICE</span>
+            <span class="plat">5</span>
+          </a>
+
+          <div class="bticker" aria-hidden="true"><span class="run">⚠ all services running normally · five stops live tonight · <b>service status: good</b> · best heard after midnight · mind the gap · no cookies, we ate them · always under construction · the basement is open ·&nbsp;</span></div>
+        </div>
+      </div>
+
+      <div class="drycopy" aria-label="house rules">
+        <span class="hot">no bouncer</span><span>no list</span><span>guest session</span><span>best heard after midnight</span><span>no cookies, we ate them</span><span>always under construction</span>
+      </div>
+    </section>
+
+    <!-- ================= STRIP MAP (site as a metro line) ================= -->
+    <section class="wrap" style="padding:28px 0">
+      <div class="eyebrow"><span class="led" aria-hidden="true"></span> § ROUTE MAP · LINE 1 · YOU ARE HERE</div>
+      <div class="stripmap" aria-label="Strip map of the site: Home, Work, Stuff, About">
+        <div class="rail">
+          <a class="stop here" href="#top"><span class="node" aria-hidden="true"></span><span class="lbl">Home</span><span class="you"><span class="led"></span>You are here</span></a>
+          <a class="stop" href="#stations"><span class="node" aria-hidden="true"></span><span class="lbl">Work</span></a>
+          <a class="stop" href="#work"><span class="node" aria-hidden="true"></span><span class="lbl">Stuff</span></a>
+          <a class="stop" href="#contact"><span class="node" aria-hidden="true"></span><span class="lbl">About</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATIONS (live apps as stops) ================= -->
+    <section class="wrap section" id="stations">
+      <div class="shead">
+        <span class="signhead"><span class="bullet ember">W</span><span class="txt">Stations on the line</span></span>
+        <div class="meta">§ IN THE WILD<br/>5 stops · <b>all running</b></div>
+      </div>
+      <p style="color:var(--bone-400);max-width:52ch;margin-top:6px">Live URLs only — no screenshots, no demos behind glass. Each stop is a thing that is actually up and serving.</p>
+
+      <div class="line" role="list">
+        <a class="station" href="https://almanac.callumdavidthomas.com" role="listitem">
+          <div class="stop"><span class="bullet ember">A</span><span class="name">Almanac</span></div>
+          <div class="desc">A personal life-tracking PWA I use every day — notes, links, recurring rituals, sleep, all searchable.</div>
+          <div class="end"><span class="live"><span class="led"></span>Live</span><span class="url">almanac.callumdavidthomas.com ↗</span></div>
+        </a>
+        <a class="station" href="https://traffictools.callumdavidthomas.com" role="listitem">
+          <div class="stop"><span class="bullet amber">T</span><span class="name">Traffic Tools</span></div>
+          <div class="desc">Open-source calculators for traffic engineers and town planners. The public app.</div>
+          <div class="end"><span class="live"><span class="led"></span>Live</span><span class="url">traffictools.callumdavidthomas.com ↗</span></div>
+        </a>
+        <a class="station" href="#" role="listitem">
+          <div class="stop"><span class="bullet ultra">C</span><span class="name">Connect Five</span></div>
+          <div class="desc">Five-in-a-row on a 19×19 grid. A small web game, played late.</div>
+          <div class="end"><span class="live"><span class="led"></span>Live</span><span class="url">connect-five ↗</span></div>
+        </a>
+        <a class="station" href="#" role="listitem">
+          <div class="stop"><span class="bullet bone">B</span><span class="name">Boatlog</span></div>
+          <div class="desc">A trip logbook for the boat — engine hours, fuel, where we went.</div>
+          <div class="end"><span class="live"><span class="led"></span>Live</span><span class="url">boatlog ↗</span></div>
+        </a>
+        <a class="station" href="#" role="listitem">
+          <div class="stop"><span class="bullet ember">5</span><span class="name">Sliding Tiles</span></div>
+          <div class="desc">A retro sliding-tile puzzle. The last stop before the lights come up.</div>
+          <div class="end"><span class="live"><span class="led"></span>Live</span><span class="url">sliding-puzzle ↗</span></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= INTERCHANGE FEATURE BAND ================= -->
+    <section class="wrap section">
+      <div class="shead">
+        <span class="signhead"><span class="bullet ultra">i</span><span class="txt">Interchange · proof of signal</span></span>
+        <div class="meta">§ THE DIRECTION<br/>tresor.142 energy</div>
+      </div>
+      <div class="band">
+        <div class="metal riveted featcard">
+          <span class="rivet-b l" aria-hidden="true"></span><span class="rivet-b r" aria-hidden="true"></span>
+          <div>
+            <div class="cyberlabel">PLATFORM ANNOUNCEMENT</div>
+            <h3>Live from Almanac:<br/>last night, 6.4h.</h3>
+            <p>The same instinct behind the apps runs the site — real data over decoration. The sleep meter on the homepage reads straight from Almanac. Nothing on this line is a mock except this page.</p>
+          </div>
+          <div class="row">
+            <span>14-day avg <b>7.1h</b></span>
+            <span>uptime <b>since 1998</b></span>
+            <span>status <b>● online</b></span>
+          </div>
+        </div>
+        <!-- live platform readout (green LED scale) -->
+        <div class="metal riveted readout">
+          <span class="rivet-b l" aria-hidden="true"></span><span class="rivet-b r" aria-hidden="true"></span>
+          <div class="lbl">Last sleep · platform readout</div>
+          <div class="big">6.4<small>h</small></div>
+          <div class="barwrap" aria-hidden="true"><div class="bar"></div></div>
+          <div class="foot"><span>target 7.5h</span><span>● live from almanac</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SELECTED WORK (secondary departures) ================= -->
+    <section class="wrap section" id="work">
+      <div class="shead">
+        <span class="signhead"><span class="bullet ember">S</span><span class="txt">Selected work · all stations</span></span>
+        <a class="lozenge flat" href="#" style="align-self:flex-end">Full index →</a>
+      </div>
+      <div class="board2">
+        <a class="wrow" href="https://almanac.callumdavidthomas.com"><span class="bullet ember">1</span><span class="t">Almanac</span><span class="s">Life-tracking PWA — everything searchable.</span><span class="go"><span class="pf">PLAT 1</span>↗ Live</span></a>
+        <a class="wrow" href="https://traffictools.callumdavidthomas.com"><span class="bullet amber">2</span><span class="t">Traffic Tools</span><span class="s">Open-source calculators for town planners.</span><span class="go"><span class="pf">PLAT 2</span>↗ Live</span></a>
+        <a class="wrow" href="#"><span class="bullet ultra">3</span><span class="t">Quality Mgmt System</span><span class="s">Safety &amp; quality tool for construction sites.</span><span class="go"><span class="pf">PLAT 3</span>Read →</span></a>
+        <a class="wrow" href="#"><span class="bullet bone">4</span><span class="t">Firewall Calc</span><span class="s">Fire-resistance rating — the construction kind.</span><span class="go"><span class="pf">PLAT 4</span>Read →</span></a>
+        <a class="wrow" href="#"><span class="bullet ember">5</span><span class="t">FolderFinder.vbs</span><span class="s">A 3-letter search that opens a job folder.</span><span class="go"><span class="pf">PLAT 5</span>Read →</span></a>
+      </div>
+      <a class="btn" href="#" style="margin-top:28px">See the full archive →</a>
+    </section>
+
+    <!-- ================= CTA (terminus) ================= -->
+    <section class="wrap section cta" id="contact">
+      <div class="eyebrow"><span class="led" aria-hidden="true"></span> § TERMINUS · THE LIST · ALL CHANGE</div>
+      <h2 style="margin-top:18px">You're on it. <a class="mail" href="mailto:#">Email →</a></h2>
+      <p style="color:var(--bone-400);margin-top:24px;max-width:38ch">No bouncer. No list. No idea why I framed it that way. Guest session — last train's whenever; best heard after midnight.</p>
+    </section>
+
+    <!-- ================= FOOTER (concourse plate) ================= -->
+    <footer class="wrap">
+      <div class="metal riveted">
+        <span class="rivet-b l" aria-hidden="true"></span><span class="rivet-b r" aria-hidden="true"></span>
+        <div class="foot">
+          <div style="display:flex;align-items:center;gap:14px">
+            <span class="lamp" title="Service status"><span class="bulb"></span>Service: good</span>
+            <span>Listener №</span><span class="counter" id="hits">00013371</span>
+          </div>
+          <div class="uc">⚠ always under construction (aren't we all) · mind the gap · best heard after midnight · no cookies, we ate them</div>
+          <div class="links">
+            <a href="#">GitHub</a><a href="#">LinkedIn</a><span style="color:var(--bone-600)">© 2026 CDT</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- corner mockup badge -->
+  <div class="badge">
+    <span class="hd">MOCKUP · BASEMENT TRANSIT (v3)</span><br/>
+    <a href="index.html">→ legend &amp; palette</a><br/>
+    <a href="editorial.html">editorial (v1)</a> ·
+    <a href="desktop.html">desktop (v1)</a> ·
+    <a href="softclub.html">softclub (v2)</a>
+  </div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- system-bar clock (HH:MM) ---- */
+  function pad(n){return String(n).padStart(2,'0');}
+  function tick(){var d=new Date();
+    var el=document.getElementById('clock');
+    if(el) el.textContent = pad(d.getHours())+':'+pad(d.getMinutes());}
+  tick();setInterval(tick,20000);
+
+  /* ---- platform clock on the board (HH:MM:SS, ticks live) ---- */
+  var bc=document.getElementById('boardclock');
+  function boardtick(){var d=new Date();
+    if(bc) bc.textContent = pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());}
+  boardtick();
+  if(!reduce){ setInterval(boardtick,1000); }
+
+  /* ---- living hit-counter (Listener №) ---- */
+  var n=13371, el=document.getElementById('hits');
+  if(!reduce && el){ setInterval(function(){n++;el.textContent=String(n).padStart(8,'0');},9000); }
+
+  /* ---- CALM toggle ---- */
+  var calm=document.getElementById('calmtoggle');
+  if(calm){
+    calm.addEventListener('click',function(){
+      var on=document.body.classList.toggle('calm');
+      calm.classList.toggle('on',on);
+      calm.setAttribute('aria-pressed',on?'true':'false');
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>callumdavidthomas — MOCKUP (Editorial / subtle Y2K)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Pixelify+Sans:wght@400;500;600&family=VT323&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   EDITORIAL MODE — 80% basement, 20% Y2K furniture.
+   The headlines & layout stay exactly as production. Y2K lives
+   only in the chrome: a system bar, window-framed cards, gel
+   buttons, a phosphor counter footer. This is the "subtle" dial.
+   ============================================================ */
+:root{
+  --ink-900:#040308;--ink-800:#08070d;--ink-700:#0d0b13;--ink-600:#12101a;--ink-500:#181523;--ink-400:#241f30;--line:#1c1828;
+  --bone-50:#f6f1e7;--bone-200:#d8cfbe;--bone-400:#a89e8d;--bone-600:#6a6358;
+  --ember:#ff3d2e;--ember-deep:#c3261c;--ultra:#7a2dff;--ultra-deep:#3d0d8a;--halo:#ffe7c2;
+  --phosphor:#8dff63;
+  --font-display:'Fraunces','Times New Roman',serif;
+  --font-sans:'Geist','Segoe UI',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --font-pixel:'Pixelify Sans','MS Sans Serif',Tahoma,sans-serif;
+  --font-led:'VT323',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:var(--ink-900);color:var(--bone-50);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
+
+/* ambience (same as production + a *very* faint scanline) */
+.clublights{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.clublights span{position:absolute;display:block;border-radius:9999px;filter:blur(120px);opacity:.18}
+.clublights .l1{width:62vmax;height:62vmax;left:-22vmax;top:-22vmax;background:radial-gradient(circle,var(--ember) 0%,transparent 60%);animation:d1 34s ease-in-out infinite alternate}
+.clublights .l2{width:52vmax;height:52vmax;right:-16vmax;bottom:-16vmax;background:radial-gradient(circle,var(--ultra) 0%,transparent 60%);animation:d2 42s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate3d(8vw,6vh,0) scale(1.12)}}
+@keyframes d2{to{transform:translate3d(-10vw,-8vh,0) scale(1.08)}}
+.scan{position:fixed;inset:0;z-index:55;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.10) 0 1px,transparent 1px 4px);mix-blend-mode:multiply;opacity:.5}
+.grain{position:fixed;inset:0;z-index:56;pointer-events:none;opacity:.08;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.vignette{position:fixed;inset:0;z-index:54;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%)}
+.content{position:relative;z-index:10}
+
+/* shared chrome bits */
+.led{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--phosphor);box-shadow:0 0 8px var(--phosphor);animation:blink 2.6s steps(1) infinite}
+@keyframes blink{0%,92%{opacity:1}93%,100%{opacity:.4}}
+.holo{height:1px;border:0;background:linear-gradient(90deg,var(--ember),var(--ultra),var(--phosphor),var(--halo),var(--ember));background-size:220% 100%;opacity:.4;animation:holo 9s linear infinite}
+@keyframes holo{to{background-position:220% 0}}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-400);display:flex;align-items:center;gap:10px}
+
+/* ---- SYSTEM BAR (replaces the sticky header) ---- */
+header{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);
+  background:linear-gradient(180deg,rgba(20,17,29,.85),rgba(8,7,13,.8));
+  border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(255,255,255,.04)}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:9px 0}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-200)}
+.brand .cdt{font-family:var(--font-pixel);font-size:15px;letter-spacing:.02em;color:var(--bone-50)}
+.brand .sep{color:var(--bone-600)}
+nav{display:flex;align-items:center;gap:8px}
+nav a{font-family:var(--font-pixel);font-size:13px;letter-spacing:.01em;color:var(--bone-400);text-decoration:none;padding:5px 11px;
+  border-top:1px solid transparent;border-left:1px solid transparent}
+nav a:hover{color:var(--bone-50);background:linear-gradient(180deg,#211e2b,#14111d);
+  border-top:1px solid rgba(255,255,255,.12);border-left:1px solid rgba(255,255,255,.07);
+  border-right:1px solid #000;border-bottom:1px solid #000}
+.clock{font-family:var(--font-led);font-size:18px;color:var(--phosphor);letter-spacing:1px;text-shadow:0 0 6px rgba(141,255,99,.5);
+  background:#020104;padding:1px 8px;box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.05)}
+
+/* ---- HERO (headline stays pure editorial Fraunces) ---- */
+.hero{padding:80px 0 110px}
+.hero h1{font-family:var(--font-display);font-size:clamp(80px,15vw,220px);line-height:.86;letter-spacing:-.04em;color:var(--bone-50)}
+.hero h1 b{color:var(--ember);font-weight:inherit}
+.hero .sub{font-family:var(--font-mono);font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--bone-400);margin-top:20px}
+.herometa{display:grid;grid-template-columns:1.6fr 1fr;gap:40px;margin-top:54px;align-items:start}
+.herometa p{max-width:42ch;font-size:19px;line-height:1.55;color:var(--bone-200)}
+.herometa p b{color:var(--bone-50);font-weight:inherit}
+.statbox{font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-400)}
+.statbox .r{display:flex;justify-content:space-between;border-bottom:1px solid rgba(28,24,40,.8);padding:8px 0}
+.statbox .r b{color:var(--bone-50);font-weight:500}
+.statbox .r b.on{color:var(--phosphor)}
+
+/* ---- section heading ---- */
+.section{padding:90px 0}
+.shead{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:26px}
+.shead .link{font-family:var(--font-pixel);font-size:13px;color:var(--bone-400);text-decoration:none}
+.shead .link:hover{color:var(--ember)}
+.section h2{font-family:var(--font-display);font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-.04em;color:var(--bone-50);max-width:18ch}
+.section h2 .e{color:var(--ember)}.section h2 .m{color:var(--bone-400)}
+
+/* ---- TICKER ---- */
+.ticker{overflow:hidden;background:#020104;margin:14px 0;padding:9px 0;
+  box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.05);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ticker .track{display:inline-flex;gap:34px;white-space:nowrap;font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-200);animation:scroll 30s linear infinite;padding-left:100%}
+.ticker .track b{color:var(--ember)}
+@keyframes scroll{to{transform:translateX(-100%)}}
+
+/* ---- WINDOW-FRAMED CARD (the one structural Y2K borrow) ---- */
+.win{background:#0d0b13;
+  border-top:1px solid rgba(255,255,255,.08);border-left:1px solid rgba(255,255,255,.05);
+  border-right:1px solid rgba(0,0,0,.8);border-bottom:1px solid rgba(0,0,0,.85);
+  box-shadow:2px 2px 0 rgba(0,0,0,.4)}
+.win .tb{display:flex;align-items:center;gap:9px;padding:6px 8px 6px 11px;position:relative;
+  background:linear-gradient(90deg,var(--ember-deep),var(--ultra-deep));
+  font-family:var(--font-pixel);font-size:12px;letter-spacing:.03em;color:var(--halo)}
+.win .tb::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 55%)}
+.win .tb .dot{width:6px;height:6px;border-radius:50%;background:var(--halo);box-shadow:0 0 6px var(--halo)}
+.win .tb .ctl{margin-left:auto;display:flex;gap:3px}
+.win .tb .ctl i{width:16px;height:14px;display:grid;place-items:center;font-style:normal;font-size:11px;color:var(--bone-200);
+  background:linear-gradient(180deg,#3a3646,#211e2b);border-top:1px solid rgba(255,255,255,.2);border-left:1px solid rgba(255,255,255,.1);border-right:1px solid #000;border-bottom:1px solid #000}
+.win .bd{padding:22px}
+
+/* live apps grid */
+.apps{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-top:34px}
+.apps .row2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;grid-column:1 / -1}
+.app{display:flex;flex-direction:column;min-height:230px}
+.app .bd{flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.app .top{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600)}
+.app .top .live{color:var(--phosphor)}
+.app h3{font-family:var(--font-display);font-size:44px;line-height:.9;letter-spacing:-.03em;color:var(--bone-50);margin:18px 0 0}
+.app p{font-size:14px;color:var(--bone-400);margin-top:10px}
+.app .url{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:18px;padding-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-400)}
+.app:hover h3{color:#fff}
+.app:hover .url .go{color:var(--ember)}
+
+/* work rows */
+.workrows{margin-top:30px;border-top:1px solid var(--line)}
+.wrow{display:grid;grid-template-columns:48px 1fr 280px 80px;gap:24px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;position:relative;overflow:hidden}
+.wrow .n{font-family:var(--font-mono);font-size:12px;color:var(--bone-600)}
+.wrow .t{font-family:var(--font-display);font-size:clamp(30px,4vw,56px);line-height:1;color:var(--bone-50);transition:transform .25s}
+.wrow .s{font-size:14px;color:var(--bone-400)}
+.wrow .go{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-400);text-align:right}
+.wrow::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 25%,rgba(255,61,46,.10) 50%,transparent 75%);transform:translateX(-110%);z-index:-1}
+.wrow:hover::before{animation:sweep 1.8s cubic-bezier(.45,.05,.55,.95) forwards}
+.wrow:hover .t{transform:translateX(6px)}
+.wrow:hover .go{color:var(--ember)}
+@keyframes sweep{to{transform:translateX(110%)}}
+
+/* buttons */
+.btn{font-family:var(--font-pixel);font-size:13px;letter-spacing:.02em;padding:8px 16px;cursor:pointer;color:var(--bone-200);text-decoration:none;display:inline-flex;align-items:center;gap:7px;
+  background:linear-gradient(180deg,#2a2734,#16131f);border-top:1px solid rgba(255,255,255,.16);border-left:1px solid rgba(255,255,255,.1);border-right:1px solid #000;border-bottom:1px solid #000}
+.btn:hover{color:var(--bone-50)}
+.btn:active{transform:translate(1px,1px)}
+.btn-ember{color:var(--ink-900);font-weight:600;background:linear-gradient(180deg,#ff6a5e,var(--ember));border-top:1px solid rgba(255,255,255,.55);border-left:1px solid rgba(255,255,255,.3);border-right:1px solid var(--ember-deep);border-bottom:1px solid #7a160f}
+
+/* B-sides shelf */
+.bsides{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+.chan{font-family:var(--font-mono);font-size:13px;line-height:1.45;background:#f0e0d6;color:#000;border:1px solid #d9bfb7;padding:10px 14px}
+.chan .name{color:#117743;font-weight:700}.chan .meta{color:#34345c}.chan .gt{color:#789922}
+.perf{display:flex;align-items:flex-end;gap:3px;height:90px;background:#020104;padding:8px;box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.05)}
+.perf .bar{flex:1;background:var(--phosphor);box-shadow:0 0 7px rgba(141,255,99,.45);min-height:3px}
+.perf .bar.dim{background:#1f3a16;box-shadow:none}
+
+/* CTA */
+.cta h2{font-family:var(--font-display);font-size:clamp(48px,9vw,128px);line-height:.95;letter-spacing:-.04em;color:var(--bone-50);max-width:14ch}
+.cta a.mail{color:var(--ember);text-decoration:underline;text-decoration-color:rgba(255,61,46,.4);text-underline-offset:.1em}
+.cta a.mail:hover{color:var(--bone-50)}
+
+/* footer with old-web furniture */
+footer{border-top:1px solid var(--line);margin-top:60px;padding:40px 0 70px}
+.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-400)}
+.counter{font-family:var(--font-led);font-size:20px;color:var(--phosphor);letter-spacing:3px;background:#020104;padding:2px 9px;text-shadow:0 0 6px rgba(141,255,99,.5);box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.06)}
+.foot .uc{color:var(--bone-600);font-size:9px}
+
+.note{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--ultra-deep);color:var(--halo);font-family:var(--font-pixel);font-size:12px;text-align:center;padding:5px}
+.note a{color:#fff}
+
+@media (max-width:860px){
+  .herometa{grid-template-columns:1fr}.apps{grid-template-columns:1fr}.apps .row2{grid-template-columns:1fr}
+  .bsides{grid-template-columns:1fr}.wrow{grid-template-columns:34px 1fr 64px}.wrow .s{display:none}
+  nav a:not(:last-child){display:none}
+}
+@media (prefers-reduced-motion: reduce){.clublights span,.led,.holo,.ticker .track,.wrow:hover::before,.wrow:hover .t{animation:none!important;transform:none!important}}
+</style>
+</head>
+<body>
+  <div class="note">EDITORIAL MOCKUP · subtle Y2K (the production-leaning dial) — <a href="desktop.html">see the maximal CDT//OS desktop →</a></div>
+  <div class="clublights"><span class="l1"></span><span class="l2"></span></div>
+  <div class="vignette"></div><div class="scan"></div><div class="grain"></div>
+
+  <div class="content" style="padding-top:28px">
+    <header>
+      <div class="wrap bar">
+        <div class="brand"><span class="led"></span><span class="cdt">CDT</span><span class="sep">/</span><span>Software developer</span></div>
+        <nav>
+          <a href="#">Work</a><a href="#">Stuff</a><a href="#">About</a>
+          <span class="clock" id="clock">00:00</span>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="wrap hero">
+      <div class="eyebrow"><span class="led"></span> Index 001 · 2026 · it me</div>
+      <h1 style="margin-top:26px">it me<b>.</b></h1>
+      <div class="sub">Callum David Thomas — software developer, Melbourne</div>
+      <div class="herometa">
+        <p>I build clean, modular web apps — <b>slowly and on purpose.</b> Construction tools, traffic engineering software, late-night experiments. Currently freelancing out of Melbourne.</p>
+        <div class="statbox">
+          <div class="r"><span>Status</span><b class="on">● Online</b></div>
+          <div class="r"><span>Loc.</span><b>Melbourne</b></div>
+          <div class="r"><span>Time</span><b>UTC+10</b></div>
+          <a class="btn btn-ember" href="#" style="margin-top:22px;width:100%;justify-content:center">▶ See selected work →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="ticker"><div class="track">
+      Next.js 16 <b>×</b> TypeScript <b>×</b> Supabase <b>×</b> Tailwind v4 <b>×</b> Motion <b>×</b> React 19 <b>×</b> PostgreSQL <b>×</b> SvelteKit <b>×</b> Angular <b>×</b> Node.js <b>×</b> PHP <b>×</b> MySQL <b>×</b> Vercel <b>×</b> PWA <b>×</b> Figma <b>×</b>
+    </div></div>
+
+    <!-- LIVE APPS -->
+    <section class="wrap section">
+      <div class="shead">
+        <div class="eyebrow">§ In the wild</div>
+        <span class="eyebrow">5 live</span>
+      </div>
+      <h2>Apps that are <span class="e">actually running.</span></h2>
+      <p style="color:var(--bone-400);max-width:46ch;margin-top:16px">Click through, kick the tyres. Live URLs only — no screenshots, no demos behind glass.</p>
+
+      <div class="apps">
+        <a class="win app" href="#" style="grid-row:span 1">
+          <div class="tb"><span class="dot"></span>almanac.exe<span class="ctl"><i>_</i><i>□</i><i>×</i></span></div>
+          <div class="bd">
+            <div class="top"><span>01 · Personal tool</span><span class="live">● Live</span></div>
+            <h3>Almanac</h3>
+            <p>A personal knowledge base I use every day — notes, links, recurring rituals, all searchable.</p>
+            <div class="url"><span>almanac.callumdavidthomas.com</span><span class="go">Visit ↗</span></div>
+          </div>
+        </a>
+        <a class="win app" href="#">
+          <div class="tb"><span class="dot"></span>connect_five.exe<span class="ctl"><i>_</i><i>×</i></span></div>
+          <div class="bd">
+            <div class="top"><span>02 · Web game</span><span class="live">● Live</span></div>
+            <h3>Connect Five</h3>
+            <p>Five-in-a-row on a 19×19 grid.</p>
+            <div class="url"><span>connect-five…</span><span class="go">Visit ↗</span></div>
+          </div>
+        </a>
+        <div class="row2">
+          <a class="win app" href="#"><div class="tb"><span class="dot"></span>boatlog.exe<span class="ctl"><i>×</i></span></div>
+            <div class="bd"><div class="top"><span>03 · Personal tool</span><span class="live">● Live</span></div><h3>Boatlog</h3><p>Trip logbook for the boat.</p><div class="url"><span>boatlog…</span><span class="go">Visit ↗</span></div></div></a>
+          <a class="win app" href="#"><div class="tb"><span class="dot"></span>sliding_tiles.exe<span class="ctl"><i>×</i></span></div>
+            <div class="bd"><div class="top"><span>04 · Web game</span><span class="live">● Live</span></div><h3>Sliding Tiles</h3><p>Retro sliding-tile puzzle.</p><div class="url"><span>sliding-puzzle…</span><span class="go">Visit ↗</span></div></div></a>
+          <a class="win app" href="#"><div class="tb"><span class="dot"></span>traffic_tools.exe<span class="ctl"><i>×</i></span></div>
+            <div class="bd"><div class="top"><span>05 · Public app</span><span class="live">● Live</span></div><h3>Traffic Tools</h3><p>Calculators for traffic engineers.</p><div class="url"><span>traffictools…</span><span class="go">Visit ↗</span></div></div></a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="wrap holo" />
+
+    <!-- SELECTED WORK -->
+    <section class="wrap section">
+      <div class="shead">
+        <div class="eyebrow">§ Selected work</div>
+        <a class="link" href="#">Full index →</a>
+      </div>
+      <h2>Things I have made,<br/><span class="m">on purpose.</span></h2>
+      <div class="workrows">
+        <a class="wrow" href="#"><span class="n">001</span><span class="t">Almanac</span><span class="s">Life-tracking PWA — everything searchable.</span><span class="go">↗ Live</span></a>
+        <a class="wrow" href="#"><span class="n">002</span><span class="t">Traffic Tools</span><span class="s">Open-source calculators for town planners.</span><span class="go">↗ Live</span></a>
+        <a class="wrow" href="#"><span class="n">003</span><span class="t">Quality Mgmt System</span><span class="s">Safety &amp; quality tool for construction sites.</span><span class="go">Read →</span></a>
+        <a class="wrow" href="#"><span class="n">004</span><span class="t">Firewall Calc</span><span class="s">Fire-resistance rating — the construction kind.</span><span class="go">Read →</span></a>
+        <a class="wrow" href="#"><span class="n">005</span><span class="t">FolderFinder.vbs</span><span class="s">A 3-letter search that opens a job folder.</span><span class="go">Read →</span></a>
+      </div>
+      <a class="btn" href="#" style="margin-top:28px">See the full archive →</a>
+    </section>
+
+    <!-- B-SIDES -->
+    <section class="wrap section">
+      <div class="shead"><div class="eyebrow">§ B-sides</div><span class="eyebrow" style="font-size:10px">small internet artifacts</span></div>
+      <h2>Stuff that <span class="m">doesn't belong anywhere else.</span></h2>
+      <div class="bsides">
+        <div class="win"><div class="tb"><span class="dot"></span>greentext — /b/asement<span class="ctl"><i>_</i><i>×</i></span></div>
+          <div class="bd"><div class="chan">
+            <div style="margin-bottom:4px"><b>File:</b> <span class="meta" style="text-decoration:underline">cape.jpg</span> (12 KB, 480x640)</div>
+            <div style="margin-bottom:6px"><span class="name">Anonymous</span> 05/12/26(Tue) <span class="meta">No.4815162342</span></div>
+            <div class="gt">&gt;be me</div><div class="gt">&gt;be wearing a cape</div>
+          </div><p style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600);margin-top:14px">(no it's actually true)</p></div>
+        </div>
+        <div class="win"><div class="tb"><span class="dot"></span>sys_monitor — sleep<span class="ctl"><i>_</i><i>×</i></span></div>
+          <div class="bd">
+            <div class="eyebrow" style="margin-bottom:14px"><span class="led"></span> Sleep · last 14 days · live from Almanac</div>
+            <div style="display:flex;gap:30px;margin-bottom:16px">
+              <div><div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--bone-400)">LAST NIGHT</div><div style="font-family:var(--font-display);font-size:40px">6.4<span style="font-size:18px;color:var(--bone-400)">h</span></div></div>
+              <div><div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--bone-400)">AVG</div><div style="font-family:var(--font-display);font-size:40px">7.1<span style="font-size:18px;color:var(--bone-400)">h</span></div></div>
+            </div>
+            <div class="perf" id="perf"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="wrap section cta">
+      <div class="eyebrow">§ The list</div>
+      <h2 style="margin-top:20px">You're on it. <a class="mail" href="#">Email →</a></h2>
+      <p style="color:var(--bone-400);margin-top:26px;max-width:34ch">No bouncer. No list. No idea why I framed it that way.</p>
+    </section>
+
+    <footer>
+      <div class="wrap foot">
+        <div style="display:flex;align-items:center;gap:14px">
+          <span>You are listener №</span><span class="counter" id="hits">00013371</span>
+        </div>
+        <div class="uc">⚠ always under construction (aren't we all) · best heard after midnight · no cookies, we ate them</div>
+        <div style="display:flex;gap:18px"><span>GitHub</span><span>LinkedIn</span><span style="color:var(--bone-600)">© 2026 CDT</span></div>
+      </div>
+    </footer>
+  </div>
+
+<script>
+(function(){
+  function tick(){var d=new Date();document.getElementById('clock').textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+  tick();setInterval(tick,20000);
+  var perf=document.getElementById('perf'),data=[7.5,6,8,7,5.5,9,6.4,7.2,8.1,null,6.8,7,5.9,6.4];
+  data.forEach(function(h){var b=document.createElement('div');b.className='bar'+(h===null?' dim':'');b.style.height=(h===null?3:(h/10*100))+'%';perf.appendChild(b);});
+  // tiny living hit-counter
+  var n=13371,el=document.getElementById('hits');setInterval(function(){n++;el.textContent=String(n).padStart(8,'0');},9000);
+})();
+</script>
+</body>
+</html>

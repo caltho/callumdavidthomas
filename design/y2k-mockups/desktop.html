@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CDT//OS — Afterhours Edition · MOCKUP (Maximal)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Pixelify+Sans:wght@400;500;600&family=VT323&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   CDT//OS — "Afterhours Edition"
+   Y2K x basement-club crossover · MAXIMAL intensity mockup.
+   Oxidised chrome, after midnight. Wipeout UI left running in a
+   dark room for 25 years. Self-contained — open in a browser.
+   ============================================================ */
+:root{
+  /* --- basement palette (unchanged from production) --- */
+  --ink-900:#040308; --ink-800:#08070d; --ink-700:#0d0b13;
+  --ink-600:#12101a; --ink-500:#181523; --ink-400:#241f30; --line:#1c1828;
+  --bone-50:#f6f1e7; --bone-200:#d8cfbe; --bone-400:#a89e8d; --bone-600:#6a6358;
+  --ember:#ff3d2e; --ember-deep:#c3261c; --ultra:#7a2dff; --ultra-deep:#3d0d8a; --halo:#ffe7c2;
+  /* --- Y2K layer --- */
+  --phosphor:#8dff63;            /* the ONE cold machine-LED accent */
+  --chrome-hi:rgba(255,255,255,.10);
+  --chrome-lo:rgba(0,0,0,.85);
+  --font-display:'Fraunces','Times New Roman',serif;
+  --font-sans:'Geist','Segoe UI',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+  --font-pixel:'Pixelify Sans','MS Sans Serif',Tahoma,sans-serif;
+  --font-led:'VT323',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--font-sans);
+  background:var(--ink-900);
+  color:var(--bone-50);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---- full-screen ambience layers ---- */
+.clublights{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.clublights span{position:absolute;display:block;border-radius:9999px;filter:blur(120px);opacity:.2;will-change:transform}
+.clublights .l1{width:62vmax;height:62vmax;left:-22vmax;top:-22vmax;background:radial-gradient(circle,var(--ember) 0%,transparent 60%);animation:d1 34s ease-in-out infinite alternate}
+.clublights .l2{width:52vmax;height:52vmax;right:-16vmax;bottom:-16vmax;background:radial-gradient(circle,var(--ultra) 0%,transparent 60%);animation:d2 42s ease-in-out infinite alternate}
+.clublights .l3{width:30vmax;height:30vmax;left:34vw;top:54vh;background:radial-gradient(circle,var(--halo) 0%,transparent 70%);opacity:.06;animation:d3 48s ease-in-out infinite alternate}
+@keyframes d1{0%{transform:translate3d(0,0,0) scale(1);opacity:.14}100%{transform:translate3d(8vw,6vh,0) scale(1.12);opacity:.22}}
+@keyframes d2{0%{transform:translate3d(0,0,0) scale(1);opacity:.12}100%{transform:translate3d(-10vw,-8vh,0) scale(1.08);opacity:.20}}
+@keyframes d3{0%{transform:translate3d(0,0,0);opacity:.05}100%{transform:translate3d(-6vw,-10vh,0);opacity:.10}}
+
+.scan{position:fixed;inset:0;z-index:55;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.16) 0 1px,transparent 1px 3px);
+  mix-blend-mode:multiply;opacity:.6}
+.grain{position:fixed;inset:0;z-index:56;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.vignette{position:fixed;inset:0;z-index:54;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 38%,rgba(0,0,0,.6) 100%)}
+body.calm .scan,body.calm .grain{display:none}
+body.calm .clublights span{animation:none}
+
+/* ---- shared chrome bits ---- */
+.led{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--phosphor);
+  box-shadow:0 0 8px var(--phosphor),0 0 2px #fff inset;animation:blink 2.6s steps(1) infinite}
+@keyframes blink{0%,92%{opacity:1}93%,100%{opacity:.35}}
+body.calm .led{animation:none}
+
+.holo{height:2px;border:0;background:linear-gradient(90deg,var(--ember),var(--ultra),var(--phosphor),var(--halo),var(--ember));
+  background-size:220% 100%;opacity:.5;animation:holo 9s linear infinite}
+@keyframes holo{to{background-position:220% 0}}
+body.calm .holo{animation:none}
+
+.counter{font-family:var(--font-led);font-size:20px;line-height:1;color:var(--phosphor);
+  letter-spacing:3px;background:#020104;padding:3px 8px;
+  box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.06);
+  text-shadow:0 0 6px rgba(141,255,99,.6)}
+
+/* ---- the window primitive ---- */
+.window{position:absolute;min-width:240px;background:#0e0c15;
+  border-top:1px solid rgba(255,255,255,.10);border-left:1px solid rgba(255,255,255,.07);
+  border-right:1px solid rgba(0,0,0,.85);border-bottom:1px solid rgba(0,0,0,.9);
+  box-shadow:2px 2px 0 rgba(0,0,0,.5),0 34px 70px -22px rgba(0,0,0,.85);
+  display:flex;flex-direction:column}
+.window.focused{box-shadow:2px 2px 0 rgba(0,0,0,.5),0 34px 80px -16px rgba(122,45,255,.28),0 0 0 1px rgba(122,45,255,.18)}
+.titlebar{position:relative;display:flex;align-items:center;gap:8px;padding:5px 6px 5px 9px;cursor:grab;
+  background:linear-gradient(90deg,var(--ember-deep),var(--ultra-deep));
+  font-family:var(--font-pixel);font-size:13px;letter-spacing:.03em;color:var(--halo);
+  text-shadow:0 1px 0 rgba(0,0,0,.4)}
+.titlebar::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.18),transparent 55%)}
+.titlebar:active{cursor:grabbing}
+.window:not(.focused) .titlebar{background:linear-gradient(90deg,#1c1828,#0d0b13);color:var(--bone-400)}
+.titlebar .dot{width:7px;height:7px;border-radius:50%;background:var(--halo);box-shadow:0 0 6px var(--halo);flex:0 0 auto}
+.titlebar .tt{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.winctl{display:flex;gap:3px}
+.winctl b{width:18px;height:16px;display:grid;place-items:center;font:12px/1 var(--font-pixel);color:var(--bone-200);
+  background:linear-gradient(180deg,#3a3646,#211e2b);
+  border-top:1px solid rgba(255,255,255,.22);border-left:1px solid rgba(255,255,255,.12);
+  border-right:1px solid #000;border-bottom:1px solid #000;cursor:pointer;user-select:none}
+.winctl b:hover{background:linear-gradient(180deg,#4a4658,#2a2736)}
+.winctl b:active{transform:translate(1px,1px)}
+.wbody{padding:16px}
+
+/* mono eyebrow (kept from production) */
+.eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-400);display:flex;align-items:center;gap:8px}
+.statline{display:flex;justify-content:space-between;border-bottom:1px solid rgba(28,24,40,.9);padding:6px 0;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-400)}
+.statline b{color:var(--bone-50);font-weight:500}
+
+/* ---- buttons ---- */
+.btn{font-family:var(--font-pixel);font-size:13px;letter-spacing:.02em;padding:6px 14px;cursor:pointer;color:var(--bone-200);
+  background:linear-gradient(180deg,#2a2734,#16131f);
+  border-top:1px solid rgba(255,255,255,.16);border-left:1px solid rgba(255,255,255,.10);
+  border-right:1px solid #000;border-bottom:1px solid #000}
+.btn:hover{color:var(--bone-50);background:linear-gradient(180deg,#332f40,#1b1825)}
+.btn:active{transform:translate(1px,1px);background:linear-gradient(180deg,#16131f,#2a2734)}
+.btn-ember{color:var(--ink-900);font-weight:600;background:linear-gradient(180deg,#ff6a5e,var(--ember));
+  border-top:1px solid rgba(255,255,255,.55);border-left:1px solid rgba(255,255,255,.3);
+  border-right:1px solid var(--ember-deep);border-bottom:1px solid #7a160f}
+.btn-ember:hover{background:linear-gradient(180deg,#ff8076,var(--ember));color:#000}
+.btn-ghost{background:none;border:1px solid rgba(28,24,40,.9);color:var(--bone-400)}
+.btn-ghost:hover{color:var(--ember);border-color:rgba(255,61,46,.4)}
+
+/* ---- desktop icons ---- */
+#desktop{position:fixed;inset:0;z-index:1}
+.icons{position:absolute;top:18px;left:18px;display:flex;flex-direction:column;gap:18px;z-index:2}
+.icon{width:84px;text-align:center;cursor:pointer;color:var(--bone-200);user-select:none}
+.icon .glyph{width:46px;height:42px;margin:0 auto 5px;display:grid;place-items:center;font-size:20px;
+  background:linear-gradient(180deg,#211e2b,#0c0a12);
+  border-top:1px solid rgba(255,255,255,.14);border-left:1px solid rgba(255,255,255,.08);
+  border-right:1px solid #000;border-bottom:1px solid #000}
+.icon .lbl{font-family:var(--font-pixel);font-size:12px;letter-spacing:.02em;text-shadow:0 1px 2px #000}
+.icon:hover .lbl{color:var(--ember)}
+.icon:hover .glyph{box-shadow:0 0 14px rgba(255,61,46,.25)}
+
+/* ---- list rows (work archive) ---- */
+.row{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:baseline;padding:9px 4px;
+  border-bottom:1px solid rgba(28,24,40,.8);cursor:pointer}
+.row:hover{background:rgba(122,45,255,.07)}
+.row .n{font-family:var(--font-mono);font-size:11px;color:var(--bone-600)}
+.row .t{font-family:var(--font-display);font-size:22px;line-height:1;color:var(--bone-50)}
+.row:hover .t{color:#fff}
+.row .x{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--bone-400)}
+.row:hover .x{color:var(--ember)}
+
+/* ---- sleep / system monitor bars ---- */
+.perf{display:flex;align-items:flex-end;gap:3px;height:90px;
+  background:#020104;padding:8px;box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.05)}
+.perf .bar{flex:1;background:var(--phosphor);box-shadow:0 0 8px rgba(141,255,99,.5);min-height:3px}
+.perf .bar.dim{background:#1f3a16;box-shadow:none}
+
+/* ---- ticker / now playing ---- */
+.ticker{overflow:hidden;background:#020104;
+  box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.05);padding:6px 0}
+.ticker .track{display:inline-flex;gap:34px;white-space:nowrap;font-family:var(--font-mono);font-size:12px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--bone-200);animation:scroll 26s linear infinite;padding-left:100%}
+.ticker .track b{color:var(--ember)}
+@keyframes scroll{to{transform:translateX(-100%)}}
+body.calm .ticker .track{animation:none}
+
+/* ---- chan / greentext relic, faithful palette ---- */
+.chan{font-family:var(--font-mono);font-size:13px;line-height:1.45;background:#f0e0d6;color:#000;border:1px solid #d9bfb7;padding:10px 14px}
+.chan .name{color:#117743;font-weight:700}
+.chan .meta{color:#34345c}
+.chan .gt{color:#789922}
+
+/* ---- taskbar ---- */
+#taskbar{position:fixed;left:0;right:0;bottom:0;height:42px;z-index:70;display:flex;align-items:center;gap:6px;padding:0 6px;
+  background:linear-gradient(180deg,#1a1726,#0b0910);
+  border-top:1px solid rgba(255,255,255,.12)}
+.start{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 10px;cursor:pointer;
+  font-family:var(--font-pixel);font-size:14px;color:var(--bone-50);
+  background:linear-gradient(180deg,#2a2734,#14111d);
+  border-top:1px solid rgba(255,255,255,.18);border-left:1px solid rgba(255,255,255,.1);
+  border-right:1px solid #000;border-bottom:1px solid #000}
+.start:active{transform:translate(1px,1px)}
+.start .cdt{color:var(--ember);font-weight:600}
+.tabs{display:flex;gap:5px;flex:1;min-width:0;overflow:hidden}
+.tab{max-width:190px;padding:6px 12px;font-family:var(--font-pixel);font-size:12px;color:var(--bone-200);cursor:pointer;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background:linear-gradient(180deg,#211e2b,#14111d);
+  border-top:1px solid rgba(255,255,255,.12);border-left:1px solid rgba(255,255,255,.07);
+  border-right:1px solid #000;border-bottom:1px solid #000}
+.tab.active{background:linear-gradient(180deg,#14111d,#211e2b);color:#fff}
+.tray{display:flex;align-items:center;gap:10px;padding:4px 8px;
+  box-shadow:inset 1px 1px 0 rgba(0,0,0,.7),inset -1px -1px 0 rgba(255,255,255,.06)}
+.tray small{font-family:var(--font-led);font-size:16px;color:var(--bone-400);letter-spacing:1px}
+.clock{font-family:var(--font-led);font-size:22px;color:var(--phosphor);letter-spacing:1px;text-shadow:0 0 6px rgba(141,255,99,.55)}
+
+/* ---- start menu ---- */
+#startmenu{position:fixed;left:6px;bottom:46px;width:240px;z-index:71;display:none;
+  background:#0e0c15;border-top:1px solid rgba(255,255,255,.10);border-left:1px solid rgba(255,255,255,.07);
+  border-right:1px solid #000;border-bottom:1px solid #000;box-shadow:0 -10px 40px -10px rgba(0,0,0,.8)}
+#startmenu.open{display:block}
+#startmenu .head{padding:10px;font-family:var(--font-pixel);color:var(--halo);
+  background:linear-gradient(180deg,var(--ultra-deep),#180a3a);writing-mode:horizontal-tb}
+#startmenu a{display:flex;gap:10px;align-items:center;padding:9px 12px;text-decoration:none;color:var(--bone-200);
+  font-family:var(--font-pixel);font-size:13px;border-top:1px solid rgba(255,255,255,.03)}
+#startmenu a:hover{background:var(--ultra-deep);color:#fff}
+
+/* ---- toast ---- */
+#toast{position:fixed;right:14px;bottom:54px;width:300px;z-index:72;transform:translateY(140%);transition:transform .5s cubic-bezier(.2,.9,.25,1)}
+#toast.show{transform:translateY(0)}
+body.calm #toast{transition:opacity .3s;transform:none;opacity:0}
+body.calm #toast.show{opacity:1}
+
+/* ---- boot splash ---- */
+#boot{position:fixed;inset:0;z-index:90;background:var(--ink-900);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:22px;transition:opacity .6s}
+#boot.gone{opacity:0;pointer-events:none}
+#boot .logo{font-family:var(--font-display);font-size:64px;color:var(--bone-50);letter-spacing:-.04em}
+#boot .logo b{color:var(--ember)}
+#boot .sub{font-family:var(--font-pixel);font-size:14px;color:var(--bone-400);letter-spacing:.1em}
+.progress{width:300px;height:18px;background:#020104;
+  box-shadow:inset 1px 1px 0 rgba(0,0,0,.9),inset -1px -1px 0 rgba(255,255,255,.06);padding:2px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ember-deep),var(--ember));animation:load 1.7s ease forwards}
+@keyframes load{to{width:100%}}
+#boot .lines{font-family:var(--font-led);font-size:17px;color:var(--phosphor);letter-spacing:1px;text-align:center;opacity:.8}
+#boot .skip{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600)}
+
+/* corner help badge */
+.badge{position:fixed;top:10px;right:12px;z-index:73;font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--bone-600);text-align:right;line-height:1.7}
+.badge a{color:var(--bone-400);text-decoration:none}
+.badge a:hover{color:var(--ember)}
+
+@media (prefers-reduced-motion: reduce){
+  .clublights span,.led,.holo,.ticker .track,#boot .progress i{animation:none!important}
+  #toast{transition:none}
+}
+</style>
+</head>
+<body>
+  <!-- ambience -->
+  <div class="clublights"><span class="l1"></span><span class="l2"></span><span class="l3"></span></div>
+  <div class="vignette"></div><div class="scan"></div><div class="grain"></div>
+
+  <!-- boot splash -->
+  <div id="boot">
+    <div class="logo">CDT<b>//</b>OS</div>
+    <div class="sub">AFTERHOURS EDITION · v2.6</div>
+    <div class="progress"><i></i></div>
+    <div class="lines" id="bootlines">mounting /basement …</div>
+    <div class="skip">[ click anywhere to enter ]</div>
+  </div>
+
+  <div class="badge">
+    MOCKUP · MAXIMAL INTENSITY<br/>
+    <a href="editorial.html">→ see the subtle/production version</a><br/>
+    <a href="index.html">→ system legend &amp; palette</a>
+  </div>
+
+  <!-- desktop -->
+  <div id="desktop">
+    <div class="icons">
+      <div class="icon" data-open="w-work"><div class="glyph">▦</div><div class="lbl">work.exe</div></div>
+      <div class="icon" data-open="w-sys"><div class="glyph">▤</div><div class="lbl">sys_monitor</div></div>
+      <div class="icon" data-open="w-chan"><div class="glyph">▢</div><div class="lbl">b-sides/</div></div>
+      <div class="icon" data-open="w-about"><div class="glyph">▣</div><div class="lbl">about.txt</div></div>
+    </div>
+
+    <!-- HERO window -->
+    <div class="window focused" id="w-hero" style="left:300px;top:60px;width:560px">
+      <div class="titlebar"><span class="dot"></span><span class="tt">it_me.exe — \CDT\index</span>
+        <span class="winctl"><b data-min>_</b><b>□</b><b data-close>×</b></span></div>
+      <div class="wbody">
+        <div class="eyebrow"><span class="led"></span> INDEX 001 · 2026 · it me</div>
+        <h1 style="font-family:var(--font-display);font-size:96px;line-height:.86;letter-spacing:-.04em;margin:14px 0 6px">it me<span style="color:var(--ember)">.</span></h1>
+        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-400)">Callum David Thomas — software developer, Melbourne</p>
+        <p style="max-width:46ch;color:var(--bone-200);font-size:15px;line-height:1.55;margin:16px 0">I build clean, modular web apps — <span style="color:var(--bone-50)">slowly and on purpose.</span> Construction tools, traffic engineering software, late-night experiments.</p>
+        <div style="margin-top:6px">
+          <div class="statline"><span>Status</span><b style="color:var(--phosphor)">● ONLINE</b></div>
+          <div class="statline"><span>Loc.</span><b>Melbourne · UTC+10</b></div>
+          <div class="statline"><span>Uptime</span><b>since 1998</b></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:16px">
+          <button class="btn btn-ember">▶ Run selected work</button>
+          <button class="btn">✉ Email</button>
+          <button class="btn-ghost btn">readme.txt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOW PLAYING ticker window -->
+    <div class="window" id="w-now" style="left:300px;top:470px;width:560px">
+      <div class="titlebar"><span class="dot"></span><span class="tt">now_playing.exe — //the stack</span>
+        <span class="winctl"><b data-min>_</b><b data-close>×</b></span></div>
+      <div class="wbody" style="padding:10px 12px 12px">
+        <div class="eyebrow" style="margin-bottom:8px"><span class="led"></span> NOW PLAYING · 24 tracks</div>
+        <div class="ticker"><div class="track">
+          Next.js 16 <b>×</b> TypeScript <b>×</b> Supabase <b>×</b> Tailwind v4 <b>×</b> Motion <b>×</b> React 19 <b>×</b> PostgreSQL <b>×</b> SvelteKit <b>×</b> Angular <b>×</b> Node.js <b>×</b> Vercel <b>×</b> PWA <b>×</b>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- WORK archive window -->
+    <div class="window" id="w-work" style="left:900px;top:60px;width:430px">
+      <div class="titlebar"><span class="dot"></span><span class="tt">selected_work — \CDT\archive</span>
+        <span class="winctl"><b data-min>_</b><b>□</b><b data-close>×</b></span></div>
+      <div class="wbody" style="padding:8px 14px 14px">
+        <div class="eyebrow" style="margin:6px 0 8px">§ THINGS I MADE, ON PURPOSE</div>
+        <div class="row"><span class="n">001</span><span class="t">Almanac</span><span class="x">↗ live</span></div>
+        <div class="row"><span class="n">002</span><span class="t">Traffic Tools</span><span class="x">↗ live</span></div>
+        <div class="row"><span class="n">003</span><span class="t">Connect Five</span><span class="x">↗ live</span></div>
+        <div class="row"><span class="n">004</span><span class="t">Boatlog</span><span class="x">↗ live</span></div>
+        <div class="row"><span class="n">005</span><span class="t">Firewall Calc</span><span class="x">read →</span></div>
+        <div class="row"><span class="n">006</span><span class="t">FolderFinder.vbs</span><span class="x">read →</span></div>
+        <hr class="holo" style="margin:12px 0 10px"/>
+        <button class="btn" style="width:100%">See the full archive →</button>
+      </div>
+    </div>
+
+    <!-- SYSTEM MONITOR (sleep meter) window -->
+    <div class="window" id="w-sys" style="left:900px;top:430px;width:430px">
+      <div class="titlebar"><span class="dot"></span><span class="tt">sys_monitor.exe — sleep</span>
+        <span class="winctl"><b data-min>_</b><b data-close>×</b></span></div>
+      <div class="wbody">
+        <div class="eyebrow"><span class="led"></span> SLEEP · LAST 14 DAYS · LIVE FROM ALMANAC</div>
+        <div style="display:flex;gap:24px;margin:12px 0 14px">
+          <div><div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--bone-400)">LAST NIGHT</div>
+            <div style="font-family:var(--font-display);font-size:40px;color:var(--bone-50)">6.4<span style="font-size:18px;color:var(--bone-400)">h</span></div></div>
+          <div><div style="font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;color:var(--bone-400)">AVG (12/14)</div>
+            <div style="font-family:var(--font-display);font-size:40px;color:var(--bone-50)">7.1<span style="font-size:18px;color:var(--bone-400)">h</span></div></div>
+        </div>
+        <div class="perf" id="perf"></div>
+        <p style="font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone-600);margin-top:10px">hours only · no times, quality, or notes</p>
+      </div>
+    </div>
+
+    <!-- B-SIDES greentext window -->
+    <div class="window" id="w-chan" style="left:300px;top:600px;width:360px">
+      <div class="titlebar"><span class="dot"></span><span class="tt">greentext — /b/asement</span>
+        <span class="winctl"><b data-min>_</b><b data-close>×</b></span></div>
+      <div class="wbody" style="padding:12px">
+        <div class="chan">
+          <div style="margin-bottom:4px"><b>File:</b> <span class="meta" style="text-decoration:underline">cape.jpg</span> (12 KB, 480x640)</div>
+          <div style="margin-bottom:6px"><span class="name">Anonymous</span> 05/12/26(Tue) <span class="meta">No.4815162342</span></div>
+          <div class="gt">&gt;be me</div><div class="gt">&gt;be wearing a cape</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT window (small, demonstrates inactive titlebar + counter) -->
+    <div class="window" id="w-about" style="left:690px;top:600px;width:300px">
+      <div class="titlebar"><span class="dot"></span><span class="tt">about.txt — Notepad</span>
+        <span class="winctl"><b data-min>_</b><b data-close>×</b></span></div>
+      <div class="wbody" style="display:flex;flex-direction:column;gap:12px">
+        <p style="font-family:var(--font-mono);font-size:12px;line-height:1.6;color:var(--bone-200)">no bouncer. no list. no cookies — we ate them. best experienced after midnight.</p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-400)">listener №</span>
+          <span class="counter">00013371</span>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone-600)">⚠ this site is always under construction (aren't we all)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- toast -->
+  <div id="toast" class="window">
+    <div class="titlebar"><span class="dot"></span><span class="tt">cdt.exe — new transmission</span>
+      <span class="winctl"><b id="toastclose" data-close>×</b></span></div>
+    <div class="wbody" style="display:flex;flex-direction:column;gap:12px">
+      <p style="font-size:13px;color:var(--bone-200);line-height:1.5">You're on the list.<br/><span style="color:var(--bone-400)">(There is no list. There is no bouncer.)</span></p>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn" id="toastok">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- start menu -->
+  <div id="startmenu">
+    <div class="head">CDT//OS · guest session</div>
+    <a data-open="w-hero">▸ it_me.exe</a>
+    <a data-open="w-work">▸ selected_work</a>
+    <a data-open="w-sys">▸ sys_monitor (sleep)</a>
+    <a data-open="w-chan">▸ b-sides / relics</a>
+    <a data-open="w-about">▸ about.txt</a>
+    <a href="editorial.html">▸ switch to editorial mode →</a>
+  </div>
+
+  <!-- taskbar -->
+  <div id="taskbar">
+    <div class="start" id="startbtn"><span class="cdt">▶</span> CDT//OS</div>
+    <div class="tabs" id="tabs"></div>
+    <div class="tray">
+      <span class="led" title="online"></span>
+      <small id="calmtoggle" style="cursor:pointer" title="toggle CRT / motion">CALM</small>
+      <span class="clock" id="clock">00:00</span>
+    </div>
+  </div>
+
+<script>
+(function(){
+  // boot fade
+  var boot=document.getElementById('boot');
+  function enter(){boot.classList.add('gone');}
+  setTimeout(enter,1900);
+  boot.addEventListener('click',enter);
+  var bl=document.getElementById('bootlines'),steps=['mounting /basement …','loading club_lights.sys','spinning up techno.dll','OK — welcome back'],bi=0;
+  var blt=setInterval(function(){bi++;if(bi<steps.length)bl.textContent=steps[bi];else clearInterval(blt);},430);
+
+  // sleep bars
+  var perf=document.getElementById('perf'),data=[7.5,6,8,7,5.5,9,6.4,7.2,8.1,null,6.8,7,5.9,6.4];
+  data.forEach(function(h){var b=document.createElement('div');b.className='bar'+(h===null?' dim':'');b.style.height=(h===null?3:(h/10*100))+'%';if(h!==null)b.title=h+'h';perf.appendChild(b);});
+
+  // clock
+  function tick(){var d=new Date();document.getElementById('clock').textContent=
+    String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+  tick();setInterval(tick,1000*20);
+
+  // window focus + z-order
+  var z=10;
+  function focusWin(w){document.querySelectorAll('.window').forEach(function(x){x.classList.remove('focused');});
+    w.classList.add('focused');w.style.zIndex=(++z);syncTabs();}
+  document.querySelectorAll('.window').forEach(function(w){
+    if(w.id==='toast')return;
+    w.addEventListener('mousedown',function(){focusWin(w);});
+  });
+
+  // drag by titlebar
+  document.querySelectorAll('.window .titlebar').forEach(function(tb){
+    var w=tb.closest('.window');if(w.id==='toast')return;
+    tb.addEventListener('pointerdown',function(e){
+      if(e.target.closest('.winctl'))return;
+      focusWin(w);
+      var r=w.getBoundingClientRect(),ox=e.clientX-r.left,oy=e.clientY-r.top;
+      function mv(ev){w.style.left=Math.max(0,ev.clientX-ox)+'px';w.style.top=Math.max(0,ev.clientY-oy)+'px';}
+      function up(){document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);}
+      document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);
+    });
+  });
+
+  // close / minimise
+  document.querySelectorAll('[data-close]').forEach(function(b){
+    b.addEventListener('click',function(e){e.stopPropagation();var w=b.closest('.window');w.style.display='none';syncTabs();});
+  });
+  document.querySelectorAll('[data-min]').forEach(function(b){
+    b.addEventListener('click',function(e){e.stopPropagation();var w=b.closest('.window');w.style.display='none';syncTabs();});
+  });
+
+  // open from icons / start menu
+  function openWin(id){var w=document.getElementById(id);if(!w)return;w.style.display='flex';focusWin(w);}
+  document.querySelectorAll('[data-open]').forEach(function(el){
+    el.addEventListener('click',function(){openWin(el.getAttribute('data-open'));sm.classList.remove('open');});
+  });
+
+  // taskbar tabs reflect open windows
+  var tabs=document.getElementById('tabs');
+  function syncTabs(){
+    tabs.innerHTML='';
+    document.querySelectorAll('#desktop .window').forEach(function(w){
+      if(w.style.display==='none')return;
+      var t=document.createElement('div');t.className='tab'+(w.classList.contains('focused')?' active':'');
+      t.textContent=w.querySelector('.tt').textContent;
+      t.addEventListener('click',function(){focusWin(w);});
+      tabs.appendChild(t);
+    });
+  }
+  syncTabs();
+
+  // start menu
+  var sm=document.getElementById('startmenu');
+  document.getElementById('startbtn').addEventListener('click',function(e){e.stopPropagation();sm.classList.toggle('open');});
+  document.addEventListener('click',function(){sm.classList.remove('open');});
+  sm.addEventListener('click',function(e){e.stopPropagation();});
+
+  // toast
+  var toast=document.getElementById('toast');
+  setTimeout(function(){toast.classList.add('show');},3200);
+  function hideToast(){toast.classList.remove('show');}
+  document.getElementById('toastok').addEventListener('click',hideToast);
+  document.getElementById('toastclose').addEventListener('click',hideToast);
+
+  // calm mode
+  document.getElementById('calmtoggle').addEventListener('click',function(){
+    document.body.classList.toggle('calm');
+    this.style.color=document.body.classList.contains('calm')?'var(--phosphor)':'var(--bone-400)';
+  });
+})();
+</script>
+</body>
+</html>
