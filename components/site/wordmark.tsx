@@ -17,6 +17,13 @@ export function Wordmark() {
       family,
       weight: 800,
       entropy: true,
+      // Generous fatigue: a few dots give way on the first pass or two, and
+      // it keeps building up to a quarter of the word under sustained stirring.
+      yieldMin: 5,
+      yieldMean: 95,
+      maxYield: 0.22,
+      maxDrift: 3,
+      stressRelax: 0.98,
       onEntropy: ({ moved, total }) => setMoved({ moved, total }),
     });
     return () => api.current?.destroy();

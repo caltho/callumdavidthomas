@@ -30,7 +30,7 @@ const matches = (w: WorkItem, f: Filter) =>
   f === "all" || (f === "live" && !!w.live) || (f === "work" && w.kind !== "own") || (f === "own" && w.kind === "own");
 
 /** Filter buttons live in the strip's margin column, the list in the main one. */
-export function WorkStrip({ items, initial = 10 }: { items: WorkItem[]; initial?: number }) {
+export function WorkStrip({ items, initial = 10, after }: { items: WorkItem[]; initial?: number; after?: React.ReactNode }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [expanded, setExpanded] = useState(false);
   const shown = useMemo(() => {
@@ -67,6 +67,7 @@ export function WorkStrip({ items, initial = 10 }: { items: WorkItem[]; initial?
             </button>
           </div>
         )}
+        {after}
       </div>
     </section>
   );

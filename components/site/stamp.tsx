@@ -8,13 +8,11 @@ export function Stamp({ top, main, interactive = false }: { top: string; main: s
     new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", year: "numeric", timeZone: "Australia/Melbourne" }).format(new Date())
   );
   const [count, setCount] = useState(0);
-  const [tilt, setTilt] = useState(-2.5);
   const ref = useRef<HTMLSpanElement>(null);
 
   const hit = () => {
     if (!interactive) return;
     setCount((n) => n + 1);
-    setTilt(Number((Math.random() * 5 - 4).toFixed(1)));
     const el = ref.current;
     if (el) {
       el.classList.remove("thunk");
@@ -28,7 +26,7 @@ export function Stamp({ top, main, interactive = false }: { top: string; main: s
       <span
         ref={ref}
         className="stamp"
-        style={{ transform: `rotate(${tilt}deg)`, cursor: interactive ? "pointer" : "default" }}
+        style={{ cursor: interactive ? "pointer" : "default" }}
         {...(interactive
           ? {
               role: "button",

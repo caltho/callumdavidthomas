@@ -109,7 +109,7 @@ export function HumanSlider() {
       Object.assign(s.current, { done: true, drag: null, p: 1 });
       setDone(true);
       setMsg("Verified human ✓");
-      setSub(wobbles > 3 ? `Your hand wobbled ${wobbles} times on the way. Definitely human.` : "Suspiciously smooth. We'll let it slide.");
+      setSub(wobbles > 3 ? `Your hand wobbled ${wobbles} times on the way. Definitely human.` : "Suspiciously smooth. I'll let it slide.");
       render();
     },
     [render]

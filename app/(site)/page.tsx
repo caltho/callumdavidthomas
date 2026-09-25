@@ -84,8 +84,8 @@ export default async function Home() {
           </div>
         </div>
         <figure className="cell photo">
-          <img src="/images/profile photo.jfif" alt="Callum smiling on a hike, in a blue jacket, green hills and cloud behind" />
-          <figcaption className="label">Fig. 1 · Callum (typical). Not AI&#8209;generated.</figcaption>
+          <img src="/images/profile-photo.jpg" alt="Callum grinning beside the Yukhin Peak summit sign, 5,130 m, with snowy mountains behind" />
+          <figcaption className="label">Fig. 1 · Callum at 5,130 m. Not AI&#8209;generated.</figcaption>
         </figure>
         <div className="cell">
           <dl className="spec">
@@ -122,7 +122,7 @@ export default async function Home() {
       </section>
 
       <main id="content">
-        <WorkStrip items={work} />
+        <WorkStrip items={work} after={<HumanCheck key="human-check" />} />
 
         <section className="row strip" id="cv">
           <div className="cell side">
@@ -277,7 +277,6 @@ export default async function Home() {
               </li>
             </ul>
             <div className="fidgets">
-              <HumanCheck />
               <HumanSlider />
             </div>
           </div>

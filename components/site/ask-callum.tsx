@@ -19,6 +19,7 @@ import { leaveMessage } from "@/lib/chat/messages";
 import { NANO_SKETCH_REPLY, nanoReply } from "@/lib/chat/nano";
 import { melbourneNow } from "@/lib/status";
 import { site } from "@/lib/site";
+import { CHAT_TREE, type ChatNode } from "@/data/chat-tree";
 
 type Model = "callum" | "nano";
 type Msg =
@@ -26,7 +27,25 @@ type Msg =
   | { id: string; kind: "them"; who: string; think?: string; text: string; askEmail?: string }
   | { id: string; kind: "dots"; who: string; think: string };
 
-const CHIPS = ["Are you open to new roles?", "What are you building right now?", "Are you actually human?", "Coffee in Melbourne?"];
+// Flatten the question tree into ids like "0", "0.2", "0.2.1".
+type Q = ChatNode & { id: string; parent: string | null };
+const QUESTIONS = new Map<string, Q>();
+(function index(nodes: ChatNode[], parent: string | null) {
+  nodes.forEach((n, i) => {
+    const id = parent === null ? String(i) : `${parent}.${i}`;
+    QUESTIONS.set(id, { ...n, id, parent });
+    if (n.next) index(n.next, id);
+  });
+})(CHAT_TREE, null);
+const childrenOf = (id: string | null) => [...QUESTIONS.values()].filter((q) => q.parent === id);
+
+/** Follow-ups for where the conversation is: its children, else what's left nearby. */
+function suggestions(at: string | null, asked: Set<string>): Q[] {
+  for (let level = at; ; level = QUESTIONS.get(level)?.parent ?? null) {
+    const open = childrenOf(level).filter((q) => !asked.has(q.id));
+    if (open.length || level === null) return open;
+  }
+}
 
 function Fingerprint() {
   return (
@@ -51,6 +70,8 @@ export function AskCallum() {
   const [text, setText] = useState("");
   const [hello] = useState(greeting);
   const [sessionId] = useState(newId);
+  const [at, setAt] = useState<string | null>(null);
+  const [asked, setAsked] = useState<Set<string>>(() => new Set());
 
   const body = useRef<HTMLDivElement>(null);
   const picker = useRef<HTMLDivElement>(null);
@@ -207,6 +228,20 @@ export function AskCallum() {
     [add, atDesk, openLine, sendLive]
   );
 
+  // Suggested questions get the answer Callum wrote in advance.
+  const ask = useCallback(
+    (q: Q) => {
+      add({ id: newId(), kind: "me", text: q.q });
+      setMsgs((p) => [...p, { id: "dots", kind: "dots", who: "Callum 1.0", think: "Remembering what he wrote…" }]);
+      setAsked((prev) => new Set(prev).add(q.id));
+      setTimeout(() => {
+        add({ id: newId(), kind: "them", who: "Callum 1.0", think: "Written in advance, by the human", text: q.a });
+        setAt(q.id);
+      }, 650);
+    },
+    [add]
+  );
+
   // Sketches from the scratch pad land here.
   useEffect(() => {
     const onSketch = (e: Event) => {
@@ -233,6 +268,8 @@ export function AskCallum() {
   }, []);
 
   const offline = model === "callum" && !atDesk;
+  const waiting = msgs.some((m) => m.kind === "dots");
+  const next = suggestions(at, asked);
 
   return (
     <div className="ask">
@@ -283,13 +320,6 @@ export function AskCallum() {
               <br />
               What can Callum help with?
             </h3>
-            <div className="chips">
-              {CHIPS.map((c) => (
-                <button key={c} type="button" onClick={() => send(c)}>
-                  {c}
-                </button>
-              ))}
-            </div>
           </div>
         )}
         <div className="thread" aria-live="polite">
@@ -330,6 +360,20 @@ export function AskCallum() {
             )
           )}
         </div>
+        {!waiting && (next.length > 0 || at !== null) && (
+          <div className="chips">
+            {next.map((q) => (
+              <button key={q.id} type="button" onClick={() => ask(q)}>
+                {q.q}
+              </button>
+            ))}
+            {at !== null && childrenOf(null).some((q) => !asked.has(q.id)) && !next.some((q) => q.parent === null) && (
+              <button type="button" className="back" onClick={() => setAt(null)}>
+                ↺ Something else
+              </button>
+            )}
+          </div>
+        )}
       </div>
       <div className="compose">
         <form

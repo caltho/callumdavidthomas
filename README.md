@@ -49,7 +49,8 @@ The public site (`app/(site)`) is one engineering drawing: hairline cells for th
 
 - **Wordmark** (`lib/particles.ts`): the name drawn in dots. It scatters from the cursor and gets tired: stir it enough and recovery slows and some dots never go home. Idle cost is zero.
 - **Ask Callum** (`components/site/ask-callum.tsx`): an AI-assistant parody. "Callum 1.0" is the real human over Supabase Realtime when the admin chat console is open, otherwise messages save to `portfolio_messages`. `callum-nano` is the local budget model.
-- **Fidgets**: an "I'm not a robot" checkbox, a slide-to-prove-humanity slider, a stampable stamp, and a scratch pad that draws in the colour of whatever you last clicked.
+- **Fidgets**: an "I'm not a robot" checkbox, a slide-to-prove-humanity slider, a stampable stamp, and a scratch pad with cycling ink colours and pen sizes.
+- **Suggested questions** (`data/chat-tree.ts`): three starters, three follow-ups each, three more under those, all answered in advance. Edit the file to change them.
 - Sleep data comes from Almanac when there is some, and falls back to a labelled sample.
 
 The admin area (`app/(backstage)`) keeps the original dark styles in `app/globals.css`. The two halves have separate root layouts, so crossing between them is a full page load, and unmatched URLs use `app/global-not-found.tsx`.

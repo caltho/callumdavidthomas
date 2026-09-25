@@ -1,97 +1,30 @@
 "use client";
 
 /**
- * Scratch pad. No instructions: you draw in the colour of whatever you last
- * touched anywhere on the page. Photos give their actual pixel colour.
+ * Scratch pad. No instructions. Tap the ink to cycle colours and the pen to
+ * cycle sizes, like a drawer of technical pens.
  */
 
 import { useEffect, useRef, useState } from "react";
 
 const PENS: [string, number][] = [["0.25", 1.4], ["0.5", 2.6], ["0.7", 4], ["1.0", 6.5]];
-const PAPERS = [[241, 239, 232], [233, 230, 220], [247, 245, 239], [211, 207, 195]];
-const START = "rgb(23, 23, 21)";
-
-const parse = (c: string | null) => {
-  const m = (c || "").match(/[\d.]+/g);
-  if (!m || m.length < 3 || (m.length > 3 && +m[3] < 0.1)) return null;
-  return m.slice(0, 3).map(Number);
-};
-const paperish = (c: number[]) => PAPERS.some((q) => Math.abs(c[0] - q[0]) + Math.abs(c[1] - q[1]) + Math.abs(c[2] - q[2]) < 30);
-const rgb = (c: number[]) => `rgb(${c.map(Math.round).join(", ")})`;
-const toHex = (c: string) =>
-  "#" + (c.match(/\d+/g) || ["0", "0", "0"]).slice(0, 3).map((n) => (+n).toString(16).padStart(2, "0")).join("").toUpperCase();
-
-function sampleImg(img: HTMLImageElement, e: PointerEvent) {
-  try {
-    const r = img.getBoundingClientRect(), cs = getComputedStyle(img), iw = img.naturalWidth, ih = img.naturalHeight;
-    if (!iw) return null;
-    let sc = r.width / iw, ox = 0, oy = 0;
-    if (cs.objectFit === "cover") {
-      sc = Math.max(r.width / iw, r.height / ih);
-      const [px, py] = cs.objectPosition.split(" ").map((v) => (v.endsWith("%") ? parseFloat(v) / 100 : 0.5));
-      ox = (r.width - iw * sc) * px;
-      oy = (r.height - ih * sc) * py;
-    }
-    const x = (e.clientX - r.left - ox) / sc, y = (e.clientY - r.top - oy) / sc;
-    const c = document.createElement("canvas");
-    c.width = c.height = 3;
-    const cx = c.getContext("2d", { willReadFrequently: true })!;
-    cx.drawImage(img, x - 1, y - 1, 3, 3, 0, 0, 3, 3);
-    const d = cx.getImageData(0, 0, 3, 3).data, sum = [0, 0, 0];
-    for (let i = 0; i < d.length; i += 4) { sum[0] += d[i]; sum[1] += d[i + 1]; sum[2] += d[i + 2]; }
-    return rgb(sum.map((v) => v / 9));
-  } catch {
-    return null; // cross-origin images can't be read
-  }
-}
-
-function colourOf(e: PointerEvent): string | null {
-  const el = e.target;
-  if (!(el instanceof Element) || el.closest(".pad, .padbar")) return null;
-  if (el instanceof HTMLImageElement) return sampleImg(el, e);
-  if (el instanceof HTMLCanvasElement) {
-    try {
-      const r = el.getBoundingClientRect();
-      const d = el.getContext("2d")!.getImageData(((e.clientX - r.left) * el.width) / r.width, ((e.clientY - r.top) * el.height) / r.height, 1, 1).data;
-      if (d[3] > 60) return rgb([d[0], d[1], d[2]]);
-    } catch {}
-  }
-  if (el instanceof SVGElement) {
-    const cs = getComputedStyle(el);
-    const c = parse(cs.stroke) || parse(cs.fill);
-    if (c) return rgb(c);
-  }
-  for (let n: Element | null = el; n && n !== document.body; n = n.parentElement) {
-    const bg = parse(getComputedStyle(n).backgroundColor);
-    if (bg && !paperish(bg)) return rgb(bg);
-    if (bg) break;
-  }
-  const fg = parse(getComputedStyle(el).color);
-  return fg ? rgb(fg) : null;
-}
+const INKS: [string, string][] = [
+  ["Black", "#171715"],
+  ["Red", "#ec4a1d"],
+  ["Blue", "#2445ff"],
+  ["Green", "#2f9e44"],
+  ["Pencil", "#8a877d"],
+];
 
 export function SketchPad() {
   const pad = useRef<HTMLDivElement>(null);
   const cv = useRef<HTMLCanvasElement>(null);
-  const colourRef = useRef(START);
+  const colourRef = useRef(INKS[0][1]);
   const penRef = useRef(1);
-  const [colour, setColour] = useState(START);
+  const [ink, setInk] = useState(0);
   const [pen, setPen] = useState(1);
   const [dirty, setDirty] = useState(false);
-  const [pulse, setPulse] = useState(0);
-
-  // Pick up the colour of whatever was touched last, anywhere on the page.
-  useEffect(() => {
-    const onDown = (e: PointerEvent) => {
-      const c = colourOf(e);
-      if (!c || c === colourRef.current) return;
-      colourRef.current = c;
-      setColour(c);
-      setPulse((n) => n + 1);
-    };
-    document.addEventListener("pointerdown", onDown, true);
-    return () => document.removeEventListener("pointerdown", onDown, true);
-  }, []);
+  const colour = INKS[ink][1];
 
   // Keep the canvas crisp and keep the drawing when the pad resizes.
   useEffect(() => {
@@ -193,10 +126,19 @@ export function SketchPad() {
           <span className="nfc">Not for construction</span>
         </div>
         <div className="padbar">
-          <span className="ink">
-            <span key={pulse} className={`sw${pulse ? " pulse" : ""}`} style={{ background: colour }} />
-            <span>{toHex(colour)}</span>
-          </span>
+          <button
+            type="button"
+            className="ink"
+            aria-label={`Ink: ${INKS[ink][0]}. Change colour`}
+            onClick={() => {
+              const n = (ink + 1) % INKS.length;
+              colourRef.current = INKS[n][1];
+              setInk(n);
+            }}
+          >
+            <span key={ink} className={`sw${ink ? " pulse" : ""}`} style={{ background: colour }} />
+            <span>{INKS[ink][0]}</span>
+          </button>
           <button
             type="button"
             onClick={() => {
@@ -204,6 +146,7 @@ export function SketchPad() {
               penRef.current = n;
               setPen(n);
             }}
+            aria-label={`Pen ${PENS[pen][0]}. Change size`}
           >
             Pen {PENS[pen][0]}
           </button>

@@ -40,6 +40,7 @@ export type WordmarkOptions = {
   maxYield: number; // never let more than this share of dots go
   maxDrift: number; // a yielded dot settles at most this many grid spots from home
   wearHalfLife: number; // ms
+  stressRelax: number; // per-frame multiplier on accumulated stress (closer to 1 = longer memory)
   onEntropy?: (r: EntropyReport) => void;
 };
 
@@ -80,6 +81,7 @@ const DEFAULTS: WordmarkOptions = {
   maxYield: 0.12,
   maxDrift: 2,
   wearHalfLife: 30000,
+  stressRelax: 0.97,
 };
 
 export function createWordmark(el: HTMLElement, options: Partial<WordmarkOptions> = {}) {
@@ -314,7 +316,7 @@ export function createWordmark(el: HTMLElement, options: Partial<WordmarkOptions
       }
       // Stress relaxes between hits. Only sustained abuse gets past a dot's limit.
       if (o.entropy) {
-        p.s *= 0.97;
+        p.s *= o.stressRelax;
         if (canYield && p.s > p.lim) {
           p.free = true;
           pending++;
