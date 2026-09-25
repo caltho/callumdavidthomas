@@ -47,7 +47,7 @@ export default async function AdminDashboard() {
           href="/"
           className="font-display mt-3 inline-block text-3xl text-bone-200 transition-colors hover:text-ember"
         >
-          callumdavidthomas.com →
+          callum-thomas.com →
         </Link>
       </div>
     </div>

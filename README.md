@@ -1,4 +1,4 @@
-# callumdavidthomas.com
+# callum-thomas.com
 
 Personal portfolio. Rebuild — fully AI built, editorial brutalism × basement-club design, content driven from Supabase with a custom admin panel.
 

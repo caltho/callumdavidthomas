@@ -47,12 +47,12 @@ export const metadata: Metadata = {
   },
   description:
     "Portfolio of Callum David Thomas — software developer building clean, modular web apps. Melbourne / remote.",
-  metadataBase: new URL("https://callumdavidthomas.com"),
+  metadataBase: new URL("https://callum-thomas.com"),
   openGraph: {
     type: "website",
     title: "Callum David Thomas",
     description: "Software developer. Melbourne / remote.",
-    url: "https://callumdavidthomas.com",
+    url: "https://callum-thomas.com",
   },
 };
 

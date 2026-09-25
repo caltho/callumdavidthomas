@@ -2,6 +2,22 @@ import type { Project } from "../types/project";
 
 export const projects: Project[] = [
   {
+    slug: "blindfold-chess-trainer",
+    title: "Blindfold Chess Trainer",
+    summary:
+      "Board-vision drills and blind tactics for the part of chess you play in your head. Front-end only, installable, works offline.",
+    tags: ["JavaScript", "Vite", "chess.js", "PWA"],
+    number: -4,
+    thumbnail: "",
+    image: [],
+    techStack: ["Vite", "JavaScript", "chess.js", "Vercel"],
+    link: "https://blindfold.callum-thomas.com",
+    github: "https://github.com/caltho/blindfold-chess-trainer",
+    longDescription: `A trainer for seeing the board without looking at it. Four modes: name the square for a coordinate, call each square light or dark, find every square a knight can reach, and solve real Lichess puzzles on an empty board, picturing the position from a piece list and playing the solution blind.
+<br /><br />
+No backend and no accounts. It's Vite and vanilla JS, with chess.js checking the moves and a bundled slice of the open (CC0) Lichess puzzle database. Personal bests live in localStorage, and a service worker makes it installable and usable offline from the second visit, while still picking up new deploys as soon as you're back online.`,
+  },
+  {
     slug: "almanac",
     title: "Almanac",
     summary:
@@ -11,7 +27,7 @@ export const projects: Project[] = [
     thumbnail: "",
     image: [],
     techStack: ["SvelteKit", "TypeScript", "Supabase", "PostgreSQL", "PWA"],
-    link: "https://almanac.callumdavidthomas.com",
+    link: "https://almanac.callum-thomas.com",
     github: "https://github.com/caltho/almanac",
     longDescription: `Almanac is my personal life-tracking PWA — a single home for daily journal entries, habits, tasks, contacts, recipes, transactions, sleep logs, and net-worth snapshots. Everything I want to look back on, in one searchable place.
 <br /><br />
@@ -27,7 +43,7 @@ Built end-to-end with SvelteKit, TypeScript, and Supabase Postgres. Heavy Row-Le
     thumbnail: "",
     image: [],
     techStack: ["Next.js", "TypeScript", "Supabase", "Vercel"],
-    link: "https://boatlog.callumdavidthomas.com",
+    link: "https://boatlog.callum-thomas.com",
     github: "",
     longDescription: `Boatlog is a small private app I built for tracking days on the water — distance covered, weather and conditions, fuel used, crew on board. The kind of thing that used to live in a damp notebook on the chart table, now in a phone-friendly web app I can update one-handed.
 <br /><br />
@@ -43,7 +59,7 @@ Next.js with TypeScript on Vercel, backed by Supabase. Deliberately minimal — 
     thumbnail: "",
     image: [],
     techStack: ["JavaScript", "HTML", "CSS"],
-    link: "https://lan-hero.callumdavidthomas.com",
+    link: "https://lan-hero.callum-thomas.com",
     github: "https://github.com/caltho/LAN-hero",
     longDescription: `LAN Hero is a tongue-in-cheek personal-development tracker that wraps your real life in RPG mechanics. Level up by completing quests (read a book, train a martial art, ship a side project), unlock skills, earn XP, hoard inventory items. Half productivity app, half character sheet.
 <br /><br />
@@ -59,7 +75,7 @@ Vanilla JavaScript, HTML, and CSS — no framework, no build step. The simplest 
     thumbnail: "",
     image: [],
     techStack: ["Next.js", "TypeScript", "React", "Vercel"],
-    link: "https://firewall.callumdavidthomas.com",
+    link: "https://firewall.callum-thomas.com",
     github: "https://github.com/caltho/firewall",
     longDescription: `A small construction-industry utility for calculating the fire-resistance rating ("the fireyness") of a building firewall. Born out of doing the same back-of-envelope calc with a coffee-stained spreadsheet one too many times — now a clean web tool that anyone on site can pull up on their phone.
 <br /><br />
@@ -128,7 +144,7 @@ TypeScript + React on Next.js, deployed on Vercel. Single page, no login, paste 
     tags: ["Next.js", "TypeScript", "HTML", "CSS", "Chakra-UI", "Vercel"],
     techStack: ["Next.js", "TypeScript", "HTML", "CSS", "Chakra-UI", "Vercel"],
     number: 5,
-    link: "https://traffictools.callumdavidthomas.com",
+    link: "https://traffictools.callum-thomas.com",
     github: "https://github.com/caltho/traffic-tools",
     longDescription: `
       Traffic Tools is an open-source and free web app created for use by
@@ -190,7 +206,7 @@ I built CentreSafe on the LAMP stack — PHP and MySQL, hosted on AWS. I challen
     thumbnail: "/images/connect-five-1.png",
     image: ["/images/connect-five-1.png", "/images/connect-five-2.png", "/images/connect-five-3.png"],
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    link: "https://connect-five.callumdavidthomas.com",
+    link: "https://connect-five.callum-thomas.com",
     github: "https://github.com/caltho/connect-five",
     longDescription: `Connect Five is a web game built with Next.js and Tailwind CSS. The goal is to strategically connect five game pieces in a row on a 19×19 grid. Players take turns clicking the grid to place their black or white circles; the game tracks the board state, checks for win conditions, and provides an intuitive interface.
 <br /><br />
@@ -209,7 +225,7 @@ Tailwind CSS handled the visual side — offset div elements to render the grid,
       "/images/sliding-tiles/sliding-tiles-3.png",
     ],
     techStack: ["API", "Next.js", "TypeScript"],
-    link: "https://sliding-puzzle.callumdavidthomas.com",
+    link: "https://sliding-puzzle.callum-thomas.com",
     github: "https://github.com/caltho/sliding-puzzle",
     longDescription: `A retro and nostalgic sliding-tile puzzle that brings back the excitement of your childhood. With five grid sizes to choose from, the app offers a challenging yet entertaining experience. It uses the Unsplash developer API to fetch random images for the puzzle, then scales each image based on its aspect ratio so it fits the puzzle pieces regardless of source resolution.
     <br />
@@ -240,7 +256,7 @@ Building the puzzle board introduced some interesting game logic — only half o
       "Supabase",
       "Vercel",
     ],
-    link: "https://callumdavidthomas.com",
+    link: "https://callum-thomas.com",
     github: "https://github.com/caltho/callumdavidthomas",
     longDescription: `This is the site you're looking at. Editorial brutalism meets basement-club: massive Fraunces display type, drifting CSS club lights, oxide-red accents, film-grain overlay. No scroll hijacking — native scroll only.
     <br /><br />

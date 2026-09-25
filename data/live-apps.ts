@@ -20,7 +20,7 @@ export const liveApps: LiveApp[] = [
   {
     slug: "almanac",
     name: "Almanac",
-    url: "https://almanac.callumdavidthomas.com",
+    url: "https://almanac.callum-thomas.com",
     blurb: "A personal knowledge base I use every day — notes, links, and recurring rituals, all searchable.",
     kind: "Personal tool",
     year: "2026",
@@ -29,7 +29,7 @@ export const liveApps: LiveApp[] = [
   {
     slug: "connect-five",
     name: "Connect Five",
-    url: "https://connect-five.callumdavidthomas.com",
+    url: "https://connect-five.callum-thomas.com",
     blurb: "Strategic five-in-a-row on a 19×19 grid. Black vs. white, turn-based.",
     kind: "Web game",
     year: "2024",
@@ -38,7 +38,7 @@ export const liveApps: LiveApp[] = [
   {
     slug: "boatlog",
     name: "Boatlog",
-    url: "https://boatlog.callumdavidthomas.com",
+    url: "https://boatlog.callum-thomas.com",
     blurb: "Trip logbook for the boat — distance, weather, fuel, crew.",
     kind: "Personal tool",
     year: "2026",
@@ -47,7 +47,7 @@ export const liveApps: LiveApp[] = [
   {
     slug: "sliding-tiles",
     name: "Sliding Tiles",
-    url: "https://sliding-puzzle.callumdavidthomas.com",
+    url: "https://sliding-puzzle.callum-thomas.com",
     blurb: "Retro sliding-tile puzzle with five grid sizes and Unsplash imagery.",
     kind: "Web game",
     year: "2024",
@@ -56,7 +56,7 @@ export const liveApps: LiveApp[] = [
   {
     slug: "traffic-tools",
     name: "Traffic Tools",
-    url: "https://traffictools.callumdavidthomas.com",
+    url: "https://traffictools.callum-thomas.com",
     blurb: "Open-source calculators for traffic engineers and town planners.",
     kind: "Public web app",
     year: "2023–",
