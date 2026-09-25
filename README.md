@@ -1,6 +1,6 @@
 # callum-thomas.com
 
-Personal portfolio. Rebuild — fully AI built, editorial brutalism × basement-club design, content driven from Supabase with a custom admin panel.
+Personal portfolio of Callum Thomas. A person. Drawn as an engineering sheet on warm paper, with a few things to fiddle with. Content comes from Supabase, with a custom admin panel.
 
 ## Stack
 
@@ -45,24 +45,23 @@ The local `/data/*.ts` files act as a fallback when Supabase is unreachable, so 
 
 ## Design language
 
-Tokens in [`app/globals.css`](app/globals.css):
+The public site (`app/(site)`) is one engineering drawing: hairline cells for the landing area, ruled strips below, and a title block as the footer. Styles live in [`app/(site)/site.css`](app/(site)/site.css), set in Inter Tight and JetBrains Mono on warm paper with one orange accent.
 
-- `--ink-900..400` deep, warm blacks
-- `--bone-50..600` bulb whites
-- `--ember` oxide red, `--ultra` violet — the club lights
-- `.font-display` Fraunces, tight letter-spacing, soft + wonk axes
-- `.clublights` slow CSS radial-gradient drift behind every page
-- `.sweep` hover-reveal sweep across rows
-- `.pulse-dot` breathing accent dot
+- **Wordmark** (`lib/particles.ts`): the name drawn in dots. It scatters from the cursor and gets tired: stir it enough and recovery slows and some dots never go home. Idle cost is zero.
+- **Ask Callum** (`components/site/ask-callum.tsx`): an AI-assistant parody. "Callum 1.0" is the real human over Supabase Realtime when the admin chat console is open, otherwise messages save to `portfolio_messages`. `callum-nano` is the local budget model.
+- **Fidgets**: an "I'm not a robot" checkbox, a slide-to-prove-humanity slider, a stampable stamp, and a scratch pad that draws in the colour of whatever you last clicked.
+- Sleep data comes from Almanac when there is some, and falls back to a labelled sample.
 
-No scroll hijacking — ever. Native scroll only. `prefers-reduced-motion` disables everything.
+The admin area (`app/(backstage)`) keeps the original dark styles in `app/globals.css`. The two halves have separate root layouts, so crossing between them is a full page load, and unmatched URLs use `app/global-not-found.tsx`.
+
+The previous CDT-98 terminal homepage lives on as its own project: [whats-cyber.callum-thomas.com](https://whats-cyber.callum-thomas.com).
 
 ## Architecture notes
 
 - **`lib/content.ts`** — single content access layer. Reads from Supabase, falls back to `/data/*.ts`. Swap data sources here, not in pages.
 - **`lib/supabase/{server,client,admin,middleware}.ts`** — distinct Supabase clients for each runtime context. The `admin.ts` service-role client is `"server-only"` to prevent shipping it to the browser.
 - **`proxy.ts`** — refreshes auth cookies on every request so RSCs see the right user.
-- **`app/admin/*`** — admin pages guard themselves with `requireAdmin()` from `lib/auth.ts`.
+- **`app/(backstage)/admin/*`**: admin pages guard themselves with `requireAdmin()` from `lib/auth.ts`.
 
 ## Deploying
 

@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Callum Thomas · Route B: Register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --paper: #f6f5f0;
+  --paper-2: #eeede6;
+  --ink: #121211;
+  --ink-2: #53524d;
+  --ink-3: #8e8c85;
+  --rule: #dddbd3;
+  --dotrest: #cfccc2;
+  --blue: #2445ff;
+  --sans: "Instrument Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --pad: clamp(18px, 3vw, 40px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--paper); scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.wrap { max-width: 1480px; margin: 0 auto; padding: 0 var(--pad); }
+.g { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; }
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: .02em; text-transform: uppercase; }
+.muted { color: var(--ink-3); }
+.u { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); display: inline-block; flex: none; }
+.is-away .dot, .dot.is-away { background: var(--ink-3); }
+
+/* Header */
+header { padding: 22px 0; border-bottom: 1px solid var(--rule); }
+header .g { align-items: center; }
+.brand { grid-column: span 3; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 16px; }
+.brand svg { width: 24px; }
+.now { grid-column: span 5; display: flex; align-items: center; gap: 10px; color: var(--ink-2); }
+nav.top { grid-column: span 4; display: flex; justify-content: flex-end; gap: 26px; font-size: 15px; }
+nav.top a:hover { color: var(--blue); }
+
+/* Hero */
+.hero { padding: clamp(56px, 9vw, 130px) 0 clamp(56px, 7vw, 100px); }
+.id { grid-column: 1 / span 3; display: flex; flex-direction: column; gap: 14px; align-self: end; }
+.id img { width: 100%; max-width: 250px; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 28%; }
+.id p { font-size: 14px; color: var(--ink-2); line-height: 1.45; }
+.voice { grid-column: 4 / span 9; }
+.voice h1 { font-weight: 500; font-size: clamp(40px, 6vw, 100px); line-height: .99; letter-spacing: -.038em; font-stretch: 96%; max-width: 15ch; }
+.voice h1 em { font-style: normal; color: var(--blue); }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: clamp(40px, 5vw, 72px); padding-top: 22px; border-top: 1px solid var(--ink); }
+.trio p { font-size: 16.5px; line-height: 1.45; color: var(--ink-2); max-width: 30ch; }
+.trio .mono { display: block; color: var(--ink); margin-bottom: 8px; }
+
+/* Section head */
+section.s { padding: 28px 0 0; }
+.sh { align-items: baseline; padding-bottom: 22px; border-bottom: 1px solid var(--rule); }
+.sh h2 { grid-column: span 3; font-family: var(--mono); font-weight: 500; font-size: 12px; letter-spacing: .02em; text-transform: uppercase; }
+.sh h2 sup { color: var(--blue); margin-left: 6px; font-size: 11px; }
+.sh p { grid-column: span 5; color: var(--ink-2); font-size: 15.5px; }
+.chips { grid-column: span 4; display: flex; justify-content: flex-end; }
+.pill { display: inline-flex; background: var(--paper-2); border-radius: 99px; padding: 3px; gap: 2px; }
+.pill button { border: 0; background: transparent; font: 500 11px/1 var(--mono); letter-spacing: .03em; text-transform: uppercase; color: var(--ink-2); padding: 8px 12px; border-radius: 99px; cursor: pointer; }
+.pill button[aria-pressed="true"] { background: var(--paper); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+
+/* Register */
+.reg { list-style: none; }
+.reg li { border-bottom: 1px solid var(--rule); }
+.reg li[hidden] { display: none; }
+.reg a { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: baseline; padding: 17px 0; transition: background .15s, padding .2s; }
+.reg a:hover { background: var(--paper-2); }
+.reg .no { grid-column: span 1; color: var(--ink-3); padding-left: 2px; }
+.reg .t { grid-column: span 3; font-size: clamp(19px, 1.7vw, 24px); font-weight: 500; letter-spacing: -.015em; line-height: 1.2; }
+.reg .w { grid-column: span 4; color: var(--ink-2); font-size: 15.5px; }
+.reg .k { grid-column: span 1; color: var(--ink-3); }
+.reg .st { grid-column: span 2; color: var(--ink-3); }
+.reg .go { grid-column: span 1; text-align: right; padding-right: 4px; white-space: nowrap; }
+.reg .go.live { color: var(--blue); }
+.reg a:hover .t { color: var(--blue); }
+.showall { display: flex; justify-content: center; padding: 22px 0 0; }
+.showall button { border: 1px solid var(--ink); background: transparent; font: 500 12px/1 var(--mono); letter-spacing: .03em; text-transform: uppercase; padding: 13px 18px; border-radius: 99px; cursor: pointer; color: var(--ink); }
+.showall button:hover { background: var(--ink); color: var(--paper); }
+.peek { position: fixed; z-index: 40; width: 300px; aspect-ratio: 4 / 3; pointer-events: none; opacity: 0; transform: translate(24px, -50%) scale(.96); transition: opacity .15s, transform .15s; background: var(--paper); border: 1px solid var(--rule); overflow: hidden; }
+.peek.on { opacity: 1; transform: translate(24px, -50%) scale(1); }
+.peek img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+
+/* Record */
+.rec { list-style: none; }
+.rec li { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.rec .y { grid-column: span 3; color: var(--ink-2); }
+.rec .r { grid-column: span 4; font-size: clamp(20px, 1.9vw, 28px); font-weight: 500; letter-spacing: -.02em; line-height: 1.15; }
+.rec .r small { display: block; font-size: 15.5px; font-weight: 400; letter-spacing: 0; color: var(--ink-2); margin-top: 4px; }
+.rec .d { grid-column: span 5; color: var(--ink-2); font-size: 16px; max-width: 46ch; }
+.rec li.now .y::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); margin-right: 10px; vertical-align: 1px; }
+.toolbox { padding: 34px 0 10px; }
+.toolbox .mono { grid-column: span 3; }
+.toolbox p.big { grid-column: 4 / span 9; font-size: clamp(22px, 2.4vw, 36px); line-height: 1.25; letter-spacing: -.02em; font-weight: 500; }
+.toolbox p.big span { color: var(--ink-3); }
+
+/* Life */
+.life { padding-top: 36px; align-items: start; row-gap: 24px; }
+.yak { grid-column: span 7; }
+.yak img { width: 100%; aspect-ratio: 16 / 11; object-fit: cover; object-position: 50% 86%; }
+.cap { margin-top: 12px; color: var(--ink-3); }
+.side { grid-column: span 5; display: flex; flex-direction: column; gap: 24px; }
+.card { background: var(--paper-2); padding: 24px; }
+.card h3 { font-size: 26px; font-weight: 500; letter-spacing: -.02em; line-height: 1.15; margin: 10px 0 8px; }
+.card p { color: var(--ink-2); font-size: 15.5px; }
+.card .link { display: inline-block; margin-top: 14px; }
+.card .link:hover { color: var(--blue); }
+.peak { width: 100%; height: auto; margin: 16px 0 4px; display: block; }
+.sleep { display: flex; align-items: flex-end; gap: 7px; margin: 16px 0 12px; }
+.sleep .col { display: flex; flex-direction: column-reverse; gap: 4px; }
+.sleep i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); display: block; }
+.sleep .col.last i { background: var(--blue); }
+.sleep .col.none i { background: var(--dotrest); }
+.hobbies { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 4px; font-size: 15.5px; color: var(--ink-2); }
+
+/* Say hi */
+.hi { padding: clamp(60px, 8vw, 120px) 0 clamp(50px, 6vw, 90px); align-items: start; }
+.hi h2 { grid-column: span 5; font-size: clamp(56px, 8.5vw, 136px); font-weight: 500; letter-spacing: -.045em; line-height: .9; }
+.hi h2 em { font-style: normal; color: var(--blue); }
+.hi .right { grid-column: 7 / span 6; }
+.presence { display: flex; align-items: center; gap: 10px; font-size: 15.5px; color: var(--ink-2); }
+.thread { display: flex; flex-direction: column; gap: 10px; margin: 18px 0; max-height: 240px; overflow: auto; }
+.msg { max-width: 85%; padding: 12px 15px; border-radius: 16px; font-size: 15.5px; line-height: 1.45; background: var(--paper-2); }
+.msg .who { display: block; font: 500 10.5px/1 var(--mono); letter-spacing: .03em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+.msg.me { align-self: flex-end; background: var(--ink); color: var(--paper); border-bottom-right-radius: 4px; }
+.msg.me .who { color: #9a988f; }
+.msg.them { border-bottom-left-radius: 4px; }
+form.box { display: flex; align-items: center; gap: 8px; border: 1px solid var(--ink); border-radius: 99px; padding: 5px 5px 5px 20px; }
+form.box input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 16px; color: var(--ink); height: 42px; }
+form.box input:focus { outline: none; }
+form.box:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 18%, transparent); }
+form.box button { border: 0; background: var(--blue); color: #fff; font: 500 12px/1 var(--mono); letter-spacing: .03em; text-transform: uppercase; height: 42px; padding: 0 20px; border-radius: 99px; cursor: pointer; }
+.contact { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--rule); }
+.contact a { display: block; font-size: 17px; margin-top: 8px; }
+.contact a:hover { color: var(--blue); }
+.contact .mono { color: var(--ink-3); }
+
+/* Footer */
+footer { border-top: 1px solid var(--rule); }
+.legal { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: space-between; padding: 18px 0 8px; color: var(--ink-3); font-size: 11px; }
+.legal a:hover { color: var(--ink); }
+#wordmark { margin: 0 calc(var(--pad) * -0.5) 0; }
+
+.mock { position: fixed; right: 14px; bottom: 14px; z-index: 50; display: flex; gap: 6px; font: 500 11px/1 var(--mono); }
+.mock a { background: #111; color: #fff; padding: 8px 10px; border-radius: 99px; opacity: .82; }
+
+@media (max-width: 1000px) {
+  .now { display: none; }
+  .brand { grid-column: span 5; } nav.top { grid-column: span 7; }
+  .id { grid-column: 1 / -1; flex-direction: row; align-items: end; margin-bottom: 34px; }
+  .id img { max-width: 150px; }
+  .voice { grid-column: 1 / -1; }
+  .sh h2 { grid-column: span 12; margin-bottom: 8px; }
+  .sh p { grid-column: span 7; } .chips { grid-column: span 5; }
+  .reg .t { grid-column: span 4; } .reg .w { grid-column: span 5; } .reg .k { display: none; } .reg .st { display: none; } .reg .go { grid-column: span 2; }
+  .yak, .side { grid-column: 1 / -1; }
+  .hi h2 { grid-column: 1 / -1; margin-bottom: 30px; } .hi .right { grid-column: 1 / -1; }
+  .toolbox .mono { grid-column: 1 / -1; margin-bottom: 10px; } .toolbox p.big { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  nav.top { gap: 16px; font-size: 14px; }
+  .brand { grid-column: 1 / -1; margin-bottom: 10px; } nav.top { grid-column: 1 / -1; justify-content: flex-start; }
+  .trio { grid-template-columns: 1fr; gap: 18px; }
+  .sh p, .chips { grid-column: 1 / -1; } .chips { justify-content: flex-start; margin-top: 14px; }
+  .reg a { grid-template-columns: 28px 1fr auto; column-gap: 12px; }
+  .reg .no { grid-column: 1; } .reg .t { grid-column: 2; } .reg .go { grid-column: 3; grid-row: 1; }
+  .reg .w { grid-column: 2 / span 2; margin-top: 4px; font-size: 14.5px; }
+  .rec li { grid-template-columns: 1fr; row-gap: 6px; }
+  .rec .y, .rec .r, .rec .d { grid-column: 1; }
+  .contact { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap g">
+    <a class="brand" href="#">
+      <svg viewBox="0 0 1632 996" aria-hidden="true"><path d="M798 825H171V171H1461V825" stroke="currentColor" stroke-width="300" stroke-linecap="square" fill="none"/></svg>
+      Callum Thomas
+    </a>
+    <p class="now mono" data-awake><span class="dot"></span><span><span data-clock>10:54 pm</span> in Melbourne · probably <span data-status>shipping something</span></span></p>
+    <nav class="top" aria-label="Sections">
+      <a href="#work">Work</a><a href="#record">Record</a><a href="#life">Life</a><a href="#hi">Say hi</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap g">
+      <div class="id">
+        <img src="../../public/images/profile%20photo.jfif" alt="Callum smiling on a hike, in a blue jacket" />
+        <p><span class="mono" style="color:var(--ink)">Callum Thomas</span><br/>Builder, AI whisperer,<br/>solution seeker. Melbourne.</p>
+      </div>
+      <div class="voice">
+        <h1>I find the annoying problem, then build the thing that makes it <em>go away.</em></h1>
+        <div class="trio">
+          <p><span class="mono">Now</span>Lead developer and product owner at RJE Global, building quality and safety software for construction sites.</p>
+          <p><span class="mono">Before</span>Eight years as a traffic engineer at Stantec and Amber. I still build free tools for that world.</p>
+          <p><span class="mono">After hours</span>Small apps for my own life, a lot of hiking, and losing gracefully at jiu-jitsu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="work">
+    <div class="wrap">
+      <div class="g sh">
+        <h2>Register of work<sup>17</sup></h2>
+        <p>Every project, newest first. Live ones open the real app; the others have a write-up.</p>
+        <div class="chips">
+          <div class="pill" role="group" aria-label="Filter projects">
+            <button aria-pressed="true" data-f="all">All</button>
+            <button aria-pressed="false" data-f="live">Live</button>
+            <button aria-pressed="false" data-f="work">Work &amp; clients</button>
+            <button aria-pressed="false" data-f="own">Personal</button>
+          </div>
+        </div>
+      </div>
+      <ul class="reg" id="reg"></ul>
+      <div class="showall"><button id="more">Show all 17</button></div>
+    </div>
+  </section>
+
+  <section class="s" id="record" style="padding-top:90px">
+    <div class="wrap">
+      <div class="g sh">
+        <h2>Record</h2>
+        <p>The site is the CV, so here's the CV part.</p>
+        <div class="chips"><a class="mono u" href="https://www.linkedin.com/in/callumdavidthomas/">LinkedIn ↗</a></div>
+      </div>
+      <ul class="rec">
+        <li class="now"><span class="y mono">2023-now</span><span class="r">Lead Software Developer &amp; Product Owner<small>RJE Global, Melbourne</small></span><span class="d">Took over the quality and safety platform used on live construction sites and rebuilt it front to back: JavaScript to TypeScript, modular, and much faster.</span></li>
+        <li><span class="y mono">2021-2023</span><span class="r">Senior Traffic Engineer<small>Amber Organisation</small></span><span class="d">Led traffic engineering projects, including a major subdivision in Dubbo. Built the quote-signing portal clients kept asking for, on the side.</span></li>
+        <li><span class="y mono">2019-2021</span><span class="r">Project Engineer<small>Stantec</small></span><span class="d">Traffic impact assessments, SIDRA modelling, swept paths and transport strategies for public and private clients.</span></li>
+        <li><span class="y mono">2015</span><span class="r">BE (Hons) Civil &amp; Environmental, BCom Finance<small>University of Auckland</small></span><span class="d">Engineering and finance at the same time, which explains the spreadsheets.</span></li>
+      </ul>
+      <div class="g toolbox">
+        <span class="mono">Toolbox</span>
+        <p class="big">TypeScript, React, Next.js, SvelteKit, Angular, Node, Supabase, Postgres, PHP, MySQL, Tailwind, Figma <span>and Claude, most days, as a very fast colleague.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="life" style="padding-top:90px">
+    <div class="wrap">
+      <div class="g sh">
+        <h2>Off the clock</h2>
+        <p>Proof of a life outside the browser. Some of it is logged in apps I made.</p>
+        <div class="chips"><a class="mono u" href="#">All stuff →</a></div>
+      </div>
+      <div class="g life">
+        <figure class="yak">
+          <img src="../../public/images/yukhin-peak/mountain-yak.jpg" alt="A lone black yak on golden grassland beneath a huge bare mountain" />
+          <figcaption class="cap mono">A yak, unbothered. Alay Mountains, Kyrgyzstan.</figcaption>
+        </figure>
+        <div class="side">
+          <div class="card">
+            <span class="mono muted">Latest climb</span>
+            <h3>Yukhin Peak, 5,130 m</h3>
+            <svg class="peak" id="peak" viewBox="0 0 460 150" role="img" aria-label="Dotted mountain profile with advanced base camp at 4,200 metres and the summit at 5,130 metres"></svg>
+            <p>Two weeks acclimatising, one awful night at base camp, then a summit so sunny I wore a t-shirt.</p>
+            <a class="link mono u" href="#">Read the trip →</a>
+          </div>
+          <div class="card">
+            <span class="mono muted">Sleep, last 14 nights</span>
+            <div class="sleep" id="sleep" aria-label="Hours slept per night, one dot per hour"></div>
+            <p><strong style="color:var(--ink);font-weight:500"><span data-sleep-last>6.9</span> h last night</strong>, <span data-sleep-avg>7.1</span> h on average. Live from Almanac, which I built, which is why it's accurate.</p>
+          </div>
+          <div class="hobbies"><span>Ultralight hiking</span><span>Brazilian jiu-jitsu</span><span>The boat</span><span>Art, digital and physical</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hi" id="hi">
+    <div class="wrap g">
+      <h2>Say <em>hi.</em></h2>
+      <div class="right" data-chat-root>
+        <p class="presence"><span class="dot" data-desk-dot></span><span data-desk>Callum's away. Leave a message, or chat with callum-nano.</span></p>
+        <div class="thread" data-thread>
+          <div class="msg them"><span class="who">Callum</span><span class="txt">Hey! Hiring, collaborating or just curious, drop a note. If I'm at my desk you'll get me live; if not, I'll reply by email.</span></div>
+        </div>
+        <form class="box" data-chat>
+          <label class="sr" for="m">Your message</label>
+          <input id="m" placeholder="Write a message…" autocomplete="off" />
+          <button type="submit">Send</button>
+        </form>
+        <div class="contact">
+          <div><span class="mono">Email</span><a href="mailto:callumdavidthomas@gmail.com">callumdavidthomas@gmail.com</a></div>
+          <div><span class="mono">Elsewhere</span><a href="https://www.linkedin.com/in/callumdavidthomas/">LinkedIn ↗</a><a href="https://github.com/caltho">GitHub ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="legal mono">
+      <span>© 2026 Callum Thomas</span>
+      <span>Built in Melbourne, checked by Claude</span>
+      <span>Set in Instrument Sans &amp; IBM Plex Mono</span>
+      <span>No cookies, no tracking</span>
+      <a href="#">Back to top ↑</a>
+    </div>
+    <div id="wordmark"><span class="sr">Callum Thomas</span></div>
+  </div>
+</footer>
+
+<div class="peek" id="peek"><img alt="" /></div>
+<nav class="mock" aria-label="Mockup navigation"><a href="a-sheet.html">← A</a><a href="index.html">Routes</a><a href="c-markup.html">C →</a></nav>
+
+<script src="live.js"></script>
+<script src="particles.js"></script>
+<script>
+  const IMG = "../../public/images/";
+  // kind: work | client | own | game ; live: external url or null
+  const P = [
+    ["Almanac", "My whole life in one searchable PWA: journal, habits, money, sleep", "own", "SvelteKit, Supabase", "https://almanac.callum-thomas.com", null],
+    ["Boatlog", "Trip logbook for the boat. Every entry says windy", "own", "Next.js, Supabase", "https://boatlog.callum-thomas.com", null],
+    ["Quality Management System", "Quality and safety capture for active construction sites", "work", "Angular, Node, MySQL", null, "rje/QMS%20(4).png"],
+    ["Traffic Tools", "Free calculators for traffic engineers and town planners", "own", "Next.js, Chakra", "https://traffictools.callum-thomas.com", "traffictools/TT%20-%20Turn%20Treatment%20Calculator.png"],
+    ["Firewall Fireyness Calculator", "Fire ratings for building firewalls. Not the network kind", "own", "Next.js, React", "https://firewall.callum-thomas.com", null],
+    ["RJE CSV Importer", "Drag, drop, validated. Replaced a copy-paste ritual", "work", "Next.js", "https://rje-global-frontend.vercel.app", null],
+    ["LAN Hero", "Your real life, with an XP bar and skill trees", "own", "Vanilla JS", "https://lan-hero.callum-thomas.com", null],
+    ["Connect Five", "Five in a row on a 19 × 19 grid", "own", "Next.js, Tailwind", "https://connect-five.callum-thomas.com", "connect-five-3.png"],
+    ["Sliding Tiles", "A sliding puzzle that checks it's solvable first", "own", "Next.js, Unsplash", "https://sliding-puzzle.callum-thomas.com", "sliding-tiles/sliding-tiles-2.png"],
+    ["CentreSafe", "Risk management portal for companies and NGOs", "work", "PHP, MySQL, AWS", null, "centresafe/CentreSafe%20Web%20Design.png"],
+    ["CentreSafe Brand", "Brand guidelines and web design system", "work", "Figma, Photoshop", null, "centresafe/CS%20-%20Centres.png"],
+    ["NZOPA Revamp", "New website and member portal for a professional body", "client", "WordPress, PHP", "https://nzopa.co.nz/", null],
+    ["Modal Group Replatform", "WordPress to Next.js, faster and easier to extend", "client", "Next.js, Chakra", "https://modalgroup.com.au/", null],
+    ["Amber Quote Signing", "Clients sign quotes on any device instead of printing them", "work", "WordPress plugin", null, null],
+    ["This site", "You're looking at it. Built with Claude", "own", "Next.js, Supabase", null, null],
+    ["Project Folder Shortcut", "Type three letters, open the right job folder", "work", "VBScript", null, null],
+    ["Outlook Filing Macro", "Files email into the right project folder", "work", "VBA", null, null],
+  ];
+  const KIND = { work: "Work", client: "Client", own: "Personal" };
+  const reg = document.getElementById("reg");
+  P.forEach(([t, w, k, st, live, img], i) => {
+    const li = document.createElement("li");
+    li.dataset.kind = k; li.dataset.live = live ? "1" : "0";
+    if (i >= 10) li.dataset.extra = "1";
+    li.innerHTML = `<a href="${live || "#"}"${img ? ` data-img="${IMG + img}"` : ""}>
+      <span class="no mono">${String(i + 1).padStart(2, "0")}</span>
+      <span class="t">${t}</span><span class="w">${w}</span>
+      <span class="k mono">${KIND[k]}</span><span class="st mono">${st}</span>
+      <span class="go mono ${live ? "live" : ""}">${live ? "Live ↗" : "Read →"}</span></a>`;
+    reg.appendChild(li);
+  });
+
+  let filter = "all", expanded = false;
+  const more = document.getElementById("more");
+  function apply() {
+    let shown = 0;
+    reg.querySelectorAll("li").forEach((li) => {
+      const ok = filter === "all" || (filter === "live" && li.dataset.live === "1") ||
+        (filter === "work" && (li.dataset.kind === "work" || li.dataset.kind === "client")) ||
+        (filter === "own" && li.dataset.kind === "own");
+      const cut = filter === "all" && !expanded && li.dataset.extra;
+      li.hidden = !ok || cut;
+      if (!li.hidden) shown++;
+    });
+    more.parentElement.style.display = filter === "all" && !expanded ? "" : "none";
+  }
+  document.querySelectorAll(".pill button").forEach((b) => b.addEventListener("click", () => {
+    document.querySelectorAll(".pill button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+    filter = b.dataset.f; apply();
+  }));
+  more.addEventListener("click", () => { expanded = true; apply(); });
+  apply();
+
+  // Hover preview that follows the cursor, only where there's a real pointer.
+  if (matchMedia("(hover: hover)").matches) {
+    const peek = document.getElementById("peek"), pimg = peek.querySelector("img");
+    reg.addEventListener("mousemove", (e) => {
+      const a = e.target.closest("a[data-img]");
+      if (!a) return peek.classList.remove("on");
+      if (pimg.getAttribute("src") !== a.dataset.img) pimg.src = a.dataset.img;
+      const x = Math.min(e.clientX, innerWidth - 340);
+      peek.style.left = x + "px"; peek.style.top = e.clientY + "px";
+      peek.classList.add("on");
+    });
+    reg.addEventListener("mouseleave", () => peek.classList.remove("on"));
+  }
+
+  // Dotted mountain: a stylised profile, not survey data.
+  (function peak() {
+    const svg = document.getElementById("peak"), W = 460, H = 150, g = 7;
+    const ridge = (x) => {
+      const t = x / W;
+      const main = Math.exp(-Math.pow((t - .72) / .17, 2)) * 118;
+      const shoulder = Math.exp(-Math.pow((t - .38) / .14, 2)) * 70;
+      return H - 8 - Math.max(main, shoulder, 10 + t * 20);
+    };
+    let dots = "";
+    for (let x = g / 2; x < W; x += g) for (let y = g / 2; y < H; y += g) {
+      if (y > ridge(x)) dots += `<circle cx="${x}" cy="${y}" r="1.6" fill="${y > H - 18 ? "#cfccc2" : "#121211"}" opacity="${y > H - 18 ? 1 : .85}"/>`;
+    }
+    const sx = W * .72, sy = ridge(sx), bx = W * .38, by = ridge(bx);
+    dots += `<circle cx="${sx}" cy="${sy - 2}" r="4" fill="#2445ff"/><text x="${sx + 10}" y="${sy + 2}" font-family="IBM Plex Mono" font-size="10" fill="#121211">SUMMIT 5,130 M</text>`;
+    dots += `<circle cx="${bx}" cy="${by - 2}" r="3.5" fill="#2445ff"/><text x="${bx}" y="${by - 14}" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#53524d">BASE CAMP 4,200 M</text>`;
+    svg.innerHTML = dots;
+  })();
+
+  // Sleep as dot columns: one dot per hour slept.
+  (function sleep() {
+    const el = document.getElementById("sleep"), s = CT.sleep;
+    s.nights.forEach((h, i) => {
+      const col = document.createElement("span");
+      col.className = "col" + (h == null ? " none" : i === s.nights.length - 1 ? " last" : "");
+      col.title = h == null ? "no log" : h + " h";
+      const n = h == null ? 1 : Math.round(h);
+      for (let j = 0; j < n; j++) col.appendChild(document.createElement("i"));
+      el.appendChild(col);
+    });
+    document.querySelectorAll("[data-sleep-last]").forEach((e) => (e.textContent = s.last.toFixed(1)));
+    document.querySelectorAll("[data-sleep-avg]").forEach((e) => (e.textContent = s.avg.toFixed(1)));
+  })();
+
+  ParticleWordmark(document.getElementById("wordmark"), {
+    family: '"Instrument Sans"', weight: 700, tracking: -0.03, pad: 22,
+    gap: 5, dot: 1.7, color: "#c2beb2", hot: "#2445ff", ringColor: "#121211", radius: 110, intro: "rain",
+  });
+</script>
+</body>
+</html>

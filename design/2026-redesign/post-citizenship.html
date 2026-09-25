@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Officially Australian · Callum Thomas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --paper: #f1efe8; --card: #f7f5ef; --ink: #171715; --ink-2: #4f4d47; --ink-3: #8a877d;
+  --rule: #d3cfc3; --rule-2: #b9b4a6; --accent: #ec4a1d; --green: #3bb54a;
+  --sans: "Inter Tight", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+  --gut: clamp(24px, 3.4vw, 56px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--paper); }
+body { font-family: var(--sans); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; padding: 10px; font-size: 16px; line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+.row { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-top: 0; }
+.row:first-child { border-top: 1px solid var(--rule); }
+.cell { background: var(--paper); padding: 22px 24px; position: relative; min-width: 0; }
+.label { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.label b { color: var(--ink); font-weight: 500; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: inline-block; flex: none; }
+.is-away .dot { background: var(--ink-3); }
+
+.head { grid-template-columns: 3fr 6fr 3fr; }
+.head .cell { padding: 14px 24px; display: flex; align-items: center; min-height: 54px; }
+.brand { gap: 12px; font-weight: 600; font-size: 17px; letter-spacing: -.01em; }
+.brand svg { width: 30px; height: auto; }
+.nav { gap: 28px; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; flex-wrap: wrap; row-gap: 6px; }
+.nav a { color: var(--ink-2); } .nav a span { color: var(--ink-3); margin-right: 6px; } .nav a:hover { color: var(--accent); }
+.stat { justify-content: flex-end; gap: 10px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; overflow: hidden; }
+
+/* Title */
+.titlerow { grid-template-columns: 3fr 9fr; }
+.crumbs { display: flex; flex-direction: column; gap: 10px; padding-top: 34px; }
+.crumbs a:hover { color: var(--accent); }
+.ttl { padding: 34px var(--gut) 40px; }
+.ttl h1 { font-size: clamp(46px, 6.4vw, 104px); line-height: .94; letter-spacing: -.042em; font-weight: 600; margin: 14px 0 18px; }
+.ttl .dek { font-size: clamp(20px, 1.9vw, 28px); line-height: 1.25; letter-spacing: -.02em; color: var(--ink-2); max-width: 30ch; }
+.ttl .meta { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 26px; }
+
+/* Hero figure */
+.hero { padding: 0; }
+.hero figure { margin: 0; }
+.hero img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 42%; }
+.hero figcaption { padding: 12px 24px 14px; }
+
+/* Body */
+.body { grid-template-columns: 3fr 9fr; }
+.side { padding: 40px 24px; }
+.side .in { position: sticky; top: 24px; }
+.facts div { padding: 11px 0; border-top: 1px solid var(--rule); }
+.facts div:first-child { border-top: 0; padding-top: 0; }
+.facts dt { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 2px; }
+.facts dd { font-size: 15.5px; line-height: 1.4; }
+article { padding: 40px var(--gut) 70px; }
+.prose { max-width: 64ch; font-size: clamp(17.5px, 1.3vw, 19.5px); line-height: 1.62; color: var(--ink-2); }
+.prose p + p { margin-top: 1.05em; }
+.prose h2 { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); margin: 2.4em 0 .9em; display: flex; gap: 10px; }
+.prose h2 span { color: var(--accent); }
+.prose strong { color: var(--ink); font-weight: 500; }
+.prose .lead { font-size: 1.22em; line-height: 1.45; color: var(--ink); letter-spacing: -.012em; }
+.inline { margin: 2em 0; max-width: 520px; }
+.inline img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 35%; }
+.inline figcaption { margin-top: 10px; }
+.pull { margin: 2em 0; padding: 4px 0 4px 18px; border-left: 2px solid var(--accent); font-size: clamp(22px, 2vw, 30px); line-height: 1.22; letter-spacing: -.022em; color: var(--ink); font-weight: 500; max-width: 26ch; }
+.void { border: 1px dashed var(--rule-2); display: grid; place-items: center; background: var(--card); aspect-ratio: 16 / 9; }
+.inline .void { aspect-ratio: 3 / 4; }
+.void p { font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); text-align: center; padding: 12px; line-height: 1.6; }
+.after { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--ink); max-width: 64ch; }
+.btn { display: inline-flex; align-items: center; height: 44px; padding: 0 18px; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--ink); }
+.btn.solid { background: var(--ink); color: var(--paper); }
+.btn.solid:hover { background: var(--accent); border-color: var(--accent); }
+.btn:not(.solid):hover { color: var(--accent); border-color: var(--accent); }
+
+/* Title block */
+.tb { grid-template-columns: 2fr 1.3fr 1.5fr 1.6fr 1.3fr 1fr 2fr; }
+.tb .cell { padding: 12px 16px 14px; }
+.tb .v { font-size: 15px; font-weight: 500; margin-top: 4px; }
+.tb .v small { color: var(--ink-3); font-weight: 400; font-size: 13px; }
+/* A rubber stamp: double rule, small over big over date, inked with multiply. */
+.stamp { display: inline-grid; justify-items: center; gap: 2px; margin: 8px 0 2px 4px; padding: 7px 14px 6px; color: var(--accent);
+  border: 2px solid currentColor; outline: 1px solid currentColor; outline-offset: 2px; border-radius: 2px;
+  font-family: var(--mono); text-transform: uppercase; line-height: 1; transform: rotate(-2.5deg); mix-blend-mode: multiply; opacity: .9; }
+.stamp small { font-size: 9.5px; letter-spacing: .3em; padding-left: .3em; }
+.stamp strong { font-size: 15px; font-weight: 600; letter-spacing: .1em; padding: 1px 0 2px; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; }
+.stamp em { font-style: normal; font-size: 9.5px; letter-spacing: .24em; padding-left: .24em; }
+.colophon { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 14px 6px 4px; }
+.mock { position: fixed; right: 14px; bottom: 14px; z-index: 50; display: flex; gap: 6px; font: 500 11px/1 var(--mono); }
+.mock a { background: #111; color: #fff; padding: 8px 10px; border-radius: 99px; opacity: .82; }
+
+@media (max-width: 1100px) {
+  .head { grid-template-columns: 1fr auto; } .head .nav { grid-column: 1 / -1; grid-row: 2; }
+  .tb { grid-template-columns: repeat(3, 1fr); }
+  .tb .cell:first-child, .tb .cell:last-child { grid-column: 1 / -1; }
+  .tb .cell:nth-child(6) { grid-column: span 2; }
+}
+@media (max-width: 760px) {
+  body { padding: 6px; }
+  .head, .titlerow, .body { grid-template-columns: 1fr; }
+  .head .nav { grid-row: auto; } .stat { justify-content: flex-start; }
+  .crumbs { padding: 22px 18px 0; } .ttl { padding: 18px 18px 30px; }
+  .hero img { aspect-ratio: 4 / 3; }
+  .side { padding: 24px 18px 0; } .side .in { position: static; }
+  article { padding: 20px 18px 50px; }
+  .tb { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="row head">
+  <a class="cell brand" href="a2-human.html" aria-label="Callum Thomas, home">
+    <svg viewBox="0 0 1632 996" aria-hidden="true"><path d="M798 825H171V171H1461V825" stroke="currentColor" stroke-width="300" stroke-linecap="square" fill="none"/></svg>
+    Callum Thomas
+  </a>
+  <nav class="cell nav" aria-label="Sections">
+    <a href="a2-human.html#work"><span>01</span>Work</a>
+    <a href="a2-human.html#cv"><span>02</span>CV</a>
+    <a href="a2-human.html#proof"><span>03</span>Proof of humanity</a>
+    <a href="a2-human.html#ask"><span>04</span>Ask Callum</a>
+  </nav>
+  <div class="cell stat" data-awake><span class="dot"></span><span><span data-status>shipping something</span> · <span data-clock>10:42 pm</span> Melb</span></div>
+</header>
+
+<section class="row titlerow">
+  <div class="cell crumbs">
+    <a class="label" href="a2-human.html#proof">← Proof of humanity</a>
+    <span class="label"><b>Exhibit A</b> · Field note 01</span>
+  </div>
+  <div class="cell ttl">
+    <p class="label"><b>Citizenship</b> · 2 minute read · Written by a human</p>
+    <h1>Officially Australian.</h1>
+    <p class="dek">Still a Kiwi. Still a person. Now with paperwork.</p>
+  </div>
+</section>
+
+<section class="row">
+  <div class="cell hero">
+    <figure>
+      <img src="../../public/images/citizenship/ceremony-group.jpg" data-missing="public/images/citizenship/ceremony-group.jpg" alt="Callum holding his citizenship certificate and a small Australian flag, standing with guests in front of the Aboriginal, Australian and Torres Strait Islander flags" />
+      <figcaption class="label">Fig. 1 · Certificate, tiny flag, gold jacket. Merri-bek.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="row body">
+  <div class="cell side"><div class="in">
+    <dl class="facts">
+      <div><dt>Status</dt><dd>Australian citizen</dd></div>
+      <div><dt>Also</dt><dd>Still a Kiwi</dd></div>
+      <div><dt>Where</dt><dd>Merri-bek, Melbourne</dd></div>
+      <div><dt>Took</dt><dd>One pledge, one handshake</dd></div>
+      <div><dt>Souvenirs</dt><dd>Certificate, tiny flag, a plant</dd></div>
+      <div><dt>Plant status</dt><dd>Alive (so far)</dd></div>
+    </dl>
+  </div></div>
+  <article class="cell">
+    <div class="prose">
+      <p class="lead">Some news from the human department: I'm an Australian citizen now.</p>
+      <p>I've lived in Melbourne long enough to have strong opinions about coffee and to call the afternoon the arvo without irony. At some point the paperwork caught up with the feeling, and there was a ceremony.</p>
+
+      <h2><span>01</span>The ceremony</h2>
+      <p>It was at Merri-bek, under three flags and one very red curtain. There were speeches, a pledge, a handshake, a certificate, a tiny flag, and a small plant to take home. I'm now responsible for keeping an Australian plant alive, which feels like the real citizenship test.</p>
+      <p>I wore the gold jacket. If you're only going to become a citizen once, you should dress like it.</p>
+
+      <figure class="inline">
+        <img src="../../public/images/citizenship/ceremony-handshake.jpg" data-missing="public/images/citizenship/ceremony-handshake.jpg" alt="Callum shaking hands and receiving his certificate on stage" />
+        <figcaption class="label">Fig. 2 · The handshake. Legally binding, probably.</figcaption>
+      </figure>
+
+      <h2><span>02</span>The pledge</h2>
+      <p>You make the pledge out loud, in a room full of people who are all doing the same thing for their own reasons. Nobody can do it on your behalf: no assistant, no model, no autocomplete. For something that's mostly forms and waiting, it was surprisingly moving.</p>
+      <p class="pull">I can feel things, man.</p>
+      <p>Only one robot has ever been granted citizenship (Sophia, Saudi Arabia, 2017). I'm pleased to confirm I'm not her.</p>
+
+      <h2><span>03</span>Still a Kiwi</h2>
+      <p>New Zealand lets you keep both, so I'm now officially two things at once. The only downside is working out who to cheer for when they play each other. I'll be supporting whoever's winning.</p>
+
+      <h2><span>04</span>Thanks</h2>
+      <p>To everyone who came along, to the council team who ran the whole thing, and to Australia for having me. Next step: learn the second verse of the anthem.</p>
+    </div>
+    <div class="after">
+      <a class="btn solid" href="a2-human.html#ask">Say congrats to Callum →</a>
+      <a class="btn" href="a2-human.html#proof">More proof of humanity</a>
+    </div>
+  </article>
+</section>
+
+<footer>
+  <div class="row tb">
+    <div class="cell"><p class="label">Project</p><p class="v">callum-thomas.com</p></div>
+    <div class="cell"><p class="label">Drawing</p><p class="v">Field note 01</p></div>
+    <div class="cell"><p class="label">Drawn</p><p class="v">C. Thomas <small>(human)</small></p></div>
+    <div class="cell"><p class="label">Checked</p><p class="v">Claude <small>(not human)</small></p></div>
+    <div class="cell"><p class="label">Scale</p><p class="v">1:1</p></div>
+    <div class="cell"><p class="label">Rev</p><p class="v">26.09</p></div>
+    <div class="cell"><p class="label">Status</p><span class="stamp"><small>Draft</small><strong>For review</strong><em data-today>23 Sep 2026</em></span></div>
+  </div>
+  <div class="colophon">
+    <span class="label">© 2026 Callum Thomas · Written by a human, proofread by a machine</span>
+    <span class="label">No cookies. No tracking. No terminal.</span>
+  </div>
+</footer>
+
+<nav class="mock" aria-label="Mockup navigation"><a href="a2-human.html">← Home</a><a href="index.html">Routes</a></nav>
+
+<script src="live.js"></script>
+<script>
+  document.querySelectorAll("[data-today]").forEach((e) => {
+    e.textContent = new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", year: "numeric", timeZone: "Australia/Melbourne" }).format(new Date());
+  });
+</script>
+<script>
+  document.querySelectorAll("img[data-missing]").forEach((img) => {
+    const swap = () => {
+      const v = document.createElement("div");
+      v.className = "void";
+      v.innerHTML = `<p>Photo goes here<br/>${img.dataset.missing}</p>`;
+      img.replaceWith(v);
+    };
+    if (img.complete && !img.naturalWidth) swap(); else img.addEventListener("error", swap);
+  });
+</script>
+</body>
+</html>

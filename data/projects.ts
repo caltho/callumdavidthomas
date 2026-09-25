@@ -2,6 +2,22 @@ import type { Project } from "../types/project";
 
 export const projects: Project[] = [
   {
+    slug: "whats-cyber-terminal",
+    title: "What's Cyber Terminal",
+    summary:
+      "The CDT-98 terminal that used to be this site's homepage, kept running as a museum piece.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Personal"],
+    number: -5,
+    thumbnail: "/images/whats-cyber-terminal.jpg",
+    image: ["/images/whats-cyber-terminal.jpg"],
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    link: "https://whats-cyber.callum-thomas.com",
+    github: "https://github.com/caltho/whats-cyber-terminal",
+    longDescription: `Before this site was a drawing sheet, it was a CRT terminal. What's Cyber Terminal is that homepage, the CDT-98 console from 2026, spun off into its own project so it can keep running: boot messages, a command console, a clickable project list, a CALM switch and callum-nano, the budget autoresponder.
+<br /><br />
+It started as an experiment in how far a portfolio could lean into a gimmick. The answer was "too far" for a homepage, but it makes a good museum piece. Next.js, React and Tailwind, with no backend: the live chat that used to reach the real Callum now hands over to callum-nano and email.`,
+  },
+  {
     slug: "blindfold-chess-trainer",
     title: "Blindfold Chess Trainer",
     summary:

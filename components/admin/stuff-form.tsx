@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { upsertStuff, deleteStuff } from "@/app/admin/actions";
+import { upsertStuff, deleteStuff } from "@/app/(backstage)/admin/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

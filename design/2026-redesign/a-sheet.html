@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Callum Thomas · Route A: Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --paper: #f1efe8;
+  --cell-hi: #e9e6dc;
+  --ink: #171715;
+  --ink-2: #4f4d47;
+  --ink-3: #8a877d;
+  --rule: #d3cfc3;
+  --rule-2: #b9b4a6;
+  --accent: #ec4a1d;
+  --sans: "Inter Tight", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--paper); scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* Hairline grid: cells sit on a rule-coloured background, the 1px gap is the line. */
+.row { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-top: 0; }
+.row:first-child { border-top: 1px solid var(--rule); }
+.cell { background: var(--paper); padding: 22px 24px; position: relative; min-width: 0; }
+
+.label { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.label b { color: var(--ink); font-weight: 500; }
+
+/* Header */
+.head { grid-template-columns: 3fr 6fr 3fr; }
+.head .cell { padding: 14px 24px; display: flex; align-items: center; min-height: 54px; }
+.brand { gap: 12px; font-weight: 600; font-size: 17px; letter-spacing: -.01em; }
+.brand svg { width: 30px; height: auto; }
+.nav { gap: 28px; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.nav a { color: var(--ink-2); }
+.nav a span { color: var(--ink-3); margin-right: 6px; }
+.nav a:hover { color: var(--accent); }
+.stat { justify-content: flex-end; gap: 10px; font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); text-align: right; white-space: nowrap; overflow: hidden; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #3bb54a; flex: none; }
+.is-away .dot, .dot.is-away { background: var(--ink-3); }
+
+/* Wordmark */
+.mark { padding: 0; }
+.mark-inner { padding: 26px 24px 22px; position: relative; }
+.ruler { height: 9px; margin: 0 6px;
+  background:
+    repeating-linear-gradient(90deg, var(--rule-2) 0 1px, transparent 1px 80px) 0 0 / 100% 9px no-repeat,
+    repeating-linear-gradient(90deg, var(--rule-2) 0 1px, transparent 1px 8px) 0 5px / 100% 4px no-repeat; }
+.ruler.bottom { transform: scaleY(-1); }
+.cross { position: absolute; width: 13px; height: 13px; }
+.cross::before, .cross::after { content: ""; position: absolute; background: var(--ink); }
+.cross::before { left: 6px; top: 0; width: 1px; height: 13px; }
+.cross::after { top: 6px; left: 0; height: 1px; width: 13px; }
+.cross.tl { left: 10px; top: 10px; } .cross.tr { right: 10px; top: 10px; }
+.cross.bl { left: 10px; bottom: 10px; } .cross.br { right: 10px; bottom: 10px; }
+.mark-notes { display: flex; justify-content: space-between; padding: 0 20px 0 30px; margin-top: 12px; }
+#wordmark { margin: 6px 0; }
+
+/* Intro */
+.intro { grid-template-columns: 6fr 3fr 3fr; }
+.intro .cell { padding: 28px 28px 30px; }
+h1.big { font-size: clamp(38px, 4.6vw, 72px); line-height: .98; letter-spacing: -.035em; font-weight: 600; margin: 18px 0 26px; }
+.lede { font-size: clamp(17px, 1.35vw, 20px); line-height: 1.5; color: var(--ink-2); max-width: 36em; }
+.lede strong { color: var(--ink); font-weight: 500; }
+.ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 18px; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; border: 1px solid var(--ink); }
+.btn.solid { background: var(--ink); color: var(--paper); }
+.btn.solid:hover { background: var(--accent); border-color: var(--accent); }
+.btn:not(.solid):hover { color: var(--accent); border-color: var(--accent); }
+.photo { display: flex; flex-direction: column; gap: 12px; }
+.photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
+.spec { display: grid; gap: 0; }
+.spec div { padding: 12px 0; border-top: 1px solid var(--rule); }
+.spec div:first-child { border-top: 0; padding-top: 2px; }
+.spec dt { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 3px; }
+.spec dd { font-size: 15.5px; line-height: 1.4; }
+
+/* Section heads */
+.sec { grid-template-columns: 3fr 6fr 3fr; }
+.sec .cell { padding: 16px 24px; display: flex; align-items: center; min-height: 56px; }
+.sec h2 { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+.sec h2 span { color: var(--accent); margin-right: 8px; }
+.sec p { color: var(--ink-2); font-size: 15px; }
+.sec .end { justify-content: flex-end; }
+.more { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.more:hover { color: var(--accent); }
+
+/* Work */
+.work { grid-template-columns: repeat(4, 1fr); }
+.proj { display: flex; flex-direction: column; gap: 14px; padding: 18px 18px 20px; transition: background .2s; }
+.proj:hover { background: var(--cell-hi); }
+.proj .meta { display: flex; justify-content: space-between; }
+.shot { aspect-ratio: 4 / 3; background: var(--cell-hi); overflow: hidden; position: relative; }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; transition: filter .35s; }
+.proj:hover .shot img { filter: none; }
+.void { position: absolute; inset: 0; border: 1px solid var(--rule-2); display: grid; place-items: center; background: var(--paper); }
+.void svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.void p { position: relative; background: var(--paper); padding: 6px 10px; max-width: 80%; text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-2); line-height: 1.5; }
+.proj h3 { font-size: 22px; line-height: 1.1; letter-spacing: -.02em; font-weight: 600; }
+.proj .sum { font-size: 15px; line-height: 1.45; color: var(--ink-2); flex: 1; }
+.proj .foot { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding-top: 12px; border-top: 1px solid var(--rule); }
+.go { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.go.live { color: var(--accent); }
+
+/* Record */
+.record { grid-template-columns: 9fr 3fr; }
+.rev { width: 100%; border-collapse: collapse; }
+.rev th { text-align: left; font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding: 0 16px 12px 0; border-bottom: 1px solid var(--ink); }
+.rev td { padding: 18px 16px 18px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.rev tr:last-child td { border-bottom: 0; }
+.rev .r { font-family: var(--mono); font-size: 13px; width: 56px; }
+.rev .r i { font-style: normal; display: inline-grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--ink); border-radius: 50%; }
+.rev tr:first-child .r i { background: var(--accent); border-color: var(--accent); color: #fff; }
+.rev .y { font-family: var(--mono); font-size: 13px; width: 120px; white-space: nowrap; color: var(--ink-2); padding-top: 21px; }
+.rev .role { font-size: 19px; font-weight: 600; letter-spacing: -.01em; line-height: 1.25; }
+.rev .role small { display: block; font-size: 15px; font-weight: 400; color: var(--ink-2); margin-top: 2px; }
+.rev .n { color: var(--ink-2); font-size: 15px; max-width: 34em; }
+.tools ul { list-style: none; margin-top: 14px; }
+.tools li { padding: 7px 0; border-top: 1px solid var(--rule); font-size: 15px; display: flex; justify-content: space-between; }
+.tools li span { font-family: var(--mono); font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .05em; }
+.tools .aside { margin-top: 18px; font-size: 14px; color: var(--ink-2); }
+
+/* Life */
+.life { grid-template-columns: 5fr 4fr 3fr; }
+.fig img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; object-position: 50% 62%; }
+.fig .label { margin-top: 12px; }
+.life h3 { font-size: 28px; line-height: 1.1; letter-spacing: -.025em; font-weight: 600; margin: 14px 0 18px; }
+.hob { display: grid; }
+.hob div { display: grid; grid-template-columns: 110px 1fr; gap: 10px; padding: 12px 0; border-top: 1px solid var(--rule); font-size: 15.5px; }
+.hob dt { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
+.hob dd { color: var(--ink-2); }
+.hob dd strong { color: var(--ink); font-weight: 500; }
+.read { display: inline-block; margin-top: 18px; }
+.stack { display: grid; grid-template-rows: auto 1fr; gap: 1px; background: var(--rule); padding: 0; }
+.stack > div { background: var(--paper); padding: 22px 24px; }
+.num { font-size: 52px; line-height: 1; letter-spacing: -.04em; font-weight: 600; margin: 12px 0 16px; }
+.num small { font-size: 20px; color: var(--ink-3); margin-left: 4px; letter-spacing: 0; }
+.bars { display: flex; align-items: flex-end; gap: 4px; height: 70px; position: relative; }
+.bars::after { content: ""; position: absolute; left: 0; right: 0; bottom: 80%; border-top: 1px dashed var(--rule-2); }
+.bars span { flex: 1; background: var(--ink); min-height: 2px; }
+.bars span.last { background: var(--accent); }
+.bars span.none { background: var(--rule); height: 2px !important; }
+.small { font-size: 13.5px; color: var(--ink-2); margin-top: 12px; line-height: 1.45; }
+.clockbig { font-size: 40px; line-height: 1; letter-spacing: -.035em; font-weight: 600; margin: 12px 0 8px; }
+
+/* Say hi */
+.hi { grid-template-columns: 6fr 3fr 3fr; }
+.chat { display: flex; flex-direction: column; gap: 14px; }
+.presence { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+.thread { display: flex; flex-direction: column; gap: 10px; min-height: 96px; max-height: 240px; overflow: auto; padding: 4px 0; }
+.msg { display: grid; grid-template-columns: 100px 1fr; gap: 12px; font-size: 15.5px; }
+.msg .who { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding-top: 3px; }
+.msg.them .who { color: var(--accent); }
+form.box { display: flex; border: 1px solid var(--ink); }
+form.box textarea { flex: 1; border: 0; background: transparent; font: inherit; font-size: 16px; padding: 13px 14px; resize: none; height: 50px; color: var(--ink); }
+form.box textarea:focus { outline: none; }
+form.box:focus-within { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+form.box button { border: 0; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; padding: 0 22px; cursor: pointer; }
+form.box button:hover { background: var(--accent); }
+.note { font-size: 13.5px; color: var(--ink-3); }
+.email { font-size: clamp(20px, 1.9vw, 28px); font-weight: 600; letter-spacing: -.02em; line-height: 1.15; overflow-wrap: anywhere; margin-top: 14px; display: block; }
+.email:hover, .links a:hover { color: var(--accent); }
+.links { list-style: none; margin-top: 12px; }
+.links li { border-top: 1px solid var(--rule); }
+.links a { display: flex; justify-content: space-between; padding: 12px 0; font-size: 18px; font-weight: 500; }
+
+/* Title block */
+.tb { grid-template-columns: 2fr 1.3fr 1.3fr 1.3fr 1.3fr 1fr 2fr; }
+.tb .cell { padding: 12px 16px 14px; }
+.tb .v { font-size: 15px; font-weight: 500; margin-top: 4px; }
+.stamp { display: inline-block; margin-top: 6px; padding: 5px 10px 4px; border: 1.5px solid var(--accent); color: var(--accent); font-family: var(--mono); font-weight: 500; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; transform: rotate(-2deg); }
+.colophon { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 14px 6px 4px; }
+
+/* Mockup chrome (not part of the design) */
+.mock { position: fixed; right: 14px; bottom: 14px; z-index: 50; display: flex; gap: 6px; font: 500 11px/1 var(--mono); letter-spacing: .04em; }
+.mock a { background: #111; color: #fff; padding: 8px 10px; border-radius: 99px; opacity: .82; }
+.mock a:hover { opacity: 1; }
+
+@media (max-width: 1100px) {
+  .work { grid-template-columns: repeat(2, 1fr); }
+  .intro { grid-template-columns: 1fr 1fr; }
+  .intro .cell:first-child { grid-column: 1 / -1; }
+  .life { grid-template-columns: 1fr 1fr; }
+  .life .fig { grid-column: 1 / -1; }
+  .tb { grid-template-columns: repeat(3, 1fr); }
+  .tb .cell:first-child, .tb .cell:last-child { grid-column: span 3; }
+}
+@media (max-width: 760px) {
+  body { padding: 6px; }
+  .head, .sec, .record, .hi, .life, .intro { grid-template-columns: 1fr; }
+  .head .nav { gap: 18px; flex-wrap: wrap; }
+  .stat { justify-content: flex-start; text-align: left; }
+  .sec .end { justify-content: flex-start; }
+  .work { grid-template-columns: 1fr; }
+  .cell { padding: 20px 18px; }
+  .intro .cell { padding: 22px 18px 24px; }
+  .rev thead { display: none; }
+  .rev tr { display: grid; grid-template-columns: 44px 1fr; border-bottom: 1px solid var(--rule); padding: 14px 0; }
+  .rev td { border: 0; padding: 0; }
+  .rev .y { grid-column: 2; padding: 0 0 4px; }
+  .rev .role, .rev .n { grid-column: 2; }
+  .rev .n { padding-top: 6px; }
+  .rev .r { grid-row: span 3; }
+  .msg { grid-template-columns: 1fr; gap: 2px; }
+  .mark-notes .label:last-child { display: none; }
+  .photo img { aspect-ratio: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="row head">
+  <a class="cell brand" href="#top" aria-label="Callum Thomas, home">
+    <svg viewBox="0 0 1632 996" aria-hidden="true"><path d="M798 825H171V171H1461V825" stroke="currentColor" stroke-width="300" stroke-linecap="square" fill="none"/></svg>
+    Callum Thomas
+  </a>
+  <nav class="cell nav" aria-label="Sections">
+    <a href="#work"><span>01</span>Work</a>
+    <a href="#record"><span>02</span>Record</a>
+    <a href="#life"><span>03</span>Off the clock</a>
+    <a href="#hi"><span>04</span>Say hi</a>
+  </nav>
+  <div class="cell stat" data-awake>
+    <span class="dot"></span>
+    <span><span data-status>shipping something</span> · <span data-clock>10:42 pm</span> Melb</span>
+  </div>
+</header>
+
+<!-- Wordmark -->
+<section class="row" id="top">
+  <div class="cell mark">
+    <div class="mark-inner">
+      <span class="cross tl"></span><span class="cross tr"></span><span class="cross bl"></span><span class="cross br"></span>
+      <div class="ruler"></div>
+      <div id="wordmark"><span class="sr">Callum Thomas</span></div>
+      <div class="ruler bottom"></div>
+      <div class="mark-notes">
+        <span class="label">DWG CT-000 · Sheet 1 of 1</span>
+        <span class="label">Please disturb ↖ run your cursor through it</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Intro -->
+<section class="row intro">
+  <div class="cell">
+    <p class="label"><b>00</b> · Hello</p>
+    <h1 class="big">Builder.<br/>AI whisperer.<br/>Solution seeker.</h1>
+    <p class="lede">I spent eight years as a traffic engineer, telling councils how many car parks a building needs. Now I build software instead: <strong>quality and safety tools for construction sites</strong> at RJE Global, <strong>free calculators</strong> for my old profession, and <strong>small apps that run my own life.</strong></p>
+    <div class="ctas">
+      <a class="btn solid" href="#work">See the work ↓</a>
+      <a class="btn" href="#hi">Say hi →</a>
+    </div>
+  </div>
+  <figure class="cell photo">
+    <img src="../../public/images/profile%20photo.jfif" alt="Callum smiling on a hike, in a blue jacket, green hills and cloud behind" />
+    <figcaption class="label">Fig. 1 · Callum (typical)</figcaption>
+  </figure>
+  <div class="cell">
+    <dl class="spec">
+      <div><dt>Now</dt><dd>Lead developer &amp; product owner, RJE Global</dd></div>
+      <div><dt>Before</dt><dd>8 years as a consulting traffic engineer (Stantec, Amber)</dd></div>
+      <div><dt>Studied</dt><dd>BE (Hons) Civil &amp; BCom Finance, University of Auckland</dd></div>
+      <div><dt>Based</dt><dd>Melbourne. Kiwi, with Aussie work rights.</dd></div>
+      <div><dt>Last night</dt><dd><span data-sleep-last>6.9</span> h of sleep, live from Almanac</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- Work -->
+<section class="row sec" id="work">
+  <div class="cell"><h2><span>01</span>Selected work</h2></div>
+  <div class="cell"><p>Eight of seventeen. Live ones open the real app; the rest have a write-up.</p></div>
+  <div class="cell end"><a class="more" href="#">All 17 projects →</a></div>
+</section>
+<section class="row work">
+  <a class="cell proj" href="#">
+    <div class="meta"><span class="label">CT-01</span><span class="label">2023-now</span></div>
+    <div class="shot"><img src="../../public/images/rje/QMS%20(4).png" alt="" /></div>
+    <h3>Quality Management System</h3>
+    <p class="sum">Quality and safety capture for active construction sites, replacing the paper. I own it: rebuilt front and back end, moved it to TypeScript.</p>
+    <div class="foot"><span class="label">Angular · Node · MySQL</span><span class="go">Case study →</span></div>
+  </a>
+  <a class="cell proj" href="https://traffictools.callum-thomas.com">
+    <div class="meta"><span class="label">CT-02</span><span class="label">2023</span></div>
+    <div class="shot"><img src="../../public/images/traffictools/TT%20-%20Turn%20Treatment%20Calculator.png" alt="" /></div>
+    <h3>Traffic Tools</h3>
+    <p class="sum">Free calculators for traffic engineers and town planners. The tools I wished I'd had in my old job.</p>
+    <div class="foot"><span class="label">Next.js · TypeScript</span><span class="go live">Live ↗</span></div>
+  </a>
+  <a class="cell proj" href="https://almanac.callum-thomas.com">
+    <div class="meta"><span class="label">CT-03</span><span class="label">2026</span></div>
+    <div class="shot"><div class="void"><svg preserveAspectRatio="none" viewBox="0 0 100 100"><line x1="0" y1="0" x2="100" y2="100" stroke="#b9b4a6" stroke-width=".4" vector-effect="non-scaling-stroke"/><line x1="100" y1="0" x2="0" y2="100" stroke="#b9b4a6" stroke-width=".4" vector-effect="non-scaling-stroke"/></svg><p>Screenshots withheld.<br/>It knows how much I sleep.</p></div></div>
+    <h3>Almanac</h3>
+    <p class="sum">Journal, habits, tasks, recipes, money and sleep in one searchable place. I use it every single day.</p>
+    <div class="foot"><span class="label">SvelteKit · Supabase</span><span class="go live">Live ↗</span></div>
+  </a>
+  <a class="cell proj" href="#">
+    <div class="meta"><span class="label">CT-04</span><span class="label">2021</span></div>
+    <div class="shot"><img src="../../public/images/centresafe/CentreSafe%20Web%20Design.png" alt="" /></div>
+    <h3>CentreSafe</h3>
+    <p class="sum">A risk management portal for companies and NGOs. I built it on LAMP and designed the brand too.</p>
+    <div class="foot"><span class="label">PHP · MySQL · AWS</span><span class="go">Case study →</span></div>
+  </a>
+  <a class="cell proj" href="https://firewall.callum-thomas.com">
+    <div class="meta"><span class="label">CT-05</span><span class="label">Construction</span></div>
+    <div class="shot"><div class="void"><svg preserveAspectRatio="none" viewBox="0 0 100 100"><line x1="0" y1="0" x2="100" y2="100" stroke="#b9b4a6" stroke-width=".4" vector-effect="non-scaling-stroke"/><line x1="100" y1="0" x2="0" y2="100" stroke="#b9b4a6" stroke-width=".4" vector-effect="non-scaling-stroke"/></svg><p>FRL 120/120/120<br/>(that's good)</p></div></div>
+    <h3>Firewall Fireyness Calculator</h3>
+    <p class="sum">Works out the fire-resistance rating of a building firewall. The construction kind, not the network kind.</p>
+    <div class="foot"><span class="label">Next.js · React</span><span class="go live">Live ↗</span></div>
+  </a>
+  <a class="cell proj" href="https://connect-five.callum-thomas.com">
+    <div class="meta"><span class="label">CT-06</span><span class="label">2024</span></div>
+    <div class="shot"><img src="../../public/images/connect-five-3.png" alt="" style="object-position:center" /></div>
+    <h3>Connect Five</h3>
+    <p class="sum">Five in a row on a 19 × 19 grid. Black versus white, turn by turn, no mercy.</p>
+    <div class="foot"><span class="label">Next.js · Tailwind</span><span class="go live">Live ↗</span></div>
+  </a>
+  <a class="cell proj" href="https://boatlog.callum-thomas.com">
+    <div class="meta"><span class="label">CT-07</span><span class="label">2026</span></div>
+    <div class="shot"><div class="void"><svg preserveAspectRatio="none" viewBox="0 0 100 100"><line x1="0" y1="0" x2="100" y2="100" stroke="#b9b4a6" stroke-width=".4" vector-effect="non-scaling-stroke"/><line x1="100" y1="0" x2="0" y2="100" stroke="#b9b4a6" stroke-width=".4" vector-effect="non-scaling-stroke"/></svg><p>Screenshots withheld.<br/>Every entry says "windy".</p></div></div>
+    <h3>Boatlog</h3>
+    <p class="sum">A trip logbook for the boat: distance, weather, fuel, crew. The damp chart-table notebook, on a phone.</p>
+    <div class="foot"><span class="label">Next.js · Supabase</span><span class="go live">Live ↗</span></div>
+  </a>
+  <a class="cell proj" href="https://sliding-puzzle.callum-thomas.com">
+    <div class="meta"><span class="label">CT-08</span><span class="label">2024</span></div>
+    <div class="shot"><img src="../../public/images/sliding-tiles/sliding-tiles-2.png" alt="" style="object-position:center" /></div>
+    <h3>Sliding Tiles</h3>
+    <p class="sum">Only half of all shuffled sliding puzzles can be solved. This one checks the maths before you start.</p>
+    <div class="foot"><span class="label">Next.js · Unsplash API</span><span class="go live">Live ↗</span></div>
+  </a>
+</section>
+
+<!-- Record -->
+<section class="row sec" id="record">
+  <div class="cell"><h2><span>02</span>Record</h2></div>
+  <div class="cell"><p>This site is the CV. Here's the short version, as a revision table.</p></div>
+  <div class="cell end"><a class="more" href="https://www.linkedin.com/in/callumdavidthomas/">LinkedIn ↗</a></div>
+</section>
+<section class="row record">
+  <div class="cell">
+    <table class="rev">
+      <thead><tr><th>Rev</th><th>Date</th><th>Description</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td class="r"><i>D</i></td><td class="y">2023-now</td><td class="role">Lead Software Developer &amp; Product Owner<small>RJE Global</small></td><td class="n">Took over the quality and safety platform used on live construction sites. Rebuilt it front to back, JavaScript to TypeScript, and made it fast.</td></tr>
+        <tr><td class="r"><i>C</i></td><td class="y">2021-2023</td><td class="role">Senior Traffic Engineer<small>Amber Organisation</small></td><td class="n">Led traffic engineering projects, including a major subdivision in Dubbo. On the side, built the quote-signing portal clients kept asking for.</td></tr>
+        <tr><td class="r"><i>B</i></td><td class="y">2019-2021</td><td class="role">Project Engineer<small>Stantec</small></td><td class="n">Traffic impact assessments, SIDRA modelling, swept paths and transport strategies, for public and private clients.</td></tr>
+        <tr><td class="r"><i>A</i></td><td class="y">2015</td><td class="role">BE (Hons) Civil &amp; Environmental, BCom Finance<small>University of Auckland</small></td><td class="n">Engineering and finance at the same time, which explains a lot. Freelance web work since: NZOPA, Modal Group, CentreSafe.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cell tools">
+    <p class="label"><b>Toolbox</b></p>
+    <ul>
+      <li>TypeScript <span>daily</span></li>
+      <li>React / Next.js <span>daily</span></li>
+      <li>Claude <span>daily</span></li>
+      <li>SvelteKit <span>often</span></li>
+      <li>Supabase / Postgres <span>often</span></li>
+      <li>Angular / Node <span>work</span></li>
+      <li>PHP / MySQL <span>when asked</span></li>
+      <li>Figma <span>often</span></li>
+    </ul>
+    <p class="aside">Also fluent in SIDRA, swept paths and council meetings.</p>
+  </div>
+</section>
+
+<!-- Off the clock -->
+<section class="row sec" id="life">
+  <div class="cell"><h2><span>03</span>Off the clock</h2></div>
+  <div class="cell"><p>Hiking, jiu-jitsu, the boat, and apps that keep track of all three.</p></div>
+  <div class="cell end"><a class="more" href="#">All stuff →</a></div>
+</section>
+<section class="row life">
+  <figure class="cell fig">
+    <img src="../../public/images/yukhin-peak/mountain-yak.jpg" alt="A lone black yak on golden grassland beneath a huge bare mountain" />
+    <figcaption class="label">Fig. 2 · Yak, Alay Mountains, Kyrgyzstan. On the way up Yukhin Peak.</figcaption>
+  </figure>
+  <div class="cell">
+    <p class="label"><b>When I'm not at a keyboard</b></p>
+    <h3>I go uphill, get choked, and log it all in apps I made.</h3>
+    <dl class="hob">
+      <div><dt>Hiking</dt><dd>Ultralight, the higher the better. Most recently <strong>Yukhin Peak, 5,130 m.</strong></dd></div>
+      <div><dt>Jiu-jitsu</dt><dd>Brazilian. Humbling, in a good way.</dd></div>
+      <div><dt>The boat</dt><dd>Logged in Boatlog, naturally.</dd></div>
+      <div><dt>Making</dt><dd>Art, both digital and the kind with glue.</dd></div>
+    </dl>
+    <a class="more read" href="#">Read: Yukhin Peak, 5,130 m →</a>
+  </div>
+  <div class="cell stack">
+    <div>
+      <p class="label"><b>Sleep</b> · last 14 nights</p>
+      <p class="num"><span data-sleep-last>6.9</span><small>h last night</small></p>
+      <div class="bars" id="bars"></div>
+      <p class="small">Average <span data-sleep-avg>7.1</span> h. Live from Almanac, which I also built. Yes, I know.</p>
+    </div>
+    <div data-awake>
+      <p class="label"><b>Right now</b> in Melbourne</p>
+      <p class="clockbig" data-clock>10:42 pm</p>
+      <p class="small" style="margin-top:0">Callum is probably <span data-status>shipping something</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Say hi -->
+<section class="row sec" id="hi">
+  <div class="cell"><h2><span>04</span>Say hi</h2></div>
+  <div class="cell"><p>Hiring, collaborating, or just curious. All welcome.</p></div>
+  <div class="cell end"><span class="label">Replies within a day, usually</span></div>
+</section>
+<section class="row hi">
+  <div class="cell chat" data-chat-root>
+    <p class="presence"><span class="dot" data-desk-dot></span><span data-desk>Callum's away. Leave a message, or chat with callum-nano.</span></p>
+    <div class="thread" data-thread>
+      <div class="msg them"><span class="who">Callum</span><span class="txt">Hey! Drop a note here. If I'm at my desk you'll get me live; if not, it's saved and I'll reply by email.</span></div>
+    </div>
+    <form class="box" data-chat>
+      <label class="sr" for="m">Your message</label>
+      <textarea id="m" rows="1" placeholder="Write a message…"></textarea>
+      <button type="submit">Send</button>
+    </form>
+    <p class="note">While he's away, callum-nano covers. It's a budget model of me and frequently wrong.</p>
+  </div>
+  <div class="cell">
+    <p class="label"><b>Email</b></p>
+    <a class="email" href="mailto:callumdavidthomas@gmail.com">callumdavidthomas<wbr/>@gmail.com</a>
+  </div>
+  <div class="cell">
+    <p class="label"><b>Elsewhere</b></p>
+    <ul class="links">
+      <li><a href="https://www.linkedin.com/in/callumdavidthomas/">LinkedIn <span>↗</span></a></li>
+      <li><a href="https://github.com/caltho">GitHub <span>↗</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Title block -->
+<footer>
+  <div class="row tb">
+    <div class="cell"><p class="label">Project</p><p class="v">callum-thomas.com</p></div>
+    <div class="cell"><p class="label">Drawing</p><p class="v">Homepage</p></div>
+    <div class="cell"><p class="label">Drawn</p><p class="v">C. Thomas</p></div>
+    <div class="cell"><p class="label">Checked</p><p class="v">Claude</p></div>
+    <div class="cell"><p class="label">Scale</p><p class="v">1:1 (most screens)</p></div>
+    <div class="cell"><p class="label">Rev</p><p class="v">26.09</p></div>
+    <div class="cell"><p class="label">Status</p><span class="stamp">Issued for hire</span></div>
+  </div>
+  <div class="colophon">
+    <span class="label">© 2026 Callum Thomas · Set in Inter Tight &amp; JetBrains Mono</span>
+    <span class="label">No cookies. No tracking. No terminal.</span>
+  </div>
+</footer>
+
+<nav class="mock" aria-label="Mockup navigation"><a href="index.html">← Routes</a><a href="b-register.html">Next: B →</a></nav>
+
+<script src="live.js"></script>
+<script src="particles.js"></script>
+<script>
+  ParticleWordmark(document.getElementById("wordmark"), {
+    family: '"Inter Tight"', weight: 800, tracking: -0.035,
+    gap: 6, dot: 2, color: "#171715", hot: "#ec4a1d", radius: 100, intro: "scatter",
+  });
+
+  const s = CT.sleep, bars = document.getElementById("bars");
+  s.nights.forEach((h, i) => {
+    const b = document.createElement("span");
+    if (h == null) b.className = "none";
+    else { b.style.height = (h / 10) * 100 + "%"; if (i === s.nights.length - 1) b.className = "last"; }
+    b.title = h == null ? "no log" : h + " h";
+    bars.appendChild(b);
+  });
+  document.querySelectorAll("[data-sleep-last]").forEach(e => e.textContent = s.last.toFixed(1));
+  document.querySelectorAll("[data-sleep-avg]").forEach(e => e.textContent = s.avg.toFixed(1));
+</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Redesign Routes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root { --paper: #f1efe8; --card: #f8f6f1; --ink: #171715; --ink-2: #4f4d47; --ink-3: #8a877d; --rule: #d3cfc3; --sans: "Inter Tight", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--sans); background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.5; font-size: 16px; }
+a { color: inherit; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 40px); }
+.label { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+header { padding: 56px 0 36px; border-bottom: 1px solid var(--ink); }
+h1 { font-size: clamp(40px, 5.5vw, 76px); line-height: .98; letter-spacing: -.035em; font-weight: 600; margin-top: 14px; max-width: 16ch; }
+.sub { font-size: 19px; color: var(--ink-2); margin-top: 18px; max-width: 46em; }
+.brief { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin: 34px 0 0; }
+.brief div { background: var(--paper); padding: 16px 18px; }
+.brief dd { font-size: 16px; margin-top: 4px; line-height: 1.35; }
+h2 { font-size: 30px; letter-spacing: -.025em; font-weight: 600; margin: 64px 0 20px; }
+.routes { display: grid; gap: 34px; }
+.route { display: grid; grid-template-columns: 7fr 5fr; gap: 32px; padding: 26px; background: var(--card); border: 1px solid var(--rule); align-items: start; }
+.route .shots { display: grid; gap: 10px; }
+.route img { width: 100%; display: block; border: 1px solid var(--rule); }
+.route h3 { font-size: 34px; letter-spacing: -.03em; font-weight: 600; line-height: 1; margin: 8px 0 12px; }
+.route p { color: var(--ink-2); margin-bottom: 12px; }
+.route ul { list-style: none; margin: 14px 0 20px; border-top: 1px solid var(--rule); }
+.route li { padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 15px; display: grid; grid-template-columns: 90px 1fr; gap: 12px; }
+.route li span { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); padding-top: 2px; }
+.open { display: inline-flex; align-items: center; height: 46px; padding: 0 20px; background: var(--ink); color: var(--paper); text-decoration: none; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.open:hover { background: #ec4a1d; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+.list { list-style: none; border-top: 1px solid var(--ink); }
+.list li { padding: 14px 0; border-bottom: 1px solid var(--rule); color: var(--ink-2); }
+.list li strong { color: var(--ink); font-weight: 600; }
+.r2 { display: grid; grid-template-columns: 7fr 5fr; gap: 32px; padding: 26px; background: var(--card); border: 1.5px solid var(--ink); align-items: start; margin-top: 30px; }
+.r2 .shots { display: grid; gap: 10px; }
+.r2 img { width: 100%; display: block; border: 1px solid var(--rule); }
+.r2 h3 { font-size: 40px; letter-spacing: -.035em; font-weight: 600; line-height: 1; margin: 8px 0 12px; }
+.r2 p { color: var(--ink-2); margin-bottom: 12px; }
+.r2 ul { list-style: none; margin: 14px 0 20px; border-top: 1px solid var(--rule); }
+.r2 li { padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 15px; display: grid; grid-template-columns: 110px 1fr; gap: 12px; }
+.r2 li span { font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); padding-top: 2px; }
+.new { display: inline-block; background: #ec4a1d; color: #fff; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 3px 7px; margin-left: 8px; vertical-align: 2px; }
+.archive { margin-top: 70px; padding-top: 18px; border-top: 1px solid var(--ink); }
+footer { padding: 60px 0 50px; color: var(--ink-3); }
+@media (max-width: 900px) {
+  .brief { grid-template-columns: 1fr 1fr; }
+  .route, .cols, .r2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <p class="label">callum-thomas.com · Redesign · Round 2 · 23 Sep 2026</p>
+  <h1>From three routes to one.</h1>
+  <p class="sub">Round 2 merges what you liked: Route A's landing area, Route B's spacious lists drawn in A's style, and a lot more "only human" in the voice. Round 1's three routes are further down for reference.</p>
+  <dl class="brief">
+    <div><dt class="label">Win over</dt><dd>Future employers</dd></div>
+    <div><dt class="label">First 10 seconds</dt><dd>Get who you are</dd></div>
+    <div><dt class="label">Three words</dt><dd>Warm, witty, human</dd></div>
+    <div><dt class="label">Kill</dt><dd>The gimmick, the effects, the low contrast</dd></div>
+    <div><dt class="label">Structure</dt><dd>Drawing Set (Heron)</dd></div>
+    <div><dt class="label">Look</dt><dd>Warm paper, grotesk + mono</dd></div>
+    <div><dt class="label">Signature</dt><dd>Particle wordmark (United Carriers)</dd></div>
+    <div><dt class="label">Keep</dt><dd>Chat, status + clock, sleep meter, Stuff. No PDF: the site is the CV.</dd></div>
+  </dl>
+</header>
+
+<main class="wrap">
+  <article class="r2">
+    <div class="shots">
+      <a href="a2-human.html"><img src="shots/r2.jpg" alt="Round 2 homepage: dot-matrix name in a ruled sheet above 'A person.' with a dictionary definition, photo and facts" /></a>
+      <img src="shots/r2-intro.jpg" alt="Three frames of the wordmark arriving: faint and blurred in the distance, then sharpening into place" />
+      <img src="shots/r2-ask.jpg" alt="The Ask Callum chat: callum-nano answers 'Are you actually human?' after thinking for 0.4 seconds" />
+    </div>
+    <div>
+      <p class="label">Round 2 <span class="new">Latest</span></p>
+      <h3>A person.</h3>
+      <p>Route A's landing area, then Route B's calm lists redrawn in A's style. Each section below the fold is a ruled strip: a margin column with a label that stays put as you scroll, then open lists with only horizontal rules. The boxes stop at the fold.</p>
+      <p>The idea running through it: in a world where the machines keep getting smarter, you're a real person. Not artificial. Occasionally intelligent. Can feel things, man. It also has things to fiddle with, just because.</p>
+      <ul>
+        <li><span>Intro line</span>"A person." with a dictionary entry: 1. a real, living human, not artificial, occasionally intelligent; 2. Callum Thomas, builder, AI whisperer, solution seeker. Can feel things, man.</li>
+        <li><span>Fidgets</span>A name that tires the more you stir it (some dots never go home), an "I'm not a robot" checkbox, a slide-to-prove-humanity slider, a stampable stamp, and a scratch pad that draws in the colour of whatever you last clicked.</li>
+        <li><span>New post</span><a href="post-citizenship.html" style="border-bottom:1px solid">Officially Australian.</a> Needs the two ceremony photos in public/images/citizenship/.</li>
+        <li><span>Wordmark</span>Glides in from a distance (small, soft and faint, then sharp). No bounce. Then the text settles in.</li>
+        <li><span>Ask Callum</span>An AI-assistant parody with a model picker. Callum 1.0 is "human, thoughtful, replies within a day". callum-nano "Thought for 0.4 seconds". The small print says "Callum can make mistakes. He's only human."</li>
+        <li><span>Proof of humanity</span>Off the clock, reframed as evidence: sleep, altitude, jiu-jitsu, the boat, art, and the local time. Ends with an "I'm not a robot either" checkbox.</li>
+        <li><span>Small jokes</span>"Not AI-generated" photo captions, "Checked: Claude (not human)" in the title block, the human check in the facts column.</li>
+      </ul>
+      <a class="open" href="a2-human.html">Open Round 2 →</a>
+    </div>
+  </article>
+
+  <div class="archive">
+  <p class="label">Round 1 · the three original routes</p>
+  <h2 style="margin-top:14px">The routes</h2>
+  <div class="routes">
+    <article class="route">
+      <div class="shots"><a href="a-sheet.html"><img src="shots/a.jpg" alt="Route A homepage: dot-matrix name in a ruled drawing cell above a grid of intro, photo and facts" /></a></div>
+      <div>
+        <p class="label">Route A</p>
+        <h3>Sheet</h3>
+        <p>The most literal take. The whole page is one engineering drawing: hairline cells like Heron, crop marks and a ruler around your name, and a title block at the bottom stamped <em>Issued for hire</em>.</p>
+        <p>Your CV is a revision table (Rev A, graduating, up to Rev D, RJE). It's the most "designed", and it's the one where the engineering background is most obviously the concept.</p>
+        <ul>
+          <li><span>Wordmark</span>Hero, round dots, orange when disturbed</li>
+          <li><span>Accent</span>Signal orange, close to your old oxide red</li>
+          <li><span>Type</span>Inter Tight + JetBrains Mono</li>
+          <li><span>Intro</span>"Builder. AI whisperer. Solution seeker."</li>
+          <li><span>Risk</span>Dense. Lots of boxes can start to feel like a form.</li>
+        </ul>
+        <a class="open" href="a-sheet.html">Open route A →</a>
+      </div>
+    </article>
+
+    <article class="route">
+      <div class="shots"><a href="b-register.html"><img src="shots/b.jpg" alt="Route B homepage: big statement headline beside a small portrait, with now, before and after-hours columns" /><img src="shots/b-mark.png" alt="Route B footer: pale dot-matrix name scattering in blue around a cursor ring" /></a></div>
+      <div>
+        <p class="label">Route B</p>
+        <h3>Register</h3>
+        <p>The calmest and quickest to read. Lots of white space, horizontal rules only, and one big sentence in your voice. Closest to United Carriers.</p>
+        <p>All 17 projects sit in a drawing register you can filter (Live, Work &amp; clients, Personal), with a screenshot that follows the cursor. The wordmark signs off the footer, and the Yukhin climb and your sleep are both drawn in the same dot language.</p>
+        <ul>
+          <li><span>Wordmark</span>Footer, pale dots, blueprint blue when disturbed</li>
+          <li><span>Accent</span>Blueprint blue</li>
+          <li><span>Type</span>Instrument Sans + IBM Plex Mono</li>
+          <li><span>Intro</span>"I find the annoying problem, then build the thing that makes it go away."</li>
+          <li><span>Risk</span>The safest route, so the least memorable.</li>
+        </ul>
+        <a class="open" href="b-register.html">Open route B →</a>
+      </div>
+    </article>
+
+    <article class="route">
+      <div class="shots"><a href="c-markup.html"><img src="shots/c.jpg" alt="Route C homepage: large 'Hi, I'm Callum.' with highlighted phrases, beside an annotated portrait with numbered callouts" /><img src="shots/c-mark.png" alt="Route C footer: dark band with square-dot name scattering in hi-vis yellow" /></a></div>
+      <div>
+        <p class="label">Route C</p>
+        <h3>Markup</h3>
+        <p>The warmest. It opens like a letter ("Hi, I'm Callum.") with hi-vis highlighter on the key phrases, and your photo is annotated like a drawing detail: numbered callouts, a key, and a dimension line reading <em>1 Callum, not to scale</em>.</p>
+        <p>The CV runs down a road alignment with chainages. Your stack is a schedule of materials. It ends on a dark band with the wordmark in square "pixel" dots.</p>
+        <ul>
+          <li><span>Wordmark</span>Footer, square dots on ink, hi-vis when disturbed</li>
+          <li><span>Accent</span>Hi-vis highlighter yellow</li>
+          <li><span>Type</span>Bricolage Grotesque + DM Mono</li>
+          <li><span>Intro</span>"Hi, I'm Callum." plus a short letter</li>
+          <li><span>Risk</span>The jokes are doing more work, and Bricolage has more character than the pure Swiss grotesk you picked.</li>
+        </ul>
+        <a class="open" href="c-markup.html">Open route C →</a>
+      </div>
+    </article>
+  </div>
+
+  </div>
+
+  <h2>What I needed from you in round 1</h2>
+  <div class="cols">
+    <ul class="list">
+      <li><strong>Pick one, or mix.</strong> "A's structure with C's hero" is a perfectly good answer.</li>
+      <li><strong>Pick an intro line.</strong> Each route uses a different one on purpose. Which one sounds like you?</li>
+      <li><strong>Check the jokes.</strong> "Issued for hire", the photo callouts, "Every entry says windy". Keep, cut, or push further?</li>
+      <li><strong>Wordmark: top or bottom?</strong> A uses it as the hero; B and C use it as the sign-off.</li>
+    </ul>
+    <ul class="list">
+      <li><strong>Assumed:</strong> RJE Global from 2023 (the resume stops at Amber, 2021-2023). Correct me if that's wrong.</li>
+      <li><strong>Mocked:</strong> the sleep numbers, the chat replies, and "at his desk" (shown as 7-11 pm). The real versions already exist in your Supabase code.</li>
+      <li><strong>Bug found:</strong> <code>lib/status.ts</code> and callum-nano use Brisbane time while the site says Melbourne. The mockups use Melbourne.</li>
+      <li><strong>Not yet designed:</strong> project detail pages, the full work index and Stuff pages. Those come after we pick a route.</li>
+    </ul>
+  </div>
+</main>
+
+<footer class="wrap"><p class="label">Mockups live in design/2026-redesign/. Static HTML, no build step. Images come from public/images.</p></footer>
+</body>
+</html>

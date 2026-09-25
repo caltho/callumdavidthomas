@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Callum Thomas · Route C: Markup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --paper: #ede9df;
+  --paper-2: #e4dfd2;
+  --card: #f5f2ea;
+  --ink: #1c1b18;
+  --ink-2: #57544c;
+  --ink-3: #8b877c;
+  --rule: #cfc9ba;
+  --hi: #e4f04a;
+  --sans: "Bricolage Grotesque", system-ui, sans-serif;
+  --mono: "DM Mono", ui-monospace, monospace;
+  --pad: clamp(18px, 3.2vw, 48px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--paper); scroll-behavior: smooth; }
+body { font-family: var(--sans); font-optical-sizing: auto; color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; font-size: 17px; line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.wrap { max-width: 1400px; margin: 0 auto; padding: 0 var(--pad); }
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: .03em; text-transform: uppercase; }
+.muted { color: var(--ink-3); }
+
+/* Highlighter: a slightly uneven marker stroke behind the text. */
+.hl { background: linear-gradient(100deg, transparent 0 .2em, var(--hi) .2em calc(100% - .15em), transparent calc(100% - .15em)) 0 62% / 100% 78% no-repeat; padding: 0 .12em; margin: 0 -.06em; box-decoration-break: clone; -webkit-box-decoration-break: clone; transition: background-size .2s; }
+a.hl:hover { background-size: 100% 100%; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #3aa94b; display: inline-block; flex: none; }
+.is-away .dot, .dot.is-away { background: var(--ink-3); }
+
+/* Header */
+header { border-bottom: 1px solid var(--rule); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
+.brand svg { width: 26px; }
+nav.top { display: flex; gap: 28px; font-size: 16px; font-weight: 500; }
+nav.top a:hover { text-decoration: underline; text-decoration-color: var(--hi); text-decoration-thickness: 4px; text-underline-offset: 4px; }
+.pillstat { display: flex; align-items: center; gap: 9px; background: var(--card); border: 1px solid var(--rule); border-radius: 99px; padding: 7px 14px 7px 12px; font-size: 13.5px; color: var(--ink-2); }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(28px, 5vw, 80px); padding: clamp(48px, 7vw, 100px) 0 clamp(48px, 6vw, 80px); align-items: start; }
+.hero h1 { font-size: clamp(60px, 9.4vw, 148px); font-weight: 700; line-height: .9; letter-spacing: -.038em; font-variation-settings: "wdth" 92; }
+.letter { font-size: clamp(19px, 1.75vw, 25px); line-height: 1.45; margin-top: clamp(24px, 3vw, 40px); max-width: 30em; letter-spacing: -.01em; }
+.letter p + p { margin-top: .8em; }
+.sign { font-size: clamp(17px, 1.4vw, 20px); color: var(--ink-2); margin-top: 28px; }
+.sign a { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--ink); }
+.sign a:hover { border-color: var(--hi); }
+
+/* Annotated portrait */
+.detail { position: relative; padding: 26px 0 0 30px; }
+.frame { position: relative; }
+.frame img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.pin { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: var(--ink); color: var(--paper); font: 500 12px/26px var(--mono); text-align: center; box-shadow: 0 0 0 3px var(--hi); }
+.dim-h { position: absolute; top: 0; left: 30px; right: 0; height: 14px; border-left: 1px solid var(--ink); border-right: 1px solid var(--ink); }
+.dim-h::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; border-top: 1px solid var(--ink); }
+.dim-h span { position: absolute; left: 50%; top: -1px; transform: translateX(-50%); background: var(--paper); padding: 0 8px; font: 11px/14px var(--mono); letter-spacing: .03em; text-transform: uppercase; }
+.dim-v { position: absolute; left: 0; top: 26px; bottom: 0; width: 14px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.dim-v::before { content: ""; position: absolute; top: 0; bottom: 0; left: 7px; border-left: 1px solid var(--ink); }
+.dim-v span { position: absolute; top: 50%; left: 7px; transform: translate(-50%, -50%) rotate(-90deg); background: var(--paper); padding: 0 8px; font: 11px/14px var(--mono); letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
+.key { list-style: none; margin: 18px 0 0 30px; display: grid; gap: 8px; }
+.key li { display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: baseline; font-size: 15.5px; color: var(--ink-2); }
+.key li b { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--ink); font: 500 11px/1 var(--mono); color: var(--ink); }
+.key li strong { color: var(--ink); font-weight: 600; }
+.nts { margin: 16px 0 0 30px; }
+
+/* Legend strip */
+.legend { display: grid; grid-template-columns: auto repeat(3, 1fr); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); }
+.legend > * { padding: 20px 24px 22px; border-left: 1px solid var(--rule); }
+.legend > :first-child { border-left: 0; padding-left: 0; }
+.legend .sym { font-size: 22px; line-height: 1; margin-bottom: 10px; display: block; }
+.legend p { font-size: 16.5px; line-height: 1.4; color: var(--ink-2); }
+.legend p strong { color: var(--ink); font-weight: 600; display: block; font-size: 19px; margin-bottom: 2px; }
+
+/* Section head */
+.sh { display: flex; justify-content: space-between; align-items: end; gap: 24px; padding: clamp(70px, 9vw, 130px) 0 28px; flex-wrap: wrap; }
+.sh h2 { font-size: clamp(40px, 5.2vw, 76px); font-weight: 700; letter-spacing: -.04em; line-height: .95; font-variation-settings: "wdth" 92; }
+.sh p { max-width: 34ch; color: var(--ink-2); font-size: 17px; }
+
+/* Work */
+.works { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px 28px; }
+.w { grid-column: span 6; display: flex; flex-direction: column; }
+.w.wide { grid-column: span 7; } .w.narrow { grid-column: span 5; }
+.w .img { background: var(--paper-2); overflow: hidden; aspect-ratio: 16 / 10; border-radius: 4px; position: relative; }
+.w .img img { width: 100%; height: 100%; object-fit: cover; object-position: top left; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.w:hover .img img { transform: scale(1.025); }
+.w .tile { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 2.4vw, 34px); background: var(--hi); }
+.w .tile p { font-size: clamp(26px, 2.6vw, 40px); font-weight: 700; letter-spacing: -.035em; line-height: 1.02; max-width: 14ch; }
+.w .row1 { display: flex; justify-content: space-between; margin-top: 16px; color: var(--ink-3); }
+.w h3 { font-size: clamp(26px, 2.4vw, 36px); font-weight: 650; letter-spacing: -.03em; line-height: 1.05; margin-top: 8px; }
+.w .sum { color: var(--ink-2); margin-top: 8px; max-width: 42ch; }
+.w .note { margin-top: 12px; font-family: var(--mono); font-size: 12.5px; color: var(--ink); }
+.w .note::before { content: "↳ "; color: var(--ink-3); }
+.w .go { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .03em; }
+.w .go.live { background: var(--ink); color: var(--paper); padding: 3px 8px; border-radius: 3px; }
+.w:hover h3 { text-decoration: underline; text-decoration-color: var(--hi); text-decoration-thickness: 6px; text-underline-offset: 5px; }
+.also { margin-top: 48px; padding: 22px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); font-size: clamp(18px, 1.6vw, 22px); line-height: 1.7; }
+.also .mono { margin-right: 14px; color: var(--ink-3); }
+.also a { border-bottom: 1px solid var(--ink-3); }
+.also a:hover { border-color: var(--ink); background: var(--hi); }
+
+/* Record: a road alignment with chainages */
+.cv { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(28px, 5vw, 80px); align-items: start; }
+.chain { list-style: none; position: relative; padding-left: 110px; }
+.chain::before { content: ""; position: absolute; left: 84px; top: 8px; bottom: 8px; border-left: 2px solid var(--ink); }
+.chain li { position: relative; padding: 0 0 38px; }
+.chain li:last-child { padding-bottom: 0; }
+.chain .ch { position: absolute; left: -110px; top: 3px; width: 74px; text-align: right; font-family: var(--mono); font-size: 12px; color: var(--ink-2); line-height: 1.35; }
+.chain li::before { content: ""; position: absolute; left: -33px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+.chain li.now::before { background: var(--hi); width: 16px; height: 16px; left: -35px; top: 5px; }
+.chain h3 { font-size: clamp(22px, 2vw, 30px); font-weight: 650; letter-spacing: -.025em; line-height: 1.1; }
+.chain .org { font-size: 16px; color: var(--ink-3); margin-top: 2px; }
+.chain p { color: var(--ink-2); margin-top: 8px; max-width: 44ch; font-size: 16.5px; }
+.sched { background: var(--card); border: 1px solid var(--rule); border-radius: 4px; padding: 24px; }
+.sched h3 { font-size: 22px; font-weight: 650; letter-spacing: -.02em; margin: 6px 0 12px; }
+.sched table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+.sched th { text-align: left; font: 400 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .03em; color: var(--ink-3); padding: 0 0 10px; border-bottom: 1px solid var(--ink); }
+.sched td { padding: 9px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.sched td:last-child { color: var(--ink-2); text-align: right; }
+.sched tr:last-child td { border-bottom: 0; }
+.sched .foot { margin-top: 14px; font-size: 14.5px; color: var(--ink-2); }
+
+/* Life */
+.life { display: grid; grid-template-columns: repeat(12, 1fr); gap: 28px; }
+.ph { margin: 0; }
+.ph img { width: 100%; object-fit: cover; border-radius: 4px; }
+.ph figcaption { margin-top: 10px; color: var(--ink-3); }
+.ph.summit { grid-column: span 7; } .ph.summit img { aspect-ratio: 4 / 3; }
+.ph.yak { grid-column: span 5; } .ph.yak img { aspect-ratio: 4 / 5.25; object-position: 50% 80%; }
+.lifecards { grid-column: 1 / -1; display: grid; grid-template-columns: 5fr 4fr 3fr; gap: 28px; margin-top: 8px; }
+.lc { border-top: 1px solid var(--ink); padding-top: 16px; }
+.lc h3 { font-size: 24px; font-weight: 650; letter-spacing: -.02em; line-height: 1.15; margin: 8px 0 12px; }
+.lc ul { list-style: none; }
+.lc li { padding: 8px 0; border-bottom: 1px solid var(--rule); color: var(--ink-2); font-size: 16px; }
+.lc li strong { color: var(--ink); font-weight: 600; }
+.lc .big { font-size: 56px; font-weight: 700; letter-spacing: -.045em; line-height: 1; margin: 10px 0 12px; }
+.lc .big small { font-size: 18px; font-weight: 500; letter-spacing: 0; color: var(--ink-3); margin-left: 4px; }
+.lc p { color: var(--ink-2); font-size: 15.5px; }
+.bars { display: flex; align-items: flex-end; gap: 5px; height: 64px; margin-bottom: 12px; }
+.bars span { flex: 1; background: var(--ink); border-radius: 2px 2px 0 0; }
+.bars span.last { background: var(--hi); box-shadow: inset 0 0 0 1.5px var(--ink); }
+.bars span.none { background: var(--rule); height: 3px !important; }
+
+/* Say hi */
+.hi-h { font-size: clamp(48px, 6vw, 92px); font-weight: 700; letter-spacing: -.04em; line-height: .92; font-variation-settings: "wdth" 92; }
+.hi { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(28px, 5vw, 80px); align-items: start; }
+.hi .intro p { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.45; margin-top: 20px; max-width: 26em; }
+.hi .intro .mail { display: inline-block; margin-top: 26px; font-size: clamp(20px, 1.9vw, 27px); font-weight: 650; letter-spacing: -.02em; }
+.hi .intro .links { display: flex; gap: 22px; margin-top: 14px; font-weight: 500; }
+.hi .intro .links a:hover, .hi .intro .mail:hover { text-decoration: underline; text-decoration-color: var(--hi); text-decoration-thickness: 5px; text-underline-offset: 4px; }
+.chat { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.chat .bar { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--rule); font-size: 15px; color: var(--ink-2); }
+.thread { display: flex; flex-direction: column; gap: 12px; padding: 20px 18px; min-height: 170px; max-height: 300px; overflow: auto; }
+.msg { max-width: 82%; font-size: 16px; line-height: 1.45; }
+.msg .who { display: block; font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .03em; color: var(--ink-3); margin-bottom: 5px; }
+.msg .txt { display: inline-block; padding: 11px 14px; border-radius: 14px 14px 14px 4px; background: var(--paper-2); }
+.msg.me { align-self: flex-end; text-align: right; }
+.msg.me .txt { background: var(--ink); color: var(--paper); border-radius: 14px 14px 4px 14px; text-align: left; }
+.chat form { display: flex; gap: 10px; padding: 12px; border-top: 1px solid var(--rule); background: var(--paper); }
+.chat textarea { flex: 1; min-width: 0; border: 1px solid var(--rule); border-radius: 6px; background: var(--card); font: inherit; font-size: 16px; padding: 11px 13px; resize: none; height: 48px; color: var(--ink); }
+.chat textarea:focus { outline: 2px solid var(--ink); outline-offset: -1px; }
+.chat button { border: 0; border-radius: 6px; background: var(--hi); color: var(--ink); font: 500 13px/1 var(--mono); text-transform: uppercase; letter-spacing: .03em; padding: 0 20px; cursor: pointer; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.chat button:hover { background: var(--ink); color: var(--hi); }
+.chat .fine { padding: 0 14px 12px; background: var(--paper); font-size: 13.5px; color: var(--ink-3); }
+
+/* Footer band */
+footer { background: var(--ink); color: var(--paper); margin-top: clamp(80px, 10vw, 140px); }
+footer .wrap { padding-top: 26px; padding-bottom: 22px; }
+.fnav { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px 28px; color: #a9a597; }
+.fnav a:hover { color: var(--hi); }
+#wordmark { margin: 18px calc(var(--pad) * -.4) 8px; }
+.tblock { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid #3a3833; }
+.tblock div { padding: 12px 14px 0 0; }
+.tblock span { display: block; color: #8b877c; }
+.tblock strong { font-weight: 500; font-size: 15px; }
+
+.mock { position: fixed; right: 14px; bottom: 14px; z-index: 50; display: flex; gap: 6px; font: 500 11px/1 var(--mono); }
+.mock a { background: #111; color: #fff; padding: 8px 10px; border-radius: 99px; opacity: .82; box-shadow: 0 0 0 1px rgba(255,255,255,.2); }
+
+@media (max-width: 1000px) {
+  nav.top { display: none; }
+  .hero, .cv, .hi { grid-template-columns: 1fr; }
+  .detail { max-width: 520px; }
+  .legend { grid-template-columns: 1fr 1fr; }
+  .legend > :first-child { grid-column: 1 / -1; padding: 14px 0 0; }
+  .legend > :nth-child(2) { border-left: 0; padding-left: 0; }
+  .w, .w.wide, .w.narrow { grid-column: span 12; }
+  .ph.summit, .ph.yak { grid-column: span 12; }
+  .ph.yak img { aspect-ratio: 4 / 3; }
+  .lifecards { grid-template-columns: 1fr 1fr; }
+  .lifecards .lc:first-child { grid-column: 1 / -1; }
+  .tblock { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 620px) {
+  .pillstat span.long { display: none; }
+  .legend { grid-template-columns: 1fr; }
+  .legend > * { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); }
+  .legend > :first-child { border-top: 0; }
+  .lifecards { grid-template-columns: 1fr; }
+  .chain { padding-left: 34px; }
+  .chain::before { left: 8px; }
+  .chain .ch { position: static; width: auto; text-align: left; margin-bottom: 4px; }
+  .chain li::before { left: -31px; }
+  .chain li.now::before { left: -33px; }
+  .tblock { grid-template-columns: 1fr 1fr; }
+  .detail { padding-left: 24px; }
+  .dim-h { left: 24px; }
+  .key, .nts { margin-left: 24px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#">
+      <svg viewBox="0 0 1632 996" aria-hidden="true"><path d="M798 825H171V171H1461V825" stroke="currentColor" stroke-width="300" stroke-linecap="square" fill="none"/></svg>
+      Callum Thomas
+    </a>
+    <nav class="top" aria-label="Sections">
+      <a href="#work">Work</a><a href="#record">Record</a><a href="#life">Life</a><a href="#hi">Say hi</a>
+    </nav>
+    <p class="pillstat" data-awake><span class="dot"></span><span><span data-clock>10:56 pm</span><span class="long"> · probably <span data-status>shipping something</span></span></span></p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1>Hi, I'm Callum.</h1>
+      <div class="letter">
+        <p>I'm a builder, an AI whisperer and a solution seeker. For eight years I was a traffic engineer, working out how many car parks your building needs.</p>
+        <p>Now I build software: <a class="hl" href="#work">quality and safety tools for construction sites</a> at RJE Global, <a class="hl" href="#work">free calculators</a> for my old profession, and <a class="hl" href="#work">small apps that run my own life.</a></p>
+      </div>
+      <p class="sign">Have a look around, or <a href="#hi">say hi →</a></p>
+    </div>
+
+    <figure class="detail" aria-label="Annotated portrait of Callum">
+      <div class="dim-h"><span>1 Callum</span></div>
+      <div class="dim-v"><span>Not to scale</span></div>
+      <div class="frame">
+        <img src="../../public/images/profile%20photo.jfif" alt="Callum smiling on a hike, in a blue jacket with a yellow buff, green hills behind" />
+        <span class="pin" style="left:52%;top:20%">1</span>
+        <span class="pin" style="left:57%;top:53%">2</span>
+        <span class="pin" style="left:27%;top:62%">3</span>
+        <span class="pin" style="left:88%;top:60%">4</span>
+      </div>
+      <ol class="key">
+        <li><b>1</b><span><strong>Head.</strong> Full of half-finished side projects.</span></li>
+        <li><b>2</b><span><strong>Buff.</strong> Matches the highlighter. Coincidence.</span></li>
+        <li><b>3</b><span><strong>Pack.</strong> Ultralight, allegedly.</span></li>
+        <li><b>4</b><span><strong>Hills.</strong> Will be climbed.</span></li>
+      </ol>
+    </figure>
+  </section>
+
+  <div class="legend">
+    <span class="mono" style="padding-top:24px">Key</span>
+    <div><span class="sym">●</span><p><strong>Now</strong>Lead developer and product owner, RJE Global.</p></div>
+    <div><span class="sym">○</span><p><strong>Before</strong>Eight years of traffic engineering at Stantec and Amber.</p></div>
+    <div><span class="sym">◐</span><p><strong>Always</strong>Side projects. Seventeen so far, and counting.</p></div>
+  </div>
+
+  <section id="work">
+    <div class="sh">
+      <h2>Things I've built</h2>
+      <p>For work, for clients, and for me. The live ones are real, and you can use them.</p>
+    </div>
+    <div class="works">
+      <a class="w wide" href="#">
+        <div class="img"><img src="../../public/images/rje/QMS%20(4).png" alt="" /></div>
+        <div class="row1"><span class="mono">RJE Global · 2023-now</span><span class="go">Case study →</span></div>
+        <h3>Quality Management System</h3>
+        <p class="sum">Quality and safety capture for active construction sites. I took over the legacy app and rebuilt it front to back in TypeScript.</p>
+        <p class="note">Replaced a lot of clipboards</p>
+      </a>
+      <a class="w narrow" href="https://almanac.callum-thomas.com">
+        <div class="img"><div class="tile"><span class="mono">Screenshots withheld</span><p>It knows how much I sleep.</p></div></div>
+        <div class="row1"><span class="mono">Personal · 2026</span><span class="go live">Live ↗</span></div>
+        <h3>Almanac</h3>
+        <p class="sum">Journal, habits, tasks, recipes, money and sleep in one searchable place. I use it every day.</p>
+        <p class="note">The sleep chart below comes from here</p>
+      </a>
+      <a class="w narrow" href="https://traffictools.callum-thomas.com">
+        <div class="img"><img src="../../public/images/traffictools/TT%20-%20Ramp%20Design.png" alt="" /></div>
+        <div class="row1"><span class="mono">Public · 2023</span><span class="go live">Live ↗</span></div>
+        <h3>Traffic Tools</h3>
+        <p class="sum">Free calculators for traffic engineers and town planners: parking rates, ramps, turn treatments, trip generation.</p>
+        <p class="note">The tools I wished I'd had</p>
+      </a>
+      <a class="w wide" href="#">
+        <div class="img"><img src="../../public/images/centresafe/CentreSafe%20Web%20Design.png" alt="" /></div>
+        <div class="row1"><span class="mono">Startup · 2021</span><span class="go">Case study →</span></div>
+        <h3>CentreSafe</h3>
+        <p class="sum">A risk management portal for companies and NGOs. I built the product on LAMP and designed the brand to go with it.</p>
+        <p class="note">Also pitched it, which was scarier</p>
+      </a>
+      <a class="w" href="https://connect-five.callum-thomas.com">
+        <div class="img"><img src="../../public/images/connect-five-3.png" alt="" style="object-position:center" /></div>
+        <div class="row1"><span class="mono">Game · 2024</span><span class="go live">Live ↗</span></div>
+        <h3>Connect Five</h3>
+        <p class="sum">Five in a row on a 19 × 19 grid. Black versus white, turn by turn.</p>
+      </a>
+      <a class="w" href="https://sliding-puzzle.callum-thomas.com">
+        <div class="img"><img src="../../public/images/sliding-tiles/sliding-tiles-3.png" alt="" style="object-position:center" /></div>
+        <div class="row1"><span class="mono">Game · 2024</span><span class="go live">Live ↗</span></div>
+        <h3>Sliding Tiles</h3>
+        <p class="sum">Half of all shuffled sliding puzzles are impossible. This one checks the parity before you start.</p>
+      </a>
+    </div>
+    <p class="also"><span class="mono">Also</span><a href="https://boatlog.callum-thomas.com">Boatlog</a>, <a href="https://firewall.callum-thomas.com">Firewall Fireyness Calculator</a>, <a href="https://lan-hero.callum-thomas.com">LAN Hero</a>, <a href="https://nzopa.co.nz/">NZOPA</a>, <a href="https://modalgroup.com.au/">Modal Group</a>, <a href="#">and six more →</a></p>
+  </section>
+
+  <section id="record">
+    <div class="sh">
+      <h2>The CV bit</h2>
+      <p>Laid out like a road alignment, because old habits.</p>
+    </div>
+    <div class="cv">
+      <ol class="chain">
+        <li class="now"><span class="ch">CH 2023<br/>to now</span><h3>Lead Software Developer &amp; Product Owner</h3><p class="org">RJE Global</p><p>Own the quality and safety platform used on live construction sites. Rebuilt it front to back, JavaScript to TypeScript, and made it properly fast.</p></li>
+        <li><span class="ch">CH 2021</span><h3>Senior Traffic Engineer</h3><p class="org">Amber Organisation</p><p>Led traffic engineering projects, including a major subdivision in Dubbo. Built the quote-signing portal clients kept asking for.</p></li>
+        <li><span class="ch">CH 2019</span><h3>Project Engineer</h3><p class="org">Stantec</p><p>Traffic impact assessments, SIDRA modelling, swept paths and transport strategies for public and private clients.</p></li>
+        <li><span class="ch">CH 2015</span><h3>BE (Hons) Civil, BCom Finance</h3><p class="org">University of Auckland</p><p>Two degrees at once. Explains the spreadsheets.</p></li>
+      </ol>
+      <aside class="sched">
+        <span class="mono muted">Schedule of materials</span>
+        <h3>What I build with</h3>
+        <table>
+          <thead><tr><th>Item</th><th style="text-align:right">Use</th></tr></thead>
+          <tbody>
+            <tr><td>TypeScript</td><td>Daily</td></tr>
+            <tr><td>React, Next.js</td><td>Daily</td></tr>
+            <tr><td>Claude</td><td>Daily, as a colleague</td></tr>
+            <tr><td>SvelteKit</td><td>Personal apps</td></tr>
+            <tr><td>Supabase, Postgres</td><td>Most things</td></tr>
+            <tr><td>Angular, Node, MySQL</td><td>At RJE</td></tr>
+            <tr><td>PHP, WordPress</td><td>When asked nicely</td></tr>
+            <tr><td>Figma</td><td>Before code</td></tr>
+          </tbody>
+        </table>
+        <p class="foot">Legacy materials: SIDRA, swept paths, and council meetings.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="life">
+    <div class="sh">
+      <h2>Off the clock</h2>
+      <p>Mostly uphill. Occasionally on a boat. Always logged.</p>
+    </div>
+    <div class="life">
+      <figure class="ph summit">
+        <img src="../../public/images/yukhin-peak/summit.jpg" alt="Five hikers grinning around the Yukhin Peak 5130 m summit sign, snowy peaks behind" />
+        <figcaption class="mono">Yukhin Peak summit, 5,130 m. T-shirt weather, somehow.</figcaption>
+      </figure>
+      <figure class="ph yak">
+        <img src="../../public/images/yukhin-peak/mountain-yak.jpg" alt="A lone black yak on golden grassland beneath a huge bare mountain" />
+        <figcaption class="mono">Local resident. Unimpressed.</figcaption>
+      </figure>
+      <div class="lifecards">
+        <div class="lc">
+          <span class="mono muted">Hobbies, in order of injury risk</span>
+          <ul>
+            <li><strong>Brazilian jiu-jitsu.</strong> Humbling, in a good way.</li>
+            <li><strong>Ultralight hiking.</strong> Most recently the Alay Mountains, Kyrgyzstan.</li>
+            <li><strong>The boat.</strong> Logged in Boatlog, naturally.</li>
+            <li><strong>Art.</strong> Digital, and the kind with glue.</li>
+          </ul>
+          <a class="mono" href="#" style="display:inline-block;margin-top:14px;border-bottom:1px solid">Read the Yukhin Peak trip →</a>
+        </div>
+        <div class="lc">
+          <span class="mono muted">Sleep, last 14 nights</span>
+          <p class="big"><span data-sleep-last>6.9</span><small>h last night</small></p>
+          <div class="bars" id="bars"></div>
+          <p><span data-sleep-avg>7.1</span> h on average. Live from Almanac.</p>
+        </div>
+        <div class="lc" data-awake>
+          <span class="mono muted">Right now, Melbourne</span>
+          <p class="big" data-clock>10:56 pm</p>
+          <p>Callum is probably <span data-status>shipping something</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hi">
+    <div class="hi" style="padding-top:clamp(70px,9vw,130px)">
+      <div class="intro">
+        <h2 class="hi-h">Say hi.</h2>
+        <p>Hiring, building something, or just want to talk about intersections? I'd love to hear from you.</p>
+        <a class="mail" href="mailto:callumdavidthomas@gmail.com">callumdavidthomas@gmail.com</a>
+        <div class="links"><a href="https://www.linkedin.com/in/callumdavidthomas/">LinkedIn ↗</a><a href="https://github.com/caltho">GitHub ↗</a></div>
+      </div>
+      <div class="chat" data-chat-root>
+        <div class="bar"><span class="dot" data-desk-dot></span><span data-desk>Callum's away. Leave a message, or chat with callum-nano.</span></div>
+        <div class="thread" data-thread>
+          <div class="msg them"><span class="who">Callum</span><span class="txt">Hey! If I'm at my desk you'll get me live. If not, this is saved and I'll reply by email, usually within a day.</span></div>
+        </div>
+        <form data-chat>
+          <label class="sr" for="m">Your message</label>
+          <textarea id="m" rows="1" placeholder="Write a message…"></textarea>
+          <button type="submit">Send</button>
+        </form>
+        <p class="fine">While he's away, callum-nano covers. A budget model of me, frequently wrong.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fnav mono">
+      <span>That's the lot. Thanks for reading.</span>
+      <span><a href="#work">Work</a> · <a href="#record">Record</a> · <a href="#life">Life</a> · <a href="#hi">Say hi</a> · <a href="#">Top ↑</a></span>
+    </div>
+    <div id="wordmark"><span class="sr">Callum Thomas</span></div>
+    <div class="tblock mono">
+      <div><span>Drawn</span><strong>C. Thomas</strong></div>
+      <div><span>Checked</span><strong>Claude</strong></div>
+      <div><span>Scale</span><strong>Not to scale</strong></div>
+      <div><span>Rev</span><strong>26.09</strong></div>
+      <div><span>©</span><strong>2026, no cookies</strong></div>
+    </div>
+  </div>
+</footer>
+
+<nav class="mock" aria-label="Mockup navigation"><a href="b-register.html">← B</a><a href="index.html">Routes</a></nav>
+
+<script src="live.js"></script>
+<script src="particles.js"></script>
+<script>
+  const s = CT.sleep, bars = document.getElementById("bars");
+  s.nights.forEach((h, i) => {
+    const b = document.createElement("span");
+    if (h == null) b.className = "none";
+    else { b.style.height = (h / 10) * 100 + "%"; if (i === s.nights.length - 1) b.className = "last"; }
+    b.title = h == null ? "no log" : h + " h";
+    bars.appendChild(b);
+  });
+  document.querySelectorAll("[data-sleep-last]").forEach((e) => (e.textContent = s.last.toFixed(1)));
+  document.querySelectorAll("[data-sleep-avg]").forEach((e) => (e.textContent = s.avg.toFixed(1)));
+
+  ParticleWordmark(document.getElementById("wordmark"), {
+    family: '"Bricolage Grotesque"', weight: 800, tracking: -0.04, pad: 20,
+    gap: 6, dot: 2.3, shape: "square", color: "#ede9df", hot: "#e4f04a", ringColor: "#e4f04a", radius: 110, intro: "scatter",
+  });
+</script>
+</body>
+</html>
